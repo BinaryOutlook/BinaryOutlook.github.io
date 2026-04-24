@@ -82,7 +82,7 @@ if (canvas) {
 
   function drawFrame() {
     context.clearRect(0, 0, width, height);
-    context.fillStyle = "rgba(244, 246, 241, 0.2)";
+    context.fillStyle = "rgba(242, 240, 232, 0.2)";
     context.fillRect(0, 0, width, height);
 
     const horizon = height * 0.64;
@@ -92,7 +92,7 @@ if (canvas) {
     const cellHeight = Math.max(34, height / 18);
 
     context.lineWidth = 1;
-    context.strokeStyle = "rgba(13, 118, 111, 0.12)";
+    context.strokeStyle = "rgba(24, 89, 168, 0.12)";
 
     for (let column = 0; column <= columns; column += 1) {
       const x = column * cellWidth;
@@ -119,14 +119,30 @@ if (canvas) {
 
       context.fillStyle =
         column % 5 === 0
-          ? "rgba(168, 69, 34, 0.28)"
+          ? "rgba(201, 54, 43, 0.3)"
           : column % 3 === 0
-            ? "rgba(96, 74, 139, 0.2)"
-            : "rgba(13, 118, 111, 0.22)";
+            ? "rgba(226, 174, 37, 0.38)"
+            : "rgba(24, 89, 168, 0.24)";
       context.fillRect(x, y, w, barHeight);
     }
 
-    context.strokeStyle = "rgba(29, 36, 34, 0.22)";
+    context.fillStyle = "rgba(226, 174, 37, 0.42)";
+    context.fillRect(width * 0.72, height * 0.18, Math.min(130, width * 0.12), Math.min(130, width * 0.12));
+
+    context.fillStyle = "rgba(201, 54, 43, 0.32)";
+    context.beginPath();
+    context.arc(width * 0.18, height * 0.34, Math.min(72, width * 0.07), 0, Math.PI * 2);
+    context.fill();
+
+    context.fillStyle = "rgba(24, 89, 168, 0.28)";
+    context.beginPath();
+    context.moveTo(width * 0.82, height * 0.54);
+    context.lineTo(width * 0.92, height * 0.54);
+    context.lineTo(width * 0.87, height * 0.38);
+    context.closePath();
+    context.fill();
+
+    context.strokeStyle = "rgba(23, 23, 19, 0.24)";
     context.lineWidth = 2;
     context.beginPath();
     for (let x = 0; x <= width; x += 16) {
@@ -143,7 +159,7 @@ if (canvas) {
     }
     context.stroke();
 
-    context.fillStyle = "rgba(29, 36, 34, 0.7)";
+    context.fillStyle = "rgba(23, 23, 19, 0.72)";
     context.font = "700 12px ui-sans-serif, system-ui, sans-serif";
     context.fillText("BINARY OUTLOOK / LIVE SIGNAL", Math.max(18, width * 0.055), height - 30);
 
@@ -164,4 +180,236 @@ if (canvas) {
   if (reduceMotion && animationId) {
     cancelAnimationFrame(animationId);
   }
+}
+
+const languageWidget = document.querySelector("[data-language-widget]");
+const languageCacheTtl = 1000 * 60 * 60 * 12;
+const languageScanLimit = 36;
+const languageColors = {
+  JavaScript: "#f1c232",
+  TypeScript: "#3178c6",
+  Python: "#3572a5",
+  HTML: "#e34c26",
+  CSS: "#563d7c",
+  "C++": "#f34b7d",
+  C: "#555555",
+  CUDA: "#76b900",
+  Java: "#b07219",
+  Jupyter: "#da5b0b",
+  "Jupyter Notebook": "#da5b0b",
+  Shell: "#89e051",
+  Vue: "#41b883",
+  Svelte: "#ff3e00",
+  Go: "#00add8",
+  Rust: "#dea584",
+};
+const fallbackLanguageColors = ["#e2ae25", "#1859a8", "#c9362b", "#0b786e", "#57438b"];
+
+function getLanguageCacheKey(username) {
+  return `binaryoutlook-language-stats-v1-${username}`;
+}
+
+function readLanguageCache(username) {
+  try {
+    const rawCache = window.localStorage.getItem(getLanguageCacheKey(username));
+    if (!rawCache) return null;
+
+    const cached = JSON.parse(rawCache);
+    if (!cached || Date.now() - cached.cachedAt > languageCacheTtl) return null;
+
+    return cached.data;
+  } catch (error) {
+    return null;
+  }
+}
+
+function writeLanguageCache(username, data) {
+  try {
+    window.localStorage.setItem(
+      getLanguageCacheKey(username),
+      JSON.stringify({ cachedAt: Date.now(), data })
+    );
+  } catch (error) {
+    // Local storage is an enhancement; the live panel still works without it.
+  }
+}
+
+async function fetchGitHubJson(url) {
+  const response = await fetch(url, {
+    headers: {
+      Accept: "application/vnd.github+json",
+      "X-GitHub-Api-Version": "2026-03-10",
+    },
+  });
+
+  if (!response.ok) {
+    const rateLimitRemaining = response.headers.get("x-ratelimit-remaining");
+    const rateLimitReset = response.headers.get("x-ratelimit-reset");
+    const rateLimitNote =
+      rateLimitRemaining === "0" && rateLimitReset
+        ? ` Rate limit resets at ${new Date(Number(rateLimitReset) * 1000).toLocaleTimeString()}.`
+        : "";
+    throw new Error(`GitHub API request failed with ${response.status}.${rateLimitNote}`);
+  }
+
+  return response.json();
+}
+
+async function mapWithConcurrency(items, limit, mapper) {
+  const results = [];
+  let nextIndex = 0;
+  const workerCount = Math.min(limit, items.length);
+
+  async function worker() {
+    while (nextIndex < items.length) {
+      const currentIndex = nextIndex;
+      nextIndex += 1;
+      results[currentIndex] = await mapper(items[currentIndex], currentIndex);
+    }
+  }
+
+  await Promise.all(Array.from({ length: workerCount }, worker));
+  return results;
+}
+
+async function fetchLanguageData(username) {
+  const repos = await fetchGitHubJson(
+    `https://api.github.com/users/${encodeURIComponent(username)}/repos?type=owner&sort=pushed&direction=desc&per_page=100`
+  );
+
+  if (!Array.isArray(repos)) {
+    throw new Error("GitHub API returned an unexpected repository payload.");
+  }
+
+  const eligibleRepos = repos.filter(
+    (repo) => !repo.fork && !repo.archived && !repo.disabled && repo.size > 0
+  );
+  const sourceRepos = eligibleRepos.slice(0, languageScanLimit);
+  const totals = new Map();
+  const failures = [];
+
+  await mapWithConcurrency(sourceRepos, 4, async (repo) => {
+    try {
+      const languages = await fetchGitHubJson(repo.languages_url);
+      Object.entries(languages).forEach(([language, bytes]) => {
+        totals.set(language, (totals.get(language) || 0) + bytes);
+      });
+    } catch (error) {
+      failures.push(repo.name);
+    }
+  });
+
+  const totalBytes = Array.from(totals.values()).reduce((sum, bytes) => sum + bytes, 0);
+
+  if (!totalBytes) {
+    throw new Error("No language totals were available from GitHub.");
+  }
+
+  const languages = Array.from(totals, ([name, bytes]) => ({
+    name,
+    bytes,
+    percent: (bytes / totalBytes) * 100,
+  }))
+    .sort((a, b) => b.bytes - a.bytes)
+    .slice(0, 7);
+
+  return {
+    languages,
+    repoCount: sourceRepos.length,
+    totalRepoCount: eligibleRepos.length,
+    isLimited: eligibleRepos.length > sourceRepos.length,
+    skippedCount: failures.length,
+    scannedAt: new Date().toISOString(),
+    totalBytes,
+  };
+}
+
+function getLanguageColor(languageName, index) {
+  return languageColors[languageName] || fallbackLanguageColors[index % fallbackLanguageColors.length];
+}
+
+function createLanguageRow(language, index) {
+  const row = document.createElement("div");
+  row.className = "language-row";
+  row.setAttribute("aria-label", `${language.name}: ${language.percent.toFixed(1)} percent`);
+  row.style.setProperty("--language-color", getLanguageColor(language.name, index));
+  row.style.setProperty("--language-width", `${Math.max(language.percent, 2).toFixed(2)}%`);
+
+  const meta = document.createElement("div");
+  meta.className = "language-row__meta";
+
+  const name = document.createElement("span");
+  name.className = "language-row__name";
+
+  const swatch = document.createElement("span");
+  swatch.className = "language-swatch";
+  swatch.setAttribute("aria-hidden", "true");
+
+  const label = document.createElement("span");
+  label.textContent = language.name;
+
+  const percent = document.createElement("span");
+  percent.className = "language-row__percent";
+  percent.textContent = `${language.percent.toFixed(1)}%`;
+
+  const bar = document.createElement("div");
+  bar.className = "language-row__bar";
+  bar.setAttribute("aria-hidden", "true");
+
+  const fill = document.createElement("span");
+  fill.className = "language-row__fill";
+
+  name.append(swatch, label);
+  meta.append(name, percent);
+  bar.append(fill);
+  row.append(meta, bar);
+
+  return row;
+}
+
+function renderLanguageData(widget, data, fromCache = false) {
+  const list = widget.querySelector("[data-language-list]");
+  const summary = widget.querySelector("[data-language-summary]");
+  const topLanguage = data.languages[0];
+  const cacheNote = fromCache ? " using a recent local cache" : "";
+  const skipNote = data.skippedCount ? ` ${data.skippedCount} repositories were skipped during the scan.` : "";
+  const repoScope = data.isLimited
+    ? `the ${data.repoCount} most recently pushed public owner repositories`
+    : `${data.repoCount} public owner repositories`;
+
+  summary.textContent = `${topLanguage.name} leads this snapshot. I scanned ${repoScope} through GitHub's language data${cacheNote}.${skipNote}`;
+  list.replaceChildren(...data.languages.map(createLanguageRow));
+  widget.classList.remove("has-error");
+}
+
+function renderLanguageError(widget) {
+  const list = widget.querySelector("[data-language-list]");
+  const summary = widget.querySelector("[data-language-summary]");
+  const row = createLanguageRow({ name: "GitHub API unavailable", percent: 100 }, 2);
+
+  summary.textContent =
+    "Live language data is unavailable right now, usually because public API traffic is rate-limited. The GitHub profile link still has the full repository history.";
+  list.replaceChildren(row);
+  widget.classList.add("has-error");
+}
+
+async function initLanguageWidget(widget) {
+  const username = widget.dataset.githubUser || "BinaryOutlook";
+  const cachedData = readLanguageCache(username);
+
+  if (cachedData) {
+    renderLanguageData(widget, cachedData, true);
+  }
+
+  try {
+    const liveData = await fetchLanguageData(username);
+    writeLanguageCache(username, liveData);
+    renderLanguageData(widget, liveData);
+  } catch (error) {
+    if (!cachedData) renderLanguageError(widget);
+  }
+}
+
+if (languageWidget) {
+  initLanguageWidget(languageWidget);
 }

@@ -6,9 +6,9 @@ This page will be a public technical homepage for **Binary Outlook**.
 
 The goal is to make the visitor understand, quickly and clearly:
 
-- what Binary Outlook is interested in,
+- what I am interested in,
 - what kinds of technical projects Binary Outlook builds,
-- which areas Binary Outlook is currently exploring,
+- which areas I am currently exploring,
 - where to inspect the work,
 - and how to connect.
 
@@ -105,7 +105,7 @@ This section should explain the person behind the work without becoming overly b
 
 Draft copy:
 
-Binary Outlook is a computing student focused on building practical systems around intelligent software and technically meaningful ideas.
+I focus on building practical systems around intelligent software and technically meaningful ideas.
 
 The current direction is shaped by a few recurring interests: AI use cases, CNNs and deep learning, CUDA, agent workflows, and the challenge of turning experimental ideas into useful products, tools, or research directions.
 
@@ -121,7 +121,7 @@ Main heading:
 
 Draft copy:
 
-At the moment, Binary Outlook is especially focused on:
+At the moment, I am especially focused on:
 
 - AI use cases that solve real workflow problems,
 - CNNs and deep learning foundations,
@@ -262,17 +262,15 @@ Suggested groups:
 
 ## GitHub Snapshot Section
 
-This section should reuse the GitHub stats already in `README.md`, but frame it better on the webpage.
+This section should use GitHub's public REST API data and render it as native webpage UI instead of embedding a third-party image.
 
 Draft copy:
 
-The languages and tools across Binary Outlook's GitHub history shift with each project. Together, they show a practical mix of AI experimentation, web development, systems learning, and project-based exploration.
+The languages and tools across my GitHub history shift with each project. Together, they show a practical mix of AI experimentation, web development, systems learning, and project-based exploration.
 
 Suggested visual:
 
-Use the existing top-languages image from the README:
-
-`https://readme-stats-github.pages.dev/api/top-langs?username=BinaryOutlook&theme=shadow`
+Use a custom language panel that fetches public repositories, aggregates repository language byte counts, and displays bars in the site's own Bauhaus-inspired visual system.
 
 Optional supporting text:
 
@@ -327,7 +325,7 @@ Main heading:
 
 Draft copy:
 
-Binary Outlook is open to conversations around AI systems, deep learning, CUDA, technical projects, research directions, and collaboration opportunities.
+I am open to conversations around AI systems, deep learning, CUDA, technical projects, research directions, and collaboration opportunities.
 
 Suggested links:
 
@@ -426,4 +424,3 @@ Before building the HTML version, confirm:
 - whether to include a profile photo or abstract visual identity,
 - whether the site should be light mode, dark mode, or both,
 - whether project descriptions should sound more academic, more product-focused, or more personal.
-

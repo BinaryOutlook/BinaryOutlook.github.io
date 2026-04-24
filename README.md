@@ -8,7 +8,7 @@ What stays constant is the drive to explore deeply, learn with intent, and under
 
 I am especially interested in work that carries strong technical ideas across the distance from concept to product, tool, or research direction.
 
-I am also deeply curious about how innovation takes form in technology, so if our trajectories ever align, feel free to connect with me.
+I am also deeply curious about how innovation takes form in technology, so if your interests overlap with mine, feel free to connect with me.
 
 ## Current Direction
 
@@ -35,4 +35,4 @@ The languages and tools I use naturally shift with the demands of each project, 
 
 Feel free to have a look at the patterns across my GitHub history.
 
-![Top Languages](https://readme-stats-github.pages.dev/api/top-langs?username=BinaryOutlook&theme=shadow)
+The portfolio page now renders this as a native live panel using GitHub's public repository language data instead of a pasted-in image card.

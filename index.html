@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Binary Outlook is a technical portfolio focused on intelligent software, deep learning, CUDA, and interactive systems."
+      content="Technical portfolio focused on intelligent software, deep learning, CUDA, and interactive systems."
     />
     <meta name="author" content="Binary Outlook" />
     <meta property="og:title" content="Binary Outlook" />
@@ -15,6 +15,9 @@
     />
     <meta property="og:type" content="website" />
     <title>Binary Outlook</title>
+    <script>
+      document.documentElement.classList.add("js-enabled");
+    </script>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -58,7 +61,7 @@
             <p class="eyebrow">Technical portfolio</p>
             <h1 id="hero-title">Binary Outlook</h1>
             <p class="hero-lede">
-              Computing student building practical systems around intelligent
+              I am a computing student building practical systems around intelligent
               software, deep learning, CUDA, and interactive tools.
             </p>
             <p class="hero-text">
@@ -97,23 +100,22 @@
         <div class="section-kicker">About</div>
         <div class="content-split">
           <div class="section-heading reveal">
-            <h2 id="about-title">Building with curiosity and technical weight.</h2>
+            <h2 id="about-title">I build with curiosity and technical weight.</h2>
           </div>
           <div class="section-body reveal">
             <p>
-              Binary Outlook is a computing student focused on building
-              practical systems around intelligent software and technically
-              meaningful ideas.
+              I focus on building practical systems around intelligent software
+              and technically meaningful ideas.
             </p>
             <p>
-              The current direction is shaped by recurring interests: AI use
+              My current direction is shaped by recurring interests: AI use
               cases, CNNs and deep learning, CUDA, agent workflows, and the
               challenge of turning experimental ideas into useful products,
               tools, or research directions.
             </p>
             <p>
               Technology moves quickly, so the exact tools and frameworks may
-              change. The deeper pattern is more stable: learn with intent,
+              change. My deeper pattern is more stable: learn with intent,
               build with curiosity, and keep asking how technical progress can
               become useful in the real world.
             </p>
@@ -126,7 +128,7 @@
         <div class="section-intro reveal">
           <h2 id="direction-title">Current Direction</h2>
           <p>
-            Current interests cluster around AI applications, CNNs, CUDA, agent
+            My current interests cluster around AI applications, CNNs, CUDA, agent
             safety, and interactive web systems.
           </p>
         </div>
@@ -169,9 +171,9 @@
         <div class="section-intro reveal">
           <h2 id="projects-title">Featured Projects</h2>
           <p>
-            A selected set of projects showing the kinds of problems Binary
-            Outlook enjoys working on: agent safety, applied AI, semantic play,
-            and interactive systems.
+            A selected set of projects showing the kinds of problems I enjoy
+            working on: agent safety, applied AI, semantic play, and interactive
+            systems.
           </p>
         </div>
 
@@ -350,10 +352,9 @@
           <div class="github-copy reveal">
             <h2 id="github-title">GitHub Snapshot</h2>
             <p>
-              The languages and tools across Binary Outlook's GitHub history
-              shift with each project. Together, they show a practical mix of
-              AI experimentation, web development, systems learning, and
-              project-based exploration.
+              The languages and tools across my GitHub history shift with each
+              project. Together, they show a practical mix of AI experimentation,
+              web development, systems learning, and project-based exploration.
             </p>
             <p>
               The important part is not a single language ranking, but the
@@ -361,19 +362,41 @@
               pressure-test a new technical direction.
             </p>
           </div>
-          <a
-            class="stats-frame reveal"
-            href="https://github.com/BinaryOutlook"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Open Binary Outlook on GitHub"
+          <div
+            class="language-panel reveal"
+            data-language-widget
+            data-github-user="BinaryOutlook"
+            aria-labelledby="language-panel-title"
           >
-            <img
-              src="https://readme-stats-github.pages.dev/api/top-langs?username=BinaryOutlook&theme=shadow"
-              alt="Top languages used by Binary Outlook on GitHub"
-              loading="lazy"
-            />
-          </a>
+            <div class="language-panel__header">
+              <div>
+                <p class="panel-label">Live language mix</p>
+                <h3 id="language-panel-title">Most-used languages</h3>
+              </div>
+              <a
+                class="language-panel__link"
+                href="https://github.com/BinaryOutlook"
+                target="_blank"
+                rel="noreferrer"
+              >
+                GitHub
+              </a>
+            </div>
+            <p class="language-panel__summary" data-language-summary>
+              Fetching public repository language data from GitHub.
+            </p>
+            <div class="language-list" data-language-list aria-live="polite">
+              <div class="language-row is-loading">
+                <div class="language-row__meta">
+                  <span>Connecting to GitHub API</span>
+                  <span>Live</span>
+                </div>
+                <div class="language-row__bar" aria-hidden="true">
+                  <span class="language-row__fill"></span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -405,9 +428,9 @@
           <p class="section-kicker">Contact</p>
           <h2 id="contact-title">Let's connect.</h2>
           <p>
-            Binary Outlook is open to conversations around AI systems, deep
-            learning, CUDA, technical projects, research directions, and
-            collaboration opportunities.
+            I am open to conversations around AI systems, deep learning, CUDA,
+            technical projects, research directions, and collaboration
+            opportunities.
           </p>
           <div class="contact-actions">
             <a
