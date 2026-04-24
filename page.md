@@ -330,11 +330,11 @@ I am open to conversations around AI systems, deep learning, CUDA, technical pro
 Suggested links:
 
 - GitHub
-- Email
+- Email: `binaryoutlook01@gmail.com`
 - LinkedIn
 - Project repositories
 
-If email or LinkedIn should be shown publicly, add them here before the HTML stage.
+LinkedIn can be added here later if it should be shown publicly.
 
 ## Footer
 
