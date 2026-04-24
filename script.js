@@ -161,7 +161,7 @@ if (canvas) {
 
     context.fillStyle = "rgba(23, 23, 19, 0.72)";
     context.font = "700 12px ui-sans-serif, system-ui, sans-serif";
-    context.fillText("BINARY OUTLOOK / LIVE SIGNAL", Math.max(18, width * 0.055), height - 30);
+    context.fillText("binaryoutlook.github.io", Math.max(18, width * 0.055), height - 30);
 
     frame += 1;
     if (!reduceMotion) {
