@@ -122,33 +122,33 @@ Main heading:
 
 Draft copy:
 
-Four areas I am narrowing in on right now, kept short on purpose: each one
-points to a technical question I want to keep building around.
+Four areas I am narrowing in on right now, kept short on purpose: application,
+model, systems, and interface layers I want to keep building around.
 
 Use four parallel cards across the horizontal space on desktop, each with a
 short title and two specific bullet points.
 
 Suggested groups:
 
-### AI
+### AI / Application
 
-- AI-human synergies
-- Potential impact
+- Human-AI collaboration
+- Workflow automation use cases
 
-### CNN
+### CNN / Model
 
-- Model design architecture
+- CNN architecture design
 - Post-training quantization
 
-### CUDA
+### CUDA / Systems
 
-- Parallelism
-- Cost reduction through GPUs
+- Parallel execution
+- GPU cost-performance optimization
 
 ### Interface
 
-- Front-end development
-- Latest UI and UX designs
+- Front-end implementation
+- Interaction design patterns
 
 ## Featured Projects Section
 

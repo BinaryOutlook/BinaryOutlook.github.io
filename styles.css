@@ -523,43 +523,111 @@ h3 {
   outline: none;
 }
 
-.direction-grid {
+.direction-layout {
+  align-items: start;
   display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  margin-top: 3rem;
+  gap: clamp(2rem, 5vw, 5rem);
+  grid-template-columns: minmax(260px, 0.75fr) minmax(0, 1.35fr);
+}
+
+.direction-copy {
+  border-top: 3px solid var(--ink);
+  padding-top: 1.25rem;
+}
+
+.direction-copy h2 {
+  margin-bottom: 1.25rem;
+}
+
+.direction-copy p {
+  color: var(--muted);
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  font-size: 1.02rem;
+  max-width: 420px;
+}
+
+.direction-grid {
+  background: rgba(251, 248, 239, 0.78);
+  border-left: 1px solid var(--line);
+  border-top: 1px solid var(--ink);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .direction-thread {
-  background: var(--ink);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: var(--surface);
+  --thread-accent: var(--yellow);
+  background: color-mix(in srgb, var(--surface) 82%, transparent);
+  border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  color: var(--ink);
   display: flex;
   flex-direction: column;
   min-height: 230px;
-  padding: 1.35rem;
+  overflow: hidden;
+  padding: 1.25rem;
+  position: relative;
+  transition: background 180ms ease, transform 180ms ease, border-color 180ms ease;
+}
+
+.direction-thread::before {
+  background: var(--thread-accent);
+  content: "";
+  height: 0.36rem;
+  left: 1.25rem;
+  position: absolute;
+  right: 1.25rem;
+  top: 1.25rem;
 }
 
 .direction-thread:nth-child(2) {
-  background: var(--blue);
+  --thread-accent: var(--blue);
 }
 
 .direction-thread:nth-child(3) {
-  background: var(--red);
+  --thread-accent: var(--red);
 }
 
 .direction-thread:nth-child(4) {
-  background: #4b3a86;
+  --thread-accent: var(--teal);
+}
+
+.direction-thread:hover {
+  background: var(--surface-strong);
+  border-color: rgba(24, 89, 168, 0.38);
+  transform: translateY(-2px);
+}
+
+.direction-code {
+  color: var(--thread-accent);
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  margin-top: 1.2rem;
+  text-transform: uppercase;
 }
 
 .direction-thread h3 {
-  color: var(--surface);
-  font-size: 1.55rem;
+  color: var(--ink);
+  font-size: 1.6rem;
+  margin: 0.55rem 0 1.7rem;
 }
 
 .direction-thread ul {
-  border-top: 1px solid rgba(255, 255, 255, 0.24);
-  color: rgba(252, 252, 247, 0.78);
+  border-top: 1px solid var(--soft);
+  color: var(--muted);
   font-family:
     ui-sans-serif,
     system-ui,
@@ -569,11 +637,23 @@ h3 {
     sans-serif;
   list-style: none;
   margin: auto 0 0;
-  padding: 1rem 0 0;
+  padding: 0.9rem 0 0;
 }
 
 .direction-thread li {
+  align-items: start;
+  display: grid;
+  gap: 0.55rem;
+  grid-template-columns: auto minmax(0, 1fr);
   padding: 0.34rem 0;
+}
+
+.direction-thread li::before {
+  background: var(--thread-accent);
+  content: "";
+  height: 0.44rem;
+  margin-top: 0.58rem;
+  width: 0.44rem;
 }
 
 .github-section {
@@ -861,6 +941,7 @@ h3 {
 
   .hero-grid,
   .content-split,
+  .direction-layout,
   .github-layout,
   .notes-layout {
     grid-template-columns: 1fr;
@@ -881,6 +962,10 @@ h3 {
 
   .direction-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .direction-copy p {
+    max-width: 720px;
   }
 
   .project-card {

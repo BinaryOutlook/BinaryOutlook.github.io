@@ -12,12 +12,12 @@ I am also deeply curious about how innovation takes form in technology, so if yo
 
 ## Current Technical Direction
 
-Right now, I am narrowing in on four areas:
+Right now, I am narrowing in on four layers:
 
-- **AI:** AI-human synergies; potential impact
-- **CNN:** model design architecture; post-training quantization
-- **CUDA:** parallelism; cost reduction through GPUs
-- **Interface:** front-end development; latest UI and UX designs
+- **AI / application:** human-AI collaboration; workflow automation use cases
+- **CNN / model:** CNN architecture design; post-training quantization
+- **CUDA / systems:** parallel execution; GPU cost-performance optimization
+- **Interface:** front-end implementation; interaction design patterns
 
 ## Featured Projects
 
