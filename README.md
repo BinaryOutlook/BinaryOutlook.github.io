@@ -10,13 +10,14 @@ I am especially interested in work that carries strong technical ideas across th
 
 I am also deeply curious about how innovation takes form in technology, so if your interests overlap with mine, feel free to connect with me.
 
-## Current Direction
+## Current Technical Direction
 
-At the moment, the themes I find myself returning to most often are:
+Right now, I see my work as four threads that keep crossing:
 
-- AI use cases
-- CNNs and deep learning
-- CUDA
+- AI tools that make messy workflows easier without hiding human judgment
+- CNNs, datasets, training loops, and the mechanics behind model behavior
+- CUDA, GPU programming, and performance work close to the machine
+- Browser-based interfaces where technical ideas have to feel usable
 
 ## Featured Projects
 

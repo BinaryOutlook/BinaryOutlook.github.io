@@ -54,7 +54,6 @@ The top navigation should include:
 - About
 - Direction
 - Projects
-- Technical Focus
 - GitHub
 - Contact
 
@@ -111,28 +110,71 @@ The current direction is shaped by a few recurring interests: AI use cases, CNNs
 
 Technology moves quickly, so the exact tools and frameworks may change. The deeper pattern is more stable: learn with intent, build with curiosity, and keep asking how technical progress can become useful in the real world.
 
-## Current Direction Section
+## Current Technical Direction Section
 
-This section should make the page feel alive and current.
+This section should merge the old Current Direction and Technical Focus sections.
+It should feel alive, current, and personally voiced rather than like a generic
+skills inventory.
 
 Main heading:
 
-**Current Direction**
+**Current Technical Direction**
 
 Draft copy:
 
-At the moment, I am especially focused on:
+Right now, my work is less a fixed stack and more a set of questions I keep
+returning to: how can AI remove friction without hiding judgment, how do deep
+learning systems really learn, and what does the machine need from me when
+performance matters?
 
-- AI use cases that solve real workflow problems,
-- CNNs and deep learning foundations,
-- CUDA and GPU programming,
-- AI coding agents and their safety boundaries,
-- language-driven interfaces and semantic interaction,
-- browser-based experiments that combine systems, play, and interface design.
+I am most interested in ideas that can survive contact with a real interface, a
+real workflow, or a real compute constraint.
 
-Shorter webpage version:
+Suggested groups:
 
-Current interests cluster around AI applications, CNNs, CUDA, agent safety, and interactive web systems.
+### AI that does useful work
+
+I keep coming back to AI tools that make messy workflows easier: coding agents,
+retrieval, roadmaps, approval loops, and semantic interfaces that help people
+move faster without giving up control.
+
+- AI coding agents
+- LLM applications
+- Retrieval workflows
+- Human-in-the-loop systems
+
+### Learning the model beneath the demo
+
+CNNs are where I am digging into the actual mechanics: datasets, training
+loops, computer vision foundations, and the habit of measuring experiments
+instead of just admiring outputs.
+
+- CNNs
+- Model experimentation
+- Computer vision foundations
+- Training workflows
+
+### Performance close to the metal
+
+CUDA interests me because it makes computation physical again. I want to
+understand how memory, parallelism, and GPU constraints change the way software
+should be written.
+
+- CUDA
+- GPU programming
+- Efficient computation
+- Systems-level thinking
+
+### Interfaces you can actually touch
+
+The browser is my testing ground for whether an idea feels usable: tools,
+game-like interactions, semantic play, and prototypes where the system has to
+respond clearly.
+
+- Browser-based tools
+- Interactive storytelling
+- Frontend experiments
+- Product prototyping
 
 ## Featured Projects Section
 
@@ -217,48 +259,6 @@ Focus:
 Link:
 
 GitHub: `https://github.com/BinaryOutlook/SemantrisPlus`
-
-## Technical Focus Section
-
-This section should give visitors a map of skills and learning areas without pretending to be a complete skills inventory.
-
-Main heading:
-
-**Technical Focus**
-
-Suggested groups:
-
-### Intelligent Software
-
-- AI coding agents
-- LLM applications
-- Retrieval workflows
-- Human-in-the-loop systems
-- Semantic interfaces
-
-### Deep Learning
-
-- CNNs
-- Model experimentation
-- Computer vision foundations
-- Dataset handling
-- Training workflows
-
-### Systems and Performance
-
-- CUDA
-- GPU programming
-- High-performance computing
-- Efficient computation
-- Systems-level thinking
-
-### Web and Interaction
-
-- Browser-based tools
-- Interactive storytelling
-- Game-like interfaces
-- Frontend experiments
-- Product prototyping
 
 ## GitHub Snapshot Section
 
@@ -405,13 +405,12 @@ The design should let projects and technical direction carry the page.
 
 1. Hero
 2. About
-3. Current Direction
+3. Current Technical Direction
 4. Featured Projects
-5. Technical Focus
-6. GitHub Snapshot
-7. Learning Notes
-8. Contact
-9. Footer
+5. GitHub Snapshot
+6. Learning Notes
+7. Contact
+8. Footer
 
 ## Content Still Needed Before HTML
 
