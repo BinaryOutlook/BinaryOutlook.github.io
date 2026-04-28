@@ -206,23 +206,23 @@ Link:
 
 GitHub: `https://github.com/DasbootU9607/Deep-Learning-Week-Hackathon-2026-HaLoop-Team-CEEES`
 
-### ReUnion
+### BadmintonManager
 
 Draft copy:
 
-**ReUnion** is a career platform for personalized upskilling roadmaps, job filtering, and application tracking. It explores how AI can turn fragmented career information into a more navigable path.
+**BadmintonManager** is a browser-based badminton management simulation about coaching the match instead of directly playing it. Compared with smaller past projects, it moves into a higher scale of complexity: algorithms, data, long-term game systems, and a more demanding simulation loop. The project draws parallels from management games and major sports titles, then asks what that depth could look like in badminton.
 
 Focus:
 
-- AI use cases
-- Career tooling
-- Retrieval workflows
-- Roadmap generation
-- Product thinking
+- Sports management simulation
+- Match simulation
+- Algorithms and data
+- Long-term game systems
+- Tactical modeling
 
 Link:
 
-GitHub: `https://github.com/DasbootU9607/SCDS-TechFest-Hackathon-2026-Team094-ReUnion`
+GitHub: `https://github.com/BinaryOutlook/BadmintonManager`
 
 ### The Lank Forenzo Simulator
 
@@ -309,7 +309,7 @@ It can make the page feel active, but only if the events are accurate and worth 
 Possible entries:
 
 - Built HaLoop as an AI agent safety and DevSecOps project.
-- Built ReUnion as an AI-assisted career roadmap platform.
+- Started BadmintonManager as a higher-scale badminton management simulation.
 - Continued developing The Lank Forenzo Simulator as a browser-based experimentation sandbox.
 - Reimagined Semantris through LLM-powered semantic gameplay in SemantrisPlus.
 
