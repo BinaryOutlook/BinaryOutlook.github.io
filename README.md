@@ -12,12 +12,12 @@ I am also deeply curious about how innovation takes form in technology, so if yo
 
 ## Current Technical Direction
 
-Right now, I see my work as four threads that keep crossing:
+Right now, I am narrowing in on four areas:
 
-- AI tools that make messy workflows easier without hiding human judgment
-- CNNs, datasets, training loops, and the mechanics behind model behavior
-- CUDA, GPU programming, and performance work close to the machine
-- Browser-based interfaces where technical ideas have to feel usable
+- **AI:** AI-human synergies; potential impact
+- **CNN:** model design architecture; post-training quantization
+- **CUDA:** parallelism; cost reduction through GPUs
+- **Interface:** front-end development; latest UI and UX designs
 
 ## Featured Projects
 

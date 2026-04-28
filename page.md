@@ -122,59 +122,33 @@ Main heading:
 
 Draft copy:
 
-Right now, my work is less a fixed stack and more a set of questions I keep
-returning to: how can AI remove friction without hiding judgment, how do deep
-learning systems really learn, and what does the machine need from me when
-performance matters?
+Four areas I am narrowing in on right now, kept short on purpose: each one
+points to a technical question I want to keep building around.
 
-I am most interested in ideas that can survive contact with a real interface, a
-real workflow, or a real compute constraint.
+Use four parallel cards across the horizontal space on desktop, each with a
+short title and two specific bullet points.
 
 Suggested groups:
 
-### AI that does useful work
+### AI
 
-I keep coming back to AI tools that make messy workflows easier: coding agents,
-retrieval, roadmaps, approval loops, and semantic interfaces that help people
-move faster without giving up control.
+- AI-human synergies
+- Potential impact
 
-- AI coding agents
-- LLM applications
-- Retrieval workflows
-- Human-in-the-loop systems
+### CNN
 
-### Learning the model beneath the demo
+- Model design architecture
+- Post-training quantization
 
-CNNs are where I am digging into the actual mechanics: datasets, training
-loops, computer vision foundations, and the habit of measuring experiments
-instead of just admiring outputs.
+### CUDA
 
-- CNNs
-- Model experimentation
-- Computer vision foundations
-- Training workflows
+- Parallelism
+- Cost reduction through GPUs
 
-### Performance close to the metal
+### Interface
 
-CUDA interests me because it makes computation physical again. I want to
-understand how memory, parallelism, and GPU constraints change the way software
-should be written.
-
-- CUDA
-- GPU programming
-- Efficient computation
-- Systems-level thinking
-
-### Interfaces you can actually touch
-
-The browser is my testing ground for whether an idea feels usable: tools,
-game-like interactions, semantic play, and prototypes where the system has to
-respond clearly.
-
-- Browser-based tools
-- Interactive storytelling
-- Frontend experiments
-- Product prototyping
+- Front-end development
+- Latest UI and UX designs
 
 ## Featured Projects Section
 

@@ -534,7 +534,9 @@ h3 {
   background: var(--ink);
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: var(--surface);
-  min-height: 430px;
+  display: flex;
+  flex-direction: column;
+  min-height: 230px;
   padding: 1.35rem;
 }
 
@@ -552,18 +554,7 @@ h3 {
 
 .direction-thread h3 {
   color: var(--surface);
-  min-height: 3.6rem;
-}
-
-.direction-thread p {
-  color: rgba(252, 252, 247, 0.8);
-  font-family:
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+  font-size: 1.55rem;
 }
 
 .direction-thread ul {
@@ -577,7 +568,7 @@ h3 {
     "Segoe UI",
     sans-serif;
   list-style: none;
-  margin: 1.4rem 0 0;
+  margin: auto 0 0;
   padding: 1rem 0 0;
 }
 
