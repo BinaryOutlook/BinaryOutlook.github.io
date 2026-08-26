@@ -122,16 +122,11 @@ select {
   gap: 0.75rem;
 }
 
-.brand-symbol {
-  align-items: center;
-  background:
-    linear-gradient(135deg, var(--red) 0 49%, var(--ink) 49% 51%, var(--blue) 51% 100%);
-  color: var(--surface);
-  display: inline-flex;
-  height: 2.35rem;
-  justify-content: center;
-  letter-spacing: 0;
-  width: 2.35rem;
+.brand-logo {
+  flex: 0 0 auto;
+  height: 3rem;
+  object-fit: contain;
+  width: 3rem;
 }
 
 .nav-links {
@@ -1683,9 +1678,9 @@ h3 {
     font-size: 0.86rem;
   }
 
-  .brand-symbol {
-    height: 2rem;
-    width: 2rem;
+  .brand-logo {
+    height: 2.5rem;
+    width: 2.5rem;
   }
 
   .nav-links {
