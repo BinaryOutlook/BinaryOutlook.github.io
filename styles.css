@@ -416,10 +416,120 @@ h3 {
   max-width: 780px;
 }
 
+.projects-showcase {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  grid-template-columns: minmax(280px, 0.78fr) minmax(0, 1.22fr);
+  margin-top: 3rem;
+}
+
+.project-preview {
+  align-self: start;
+  position: sticky;
+  top: calc(72px + 1.5rem);
+}
+
+.project-preview__frame {
+  aspect-ratio: 16 / 10;
+  background: var(--ink);
+  border: 1px solid var(--ink);
+  color: var(--surface);
+  overflow: hidden;
+  position: relative;
+}
+
+.project-preview__frame::before {
+  background:
+    linear-gradient(90deg, rgba(251, 248, 239, 0.1) 1px, transparent 1px),
+    linear-gradient(rgba(251, 248, 239, 0.1) 1px, transparent 1px);
+  background-size: 2rem 2rem;
+  content: "";
+  inset: 0;
+  position: absolute;
+}
+
+.project-preview__placeholder {
+  inset: 0;
+  position: absolute;
+}
+
+.project-preview__index {
+  color: rgba(251, 248, 239, 0.94);
+  font-size: clamp(4.5rem, 10vw, 8rem);
+  font-weight: 900;
+  left: 1rem;
+  letter-spacing: -0.08em;
+  line-height: 0.8;
+  position: absolute;
+  top: 1.2rem;
+}
+
+.project-preview__axis {
+  background: var(--red);
+  bottom: 18%;
+  height: 0.75rem;
+  left: 10%;
+  position: absolute;
+  transform: rotate(-8deg);
+  width: 68%;
+}
+
+.project-preview__node {
+  border: 1rem solid var(--yellow);
+  border-radius: 50%;
+  bottom: 12%;
+  height: clamp(4rem, 8vw, 6.5rem);
+  position: absolute;
+  right: 9%;
+  width: clamp(4rem, 8vw, 6.5rem);
+}
+
+.project-preview__availability {
+  background: var(--surface);
+  bottom: 0;
+  color: var(--ink);
+  font-size: 0.72rem;
+  font-weight: 850;
+  left: 0;
+  letter-spacing: 0.06em;
+  padding: 0.45rem 0.65rem;
+  position: absolute;
+  text-transform: uppercase;
+  z-index: 2;
+}
+
+.project-preview__caption {
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  border: 1px solid var(--line);
+  border-top: 0;
+  padding: 1.1rem;
+}
+
+.project-preview__caption .panel-label {
+  margin-bottom: 0.45rem;
+}
+
+.project-preview__caption h3 {
+  margin-bottom: 0.55rem;
+}
+
+.project-preview__caption p:last-child {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 0;
+}
+
 .project-stack {
   display: grid;
   gap: 1rem;
-  margin-top: 3rem;
+}
+
+.projects-showcase .project-card {
+  grid-template-columns: 1fr;
+}
+
+.projects-showcase .project-link {
+  justify-self: start;
 }
 
 .project-card {
@@ -1003,6 +1113,7 @@ h3 {
   .hero-grid,
   .content-split,
   .direction-layout,
+  .projects-showcase,
   .github-layout {
     grid-template-columns: 1fr;
   }
@@ -1036,6 +1147,11 @@ h3 {
 
   .project-card {
     grid-template-columns: 1fr;
+  }
+
+  .project-preview {
+    position: relative;
+    top: auto;
   }
 
   .project-link {
@@ -1124,5 +1240,10 @@ h3 {
   .js-enabled .reveal {
     opacity: 1;
     transform: none;
+  }
+
+  .project-preview {
+    position: relative;
+    top: auto;
   }
 }
