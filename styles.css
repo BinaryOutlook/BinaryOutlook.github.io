@@ -1318,6 +1318,7 @@ h3 {
 
 .home-page .site-footer::before {
   animation: isometric-grid-drift 14s linear infinite alternate;
+  animation-play-state: paused;
   background:
     repeating-linear-gradient(
       30deg,
@@ -1342,6 +1343,10 @@ h3 {
   transform: translate3d(-1.75rem, -1rem, 0);
   will-change: transform;
   z-index: 0;
+}
+
+.home-page .site-footer.is-grid-active::before {
+  animation-play-state: running;
 }
 
 .home-page .site-footer p {

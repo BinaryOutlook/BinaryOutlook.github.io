@@ -414,6 +414,22 @@ if (canvas) {
   });
 }
 
+const animatedFooter = document.querySelector(".home-page .site-footer");
+
+if (animatedFooter && !reduceMotion) {
+  if ("IntersectionObserver" in window) {
+    const footerObserver = new IntersectionObserver(
+      ([entry]) => {
+        animatedFooter.classList.toggle("is-grid-active", entry.isIntersecting);
+      },
+      { rootMargin: "120px 0px" }
+    );
+    footerObserver.observe(animatedFooter);
+  } else {
+    animatedFooter.classList.add("is-grid-active");
+  }
+}
+
 const directionAccordion = document.querySelector("[data-direction-accordion]");
 
 if (directionAccordion) {
