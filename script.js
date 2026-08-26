@@ -598,3 +598,76 @@ async function initLanguageWidget(widget) {
 if (languageWidget) {
   initLanguageWidget(languageWidget);
 }
+
+function addWritingContactCta() {
+  const writingMain = document.querySelector(".writing-page main");
+
+  if (!writingMain || writingMain.querySelector("[data-writing-contact-cta]")) return;
+
+  const contactCta = document.createElement("section");
+  contactCta.className = "section writing-contact-cta";
+  contactCta.setAttribute("aria-labelledby", "writing-contact-title");
+  contactCta.dataset.writingContactCta = "";
+  contactCta.innerHTML = `
+    <div class="writing-contact-cta__inner">
+      <div class="writing-contact-cta__copy">
+        <p class="section-kicker">Start a conversation</p>
+        <h2 id="writing-contact-title">An idea worth discussing?</h2>
+        <p>Share what you are building, questioning, or trying to understand.</p>
+      </div>
+      <a class="button primary" href="./index.html#contact">Contact me</a>
+    </div>
+  `;
+
+  writingMain.append(contactCta);
+}
+
+function copyTextFallback(text) {
+  const input = document.createElement("textarea");
+  input.value = text;
+  input.setAttribute("readonly", "");
+  input.style.position = "fixed";
+  input.style.opacity = "0";
+  document.body.append(input);
+  input.select();
+  const copied = document.execCommand("copy");
+  input.remove();
+
+  if (!copied) throw new Error("Copy command was unavailable");
+}
+
+async function copyEmail(button) {
+  const email = button.dataset.copyEmail;
+  const label = button.querySelector("[data-copy-label]");
+  const status = button.closest(".contact-panel__lead")?.querySelector(".contact-copy-status");
+
+  if (!email || !label) return;
+
+  try {
+    if (navigator.clipboard?.writeText && window.isSecureContext) {
+      await navigator.clipboard.writeText(email);
+    } else {
+      copyTextFallback(email);
+    }
+
+    label.textContent = "Email copied";
+    button.classList.add("is-copied");
+    if (status) status.textContent = `${email} copied to your clipboard.`;
+  } catch (error) {
+    label.textContent = "Copy unavailable";
+    if (status) status.textContent = `Copy did not work. Select the visible address: ${email}`;
+  }
+
+  window.setTimeout(() => {
+    label.textContent = "Copy email";
+    button.classList.remove("is-copied");
+    if (status) status.textContent = "";
+  }, 2800);
+}
+
+addWritingContactCta();
+
+document.querySelectorAll("[data-copy-email]").forEach((button) => {
+  button.classList.add("is-ready");
+  button.addEventListener("click", () => copyEmail(button));
+});

@@ -1090,33 +1090,270 @@ h3 {
   }
 }
 
-.contact-section {
-  padding-top: 2rem;
+.writing-contact-cta {
+  padding-top: 0;
+}
+
+.writing-contact-cta__inner {
+  align-items: center;
+  background: var(--ink);
+  border-left: 0.65rem solid var(--blue);
+  color: var(--surface);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 3rem;
+  justify-content: space-between;
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+.writing-contact-cta__copy {
+  flex: 1 1 28rem;
+}
+
+.writing-contact-cta h2 {
+  color: var(--surface);
+  font-size: clamp(2rem, 5vw, 4rem);
+  margin-bottom: 0.75rem;
+}
+
+.writing-contact-cta p:not(.section-kicker) {
+  color: rgba(251, 248, 239, 0.72);
+  margin-bottom: 0;
+  max-width: 620px;
+}
+
+.writing-contact-cta .section-kicker {
+  color: var(--yellow);
+}
+
+.writing-contact-cta .button {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--ink);
+}
+
+.section.contact-section {
+  align-items: center;
+  display: grid;
+  max-width: none;
+  min-height: 78svh;
+  padding-left: max(0.75rem, calc((100vw - var(--max)) / 2));
+  padding-right: max(0.75rem, calc((100vw - var(--max)) / 2));
+  scroll-margin-top: 72px;
 }
 
 .contact-panel {
-  background:
-    linear-gradient(90deg, rgba(251, 248, 239, 0.96), rgba(251, 248, 239, 0.86)),
-    repeating-linear-gradient(135deg, rgba(24, 89, 168, 0.18) 0 1px, transparent 1px 14px);
-  border: 1px solid var(--line);
+  background: var(--ink);
   border-top: 0.7rem solid var(--red);
-  padding: clamp(2rem, 6vw, 4rem);
+  color: var(--surface);
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(2rem, 5vw, 5rem);
+  isolation: isolate;
+  margin: 0 auto;
+  max-width: var(--max);
+  min-height: 32rem;
+  overflow: hidden;
+  padding: clamp(1.25rem, 5vw, 4rem);
+  position: relative;
+  width: 100%;
+}
+
+.contact-panel::after {
+  border: 1.1rem solid var(--blue);
+  border-radius: 50%;
+  bottom: -3.5rem;
+  content: "";
+  height: 9rem;
+  left: -3rem;
+  opacity: 0.82;
+  position: absolute;
+  width: 9rem;
+  z-index: -1;
+}
+
+.contact-panel__lead {
+  align-content: center;
+  display: grid;
+  flex: 1 1 32rem;
+  min-width: 0;
+}
+
+.contact-panel .section-kicker {
+  color: var(--yellow);
 }
 
 .contact-panel h2 {
-  max-width: 640px;
+  color: var(--surface);
+  font-size: clamp(3rem, 7vw, 6rem);
+  margin-bottom: 1.5rem;
+  max-width: 10ch;
 }
 
-.contact-panel p:not(.section-kicker) {
+.contact-panel .contact-intro {
+  color: rgba(251, 248, 239, 0.76);
+  font-size: clamp(1.05rem, 2vw, 1.25rem);
+  max-width: 620px;
+}
+
+.contact-panel .button.primary {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--ink);
+}
+
+.contact-panel .button.secondary {
+  background: transparent;
+  border-color: rgba(251, 248, 239, 0.5);
+  color: var(--surface);
+  cursor: pointer;
+}
+
+.contact-copy {
+  display: none;
+}
+
+.contact-copy.is-ready {
+  display: inline-flex;
+}
+
+.contact-panel .button.secondary:hover,
+.contact-panel .button.secondary:focus-visible,
+.contact-panel .button.secondary.is-copied {
+  background: var(--surface);
+  color: var(--ink);
+}
+
+.contact-copy-status {
+  color: rgba(251, 248, 239, 0.68);
+  font-size: 0.84rem;
+  margin: 0.65rem 0 0;
+  min-height: 1.4rem;
+}
+
+.contact-panel__rail {
+  align-content: start;
+  align-self: stretch;
+  background: var(--surface);
+  color: var(--ink);
+  display: grid;
+  flex: 1 1 20rem;
+  gap: 1.5rem;
+  min-width: 0;
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+
+.contact-availability {
+  align-items: start;
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+.contact-availability__mark {
+  background: var(--teal);
+  box-shadow: 0 0 0 0.3rem rgba(11, 120, 110, 0.14);
+  height: 0.72rem;
+  margin-top: 0.34rem;
+  width: 0.72rem;
+}
+
+.contact-availability .panel-label {
+  color: var(--teal);
+  margin-bottom: 0.35rem;
+}
+
+.contact-availability p:last-child,
+.contact-note {
   color: var(--muted);
-  font-family:
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
-  max-width: 720px;
+  margin-bottom: 0;
+}
+
+.contact-topics {
+  border-bottom: 1px solid var(--soft);
+  border-top: 1px solid var(--soft);
+  padding: 1.25rem 0;
+}
+
+.contact-topics h3 {
+  font-size: 1rem;
+  margin-bottom: 0.8rem;
+}
+
+.contact-topics ul {
+  display: grid;
+  gap: 0.55rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.contact-topics li {
+  align-items: start;
+  display: grid;
+  gap: 0.65rem;
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+.contact-topics li::before {
+  background: var(--blue);
+  content: "";
+  height: 0.48rem;
+  margin-top: 0.55rem;
+  width: 0.48rem;
+}
+
+.contact-topics li:nth-child(2)::before {
+  background: var(--yellow);
+}
+
+.contact-topics li:nth-child(3)::before {
+  background: var(--red);
+}
+
+.contact-channels {
+  display: grid;
+  gap: 0.85rem;
+  margin: 0;
+}
+
+.contact-channels div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.contact-channels dt {
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  flex: 0 0 4rem;
+  text-transform: uppercase;
+}
+
+.contact-channels dd {
+  flex: 1 1 12rem;
+  font-size: 0.94rem;
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.contact-channels a {
+  border-bottom: 1px solid var(--line);
+  font-weight: 760;
+}
+
+.contact-channels a:hover,
+.contact-channels a:focus-visible {
+  border-color: var(--blue);
+  color: var(--blue);
+  outline: none;
+}
+
+.contact-note {
+  font-size: 0.88rem;
 }
 
 .site-footer {
