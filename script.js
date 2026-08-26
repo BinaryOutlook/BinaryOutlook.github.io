@@ -457,7 +457,11 @@ if (directionAccordion) {
   const directionPanels = Array.from(
     directionAccordion.querySelectorAll("[data-direction-panel]")
   );
-  let selectedDirection = null;
+  const supportsDirectionHover = window.matchMedia(
+    "(hover: hover) and (pointer: fine)"
+  ).matches;
+  let hoveredDirection = null;
+  let focusedDirection = null;
 
   function setActiveDirection(activePanel = null) {
     directionPanels.forEach((panel) => {
@@ -472,22 +476,35 @@ if (directionAccordion) {
     });
   }
 
+  function syncActiveDirection() {
+    setActiveDirection(hoveredDirection ?? focusedDirection);
+  }
+
   setActiveDirection();
 
   directionPanels.forEach((panel) => {
     const trigger = panel.querySelector("[data-direction-trigger]");
 
-    trigger?.addEventListener("focus", () => {
-      if (trigger.matches(":focus-visible")) setActiveDirection(panel);
+    panel.addEventListener("pointerenter", () => {
+      hoveredDirection = panel;
+      syncActiveDirection();
     });
-    trigger?.addEventListener("click", () => {
-      selectedDirection = panel;
-      setActiveDirection(selectedDirection);
+    panel.addEventListener("pointerleave", () => {
+      if (hoveredDirection === panel) hoveredDirection = null;
+      syncActiveDirection();
+    });
+
+    trigger?.addEventListener("focus", () => {
+      if (trigger.matches(":focus-visible") || !supportsDirectionHover) {
+        focusedDirection = panel;
+        syncActiveDirection();
+      }
     });
     trigger?.addEventListener("keydown", (event) => {
       if (event.key !== "Escape") return;
-      selectedDirection = null;
-      setActiveDirection();
+      focusedDirection = null;
+      hoveredDirection = null;
+      syncActiveDirection();
       trigger.blur();
     });
   });
@@ -495,7 +512,8 @@ if (directionAccordion) {
   directionAccordion.addEventListener("focusout", () => {
     window.setTimeout(() => {
       if (!directionAccordion.contains(document.activeElement)) {
-        setActiveDirection(selectedDirection);
+        focusedDirection = null;
+        syncActiveDirection();
       }
     }, 0);
   });

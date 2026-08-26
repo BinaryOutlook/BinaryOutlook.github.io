@@ -837,8 +837,7 @@ h3 {
   position: relative;
   transition:
     background 240ms ease,
-    border-color 240ms ease,
-    flex-grow 420ms cubic-bezier(0.22, 1, 0.36, 1);
+    border-color 240ms ease;
 }
 
 .direction-thread::before {
@@ -871,7 +870,6 @@ h3 {
 .direction-thread.is-active {
   background: var(--surface-strong);
   border-color: rgba(24, 89, 168, 0.38);
-  flex-grow: 2.15;
 }
 
 .direction-code {
@@ -901,7 +899,7 @@ h3 {
   background: transparent;
   border: 0;
   color: inherit;
-  cursor: pointer;
+  cursor: default;
   display: flex;
   font: inherit;
   font-weight: inherit;
@@ -993,6 +991,7 @@ h3 {
   display: grid;
   gap: 0.55rem;
   grid-template-columns: auto minmax(0, 1fr);
+  overflow-wrap: anywhere;
   padding: 0.34rem 0;
 }
 
@@ -1493,9 +1492,33 @@ h3 {
   transition: opacity 650ms ease, transform 650ms ease;
 }
 
+.js-enabled .direction-thread.reveal {
+  transform: none;
+  transition:
+    opacity 500ms ease,
+    background 240ms ease,
+    border-color 240ms ease;
+}
+
 .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+@media (min-width: 921px) and (max-width: 1100px) {
+  .direction-thread {
+    padding: 1rem;
+  }
+
+  .direction-thread::before {
+    left: 1rem;
+    right: 1rem;
+    top: 1rem;
+  }
+
+  .direction-thread ul {
+    font-size: 0.9rem;
+  }
 }
 
 @media (max-width: 920px) {
@@ -1637,7 +1660,7 @@ h3 {
   }
 
   .direction-thread {
-    min-height: auto;
+    min-height: 230px;
   }
 
   .writing-hello {
