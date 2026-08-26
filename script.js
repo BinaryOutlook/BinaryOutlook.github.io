@@ -65,10 +65,49 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
 
 if (canvas) {
   const context = canvas.getContext("2d");
+  const heroSection = canvas.closest(".hero-section");
+  const supportsFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const meshColumns = 18;
+  const meshRows = 9;
   let width = 0;
   let height = 0;
   let frame = 0;
   let animationId = null;
+  let mesh = [];
+  const pointer = {
+    active: false,
+    x: 0,
+    y: 0,
+    velocityX: 0,
+    velocityY: 0,
+  };
+
+  function buildMesh() {
+    const top = height * 0.08;
+    const bottom = height * 1.02;
+    const center = width * 0.5;
+
+    mesh = Array.from({ length: meshRows + 1 }, (_, rowIndex) => {
+      const depth = rowIndex / meshRows;
+      const easedDepth = depth ** 1.18;
+      const spread = 0.62 + depth * 0.5;
+      const baseY = top + easedDepth * (bottom - top);
+
+      return Array.from({ length: meshColumns + 1 }, (_, columnIndex) => {
+        const columnPosition = columnIndex / meshColumns - 0.5;
+        const baseX = center + columnPosition * width * spread;
+
+        return {
+          baseX,
+          baseY,
+          x: baseX,
+          y: baseY,
+          velocityX: 0,
+          velocityY: 0,
+        };
+      });
+    });
+  }
 
   function resizeCanvas() {
     const ratio = Math.min(window.devicePixelRatio || 1, 2);
@@ -78,6 +117,73 @@ if (canvas) {
     canvas.width = Math.floor(width * ratio);
     canvas.height = Math.floor(height * ratio);
     context.setTransform(ratio, 0, 0, ratio, 0, 0);
+    buildMesh();
+  }
+
+  function updateMesh() {
+    const influenceRadius = Math.min(240, Math.max(130, width * 0.18));
+
+    mesh.forEach((row) => {
+      row.forEach((point) => {
+        point.velocityX += (point.baseX - point.x) * 0.045;
+        point.velocityY += (point.baseY - point.y) * 0.045;
+
+        if (pointer.active) {
+          const deltaX = pointer.x - point.x;
+          const deltaY = pointer.y - point.y;
+          const distance = Math.hypot(deltaX, deltaY);
+
+          if (distance < influenceRadius) {
+            const influence = (1 - distance / influenceRadius) ** 2;
+            point.velocityX += pointer.velocityX * influence * 0.12;
+            point.velocityY += pointer.velocityY * influence * 0.12;
+          }
+        }
+
+        point.velocityX *= 0.86;
+        point.velocityY *= 0.86;
+        point.x += point.velocityX;
+        point.y += point.velocityY;
+      });
+    });
+
+    pointer.velocityX *= 0.8;
+    pointer.velocityY *= 0.8;
+  }
+
+  function drawMesh() {
+    context.lineWidth = 1;
+    context.strokeStyle = "rgba(24, 89, 168, 0.14)";
+
+    mesh.forEach((row, rowIndex) => {
+      context.beginPath();
+      row.forEach((point, columnIndex) => {
+        const idleOffset = Math.sin(frame * 0.012 + rowIndex * 0.48 + columnIndex * 0.16) * 0.7;
+        const y = point.y + idleOffset;
+
+        if (columnIndex === 0) {
+          context.moveTo(point.x, y);
+        } else {
+          context.lineTo(point.x, y);
+        }
+      });
+      context.stroke();
+    });
+
+    for (let columnIndex = 0; columnIndex <= meshColumns; columnIndex += 1) {
+      context.beginPath();
+      mesh.forEach((row, rowIndex) => {
+        const point = row[columnIndex];
+        const idleOffset = Math.sin(frame * 0.012 + rowIndex * 0.48 + columnIndex * 0.16) * 0.7;
+
+        if (rowIndex === 0) {
+          context.moveTo(point.x, point.y + idleOffset);
+        } else {
+          context.lineTo(point.x, point.y + idleOffset);
+        }
+      });
+      context.stroke();
+    }
   }
 
   function drawFrame() {
@@ -86,31 +192,12 @@ if (canvas) {
     context.fillRect(0, 0, width, height);
 
     const horizon = height * 0.64;
-    const columns = 18;
-    const rows = 9;
-    const cellWidth = width / columns;
-    const cellHeight = Math.max(34, height / 18);
+    const cellWidth = width / meshColumns;
 
-    context.lineWidth = 1;
-    context.strokeStyle = "rgba(24, 89, 168, 0.12)";
+    updateMesh();
+    drawMesh();
 
-    for (let column = 0; column <= columns; column += 1) {
-      const x = column * cellWidth;
-      context.beginPath();
-      context.moveTo(x, horizon - rows * cellHeight * 0.6);
-      context.lineTo(x + (column - columns / 2) * 12, height);
-      context.stroke();
-    }
-
-    for (let row = 0; row < rows; row += 1) {
-      const y = horizon + row * cellHeight;
-      context.beginPath();
-      context.moveTo(0, y);
-      context.lineTo(width, y + row * 10);
-      context.stroke();
-    }
-
-    for (let column = 0; column < columns; column += 1) {
+    for (let column = 0; column < meshColumns; column += 1) {
       const phase = (frame * 0.018 + column * 0.7) % 6;
       const barHeight = 18 + ((column * 23 + frame) % 90);
       const x = column * cellWidth + cellWidth * 0.18;
@@ -171,6 +258,33 @@ if (canvas) {
 
   resizeCanvas();
   drawFrame();
+
+  if (heroSection && supportsFinePointer && !reduceMotion) {
+    heroSection.addEventListener("pointerenter", (event) => {
+      const bounds = canvas.getBoundingClientRect();
+      pointer.active = true;
+      pointer.x = event.clientX - bounds.left;
+      pointer.y = event.clientY - bounds.top;
+      pointer.velocityX = 0;
+      pointer.velocityY = 0;
+    });
+
+    heroSection.addEventListener("pointermove", (event) => {
+      const bounds = canvas.getBoundingClientRect();
+      const nextX = event.clientX - bounds.left;
+      const nextY = event.clientY - bounds.top;
+      pointer.velocityX = Math.max(-28, Math.min(28, nextX - pointer.x));
+      pointer.velocityY = Math.max(-28, Math.min(28, nextY - pointer.y));
+      pointer.x = nextX;
+      pointer.y = nextY;
+    });
+
+    heroSection.addEventListener("pointerleave", () => {
+      pointer.active = false;
+      pointer.velocityX = 0;
+      pointer.velocityY = 0;
+    });
+  }
 
   window.addEventListener("resize", () => {
     resizeCanvas();
