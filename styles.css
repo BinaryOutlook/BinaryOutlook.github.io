@@ -448,9 +448,39 @@ h3 {
   position: absolute;
 }
 
+.project-preview__video {
+  background: var(--ink);
+  height: 100%;
+  inset: 0;
+  object-fit: cover;
+  opacity: 0;
+  position: absolute;
+  transition: opacity 260ms ease;
+  width: 100%;
+  z-index: 1;
+}
+
 .project-preview__placeholder {
   inset: 0;
+  opacity: 1;
   position: absolute;
+  transition: opacity 260ms ease;
+}
+
+.project-preview.has-media .project-preview__video {
+  opacity: 1;
+}
+
+.project-preview.has-media .project-preview__placeholder {
+  opacity: 0;
+}
+
+.project-preview.is-loading .project-preview__video {
+  opacity: 0.42;
+}
+
+.project-preview.has-media-error .project-preview__placeholder {
+  opacity: 1;
 }
 
 .project-preview__index {
@@ -465,7 +495,7 @@ h3 {
 }
 
 .project-preview__axis {
-  background: var(--red);
+  background: var(--preview-accent, var(--red));
   bottom: 18%;
   height: 0.75rem;
   left: 10%;
@@ -496,6 +526,11 @@ h3 {
   position: absolute;
   text-transform: uppercase;
   z-index: 2;
+}
+
+.project-preview.is-playing .project-preview__availability {
+  background: var(--preview-accent, var(--red));
+  color: var(--surface);
 }
 
 .project-preview__caption {
@@ -530,6 +565,47 @@ h3 {
 
 .projects-showcase .project-link {
   justify-self: start;
+}
+
+.project-card.is-preview-active {
+  --card-preview-accent: var(--blue);
+  background: var(--surface-strong);
+  border-color: color-mix(in srgb, var(--card-preview-accent) 42%, var(--line));
+  border-left-color: var(--card-preview-accent);
+}
+
+.project-actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.project-preview-trigger {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.04em;
+  min-height: 2.25rem;
+  padding: 0.42rem 0.65rem;
+  text-transform: uppercase;
+}
+
+.project-preview-trigger:hover,
+.project-preview-trigger:focus-visible,
+.project-preview-trigger[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--surface);
+  outline: none;
+}
+
+.project-preview-trigger:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 0.2rem;
 }
 
 .project-card {

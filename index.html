@@ -234,26 +234,55 @@
             aria-labelledby="project-preview-title"
             data-project-preview-shell
           >
-            <div class="project-preview__frame">
-              <div class="project-preview__placeholder" aria-hidden="true">
+            <div class="project-preview__frame" id="project-preview-media">
+              <video
+                class="project-preview__video"
+                muted
+                loop
+                playsinline
+                preload="none"
+                aria-hidden="true"
+                data-project-preview-video
+              ></video>
+              <div
+                class="project-preview__placeholder"
+                aria-hidden="true"
+                data-project-preview-placeholder
+              >
                 <span class="project-preview__index">01</span>
                 <span class="project-preview__axis"></span>
                 <span class="project-preview__node"></span>
               </div>
-              <span class="project-preview__availability">Preview surface ready</span>
+              <span
+                class="project-preview__availability"
+                role="status"
+                aria-live="polite"
+                data-project-preview-status
+              >
+                Interactive preview coming soon
+              </span>
             </div>
-            <div class="project-preview__caption">
+            <div class="project-preview__caption" aria-live="polite">
               <p class="panel-label">Project lens</p>
-              <h3 id="project-preview-title">HaLoop</h3>
-              <p>
-                A pinned surface for project demonstrations, screenshots, and
-                short interaction loops.
+              <h3 id="project-preview-title" data-project-preview-title>HaLoop</h3>
+              <p data-project-preview-description>
+                DevSecOps guardrails for AI coding agents: approvals, risk
+                scoring, and audit trails.
               </p>
             </div>
           </aside>
 
           <div class="project-stack">
-          <article class="project-card reveal">
+          <article
+            class="project-card reveal"
+            data-project-preview-card
+            data-preview-key="haloop"
+            data-preview-enabled="false"
+            data-preview-webm="./assets/previews/haloop.webm"
+            data-preview-mp4="./assets/previews/haloop.mp4"
+            data-preview-poster="./assets/previews/haloop-poster.webp"
+            data-preview-accent="#c9362b"
+          >
             <div class="project-meta">
               <span>AI tooling</span>
               <span>DevSecOps</span>
@@ -270,17 +299,37 @@
                 <li>Approval systems</li>
               </ul>
             </div>
-            <a
-              class="project-link"
-              href="https://github.com/DasbootU9607/Deep-Learning-Week-Hackathon-2026-HaLoop-Team-CEEES"
-              target="_blank"
-              rel="noreferrer"
-            >
-              GitHub
-            </a>
+            <div class="project-actions">
+              <button
+                class="project-preview-trigger"
+                type="button"
+                aria-controls="project-preview-media"
+                aria-pressed="false"
+                data-project-preview-trigger
+              >
+                Preview
+              </button>
+              <a
+                class="project-link"
+                href="https://github.com/DasbootU9607/Deep-Learning-Week-Hackathon-2026-HaLoop-Team-CEEES"
+                target="_blank"
+                rel="noreferrer"
+              >
+                GitHub
+              </a>
+            </div>
           </article>
 
-          <article class="project-card reveal">
+          <article
+            class="project-card reveal"
+            data-project-preview-card
+            data-preview-key="badminton-manager"
+            data-preview-enabled="false"
+            data-preview-webm="./assets/previews/badminton-manager.webm"
+            data-preview-mp4="./assets/previews/badminton-manager.mp4"
+            data-preview-poster="./assets/previews/badminton-manager-poster.webp"
+            data-preview-accent="#1859a8"
+          >
             <div class="project-meta">
               <span>Simulation game</span>
               <span>Sports management</span>
@@ -296,17 +345,37 @@
                 <li>Tactical data</li>
               </ul>
             </div>
-            <a
-              class="project-link"
-              href="https://github.com/BinaryOutlook/BadmintonManager"
-              target="_blank"
-              rel="noreferrer"
-            >
-              GitHub
-            </a>
+            <div class="project-actions">
+              <button
+                class="project-preview-trigger"
+                type="button"
+                aria-controls="project-preview-media"
+                aria-pressed="false"
+                data-project-preview-trigger
+              >
+                Preview
+              </button>
+              <a
+                class="project-link"
+                href="https://github.com/BinaryOutlook/BadmintonManager"
+                target="_blank"
+                rel="noreferrer"
+              >
+                GitHub
+              </a>
+            </div>
           </article>
 
-          <article class="project-card reveal">
+          <article
+            class="project-card reveal"
+            data-project-preview-card
+            data-preview-key="lank-forenzo"
+            data-preview-enabled="false"
+            data-preview-webm="./assets/previews/lank-forenzo.webm"
+            data-preview-mp4="./assets/previews/lank-forenzo.mp4"
+            data-preview-poster="./assets/previews/lank-forenzo-poster.webp"
+            data-preview-accent="#e2ae25"
+          >
             <div class="project-meta">
               <span>Browser game</span>
               <span>Interaction</span>
@@ -322,17 +391,37 @@
                 <li>Web storytelling</li>
               </ul>
             </div>
-            <a
-              class="project-link"
-              href="https://github.com/BinaryOutlook/The-Lank-Forenzo-Simulator"
-              target="_blank"
-              rel="noreferrer"
-            >
-              GitHub
-            </a>
+            <div class="project-actions">
+              <button
+                class="project-preview-trigger"
+                type="button"
+                aria-controls="project-preview-media"
+                aria-pressed="false"
+                data-project-preview-trigger
+              >
+                Preview
+              </button>
+              <a
+                class="project-link"
+                href="https://github.com/BinaryOutlook/The-Lank-Forenzo-Simulator"
+                target="_blank"
+                rel="noreferrer"
+              >
+                GitHub
+              </a>
+            </div>
           </article>
 
-          <article class="project-card reveal">
+          <article
+            class="project-card reveal"
+            data-project-preview-card
+            data-preview-key="semantris-plus"
+            data-preview-enabled="false"
+            data-preview-webm="./assets/previews/semantris-plus.webm"
+            data-preview-mp4="./assets/previews/semantris-plus.mp4"
+            data-preview-poster="./assets/previews/semantris-plus-poster.webp"
+            data-preview-accent="#0b786e"
+          >
             <div class="project-meta">
               <span>LLM application</span>
               <span>Semantic play</span>
@@ -348,14 +437,25 @@
                 <li>Language gameplay</li>
               </ul>
             </div>
-            <a
-              class="project-link"
-              href="https://github.com/BinaryOutlook/SemantrisPlus"
-              target="_blank"
-              rel="noreferrer"
-            >
-              GitHub
-            </a>
+            <div class="project-actions">
+              <button
+                class="project-preview-trigger"
+                type="button"
+                aria-controls="project-preview-media"
+                aria-pressed="false"
+                data-project-preview-trigger
+              >
+                Preview
+              </button>
+              <a
+                class="project-link"
+                href="https://github.com/BinaryOutlook/SemantrisPlus"
+                target="_blank"
+                rel="noreferrer"
+              >
+                GitHub
+              </a>
+            </div>
           </article>
           </div>
         </div>
@@ -431,6 +531,7 @@
       <p>&copy; 2026 Binary Outlook</p>
     </footer>
 
+    <script src="./project-previews.js?v=20260826"></script>
     <script src="./script.js?v=20260425"></script>
   </body>
 </html>
