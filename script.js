@@ -435,20 +435,242 @@ if (canvas) {
   });
 }
 
-const animatedFooter = document.querySelector(".home-page .site-footer");
+const footerCanvas = document.querySelector("[data-footer-mesh]");
 
-if (animatedFooter && !reduceMotion) {
+if (footerCanvas) {
+  const footer = footerCanvas.closest(".site-footer");
+  const context = footerCanvas.getContext("2d");
+  const supportsFinePointer = window.matchMedia(
+    "(hover: hover) and (pointer: fine)"
+  ).matches;
+  let width = 0;
+  let height = 0;
+  let frame = 0;
+  let animationId = null;
+  let resizeId = null;
+  let footerVisible = false;
+  let mesh = [];
+  const pointer = {
+    active: false,
+    x: 0,
+    y: 0,
+    velocityX: 0,
+    velocityY: 0,
+  };
+
+  function buildFooterMesh() {
+    const cellWidth = Math.min(52, Math.max(38, width / 22));
+    const rowHeight = cellWidth * 0.56;
+    const columnCount = Math.ceil(width / cellWidth) + 5;
+    const rowCount = Math.ceil(height / rowHeight) + 5;
+
+    mesh = Array.from({ length: rowCount }, (_, rowIndex) => {
+      const rowOffset = rowIndex % 2 === 0 ? 0 : cellWidth * 0.5;
+      return Array.from({ length: columnCount }, (_, columnIndex) => {
+        const baseX = columnIndex * cellWidth - cellWidth * 2 + rowOffset;
+        const baseY = rowIndex * rowHeight - rowHeight * 2;
+        return {
+          baseX,
+          baseY,
+          x: baseX,
+          y: baseY,
+          velocityX: 0,
+          velocityY: 0,
+        };
+      });
+    });
+  }
+
+  function resizeFooterCanvas() {
+    const ratio = Math.min(window.devicePixelRatio || 1, 2);
+    const bounds = footerCanvas.getBoundingClientRect();
+    width = Math.max(1, Math.floor(bounds.width));
+    height = Math.max(1, Math.floor(bounds.height));
+    footerCanvas.width = Math.floor(width * ratio);
+    footerCanvas.height = Math.floor(height * ratio);
+    context.setTransform(ratio, 0, 0, ratio, 0, 0);
+    buildFooterMesh();
+  }
+
+  function updateFooterMesh() {
+    const influenceRadius = Math.min(180, Math.max(110, width * 0.14));
+
+    mesh.forEach((row) => {
+      row.forEach((point) => {
+        point.velocityX += (point.baseX - point.x) * 0.055;
+        point.velocityY += (point.baseY - point.y) * 0.055;
+
+        if (pointer.active) {
+          const deltaX = pointer.x - point.x;
+          const deltaY = pointer.y - point.y;
+          const distance = Math.hypot(deltaX, deltaY);
+
+          if (distance < influenceRadius) {
+            const safeDistance = Math.max(distance, 0.001);
+            const influence = (1 - distance / influenceRadius) ** 2;
+            const repulsion = influence * 2.25;
+
+            point.velocityX -= (deltaX / safeDistance) * repulsion;
+            point.velocityY -= (deltaY / safeDistance) * repulsion;
+            point.velocityX += pointer.velocityX * influence * 0.08;
+            point.velocityY += pointer.velocityY * influence * 0.08;
+          }
+        }
+
+        point.velocityX *= 0.84;
+        point.velocityY *= 0.84;
+        point.x += point.velocityX;
+        point.y += point.velocityY;
+      });
+    });
+
+    pointer.velocityX *= 0.78;
+    pointer.velocityY *= 0.78;
+  }
+
+  function getFooterPoint(point, rowIndex, columnIndex) {
+    const idleX = Math.sin(frame * 0.012 + rowIndex * 0.5) * 0.45;
+    const idleY = Math.cos(frame * 0.01 + columnIndex * 0.35) * 0.45;
+    return { x: point.x + idleX, y: point.y + idleY };
+  }
+
+  function drawFooterMesh() {
+    context.clearRect(0, 0, width, height);
+    context.beginPath();
+
+    mesh.forEach((row, rowIndex) => {
+      row.forEach((point, columnIndex) => {
+        const from = getFooterPoint(point, rowIndex, columnIndex);
+
+        if (columnIndex < row.length - 1) {
+          const right = getFooterPoint(row[columnIndex + 1], rowIndex, columnIndex + 1);
+          context.moveTo(from.x, from.y);
+          context.lineTo(right.x, right.y);
+        }
+
+        if (rowIndex >= mesh.length - 1) return;
+        const nextRow = mesh[rowIndex + 1];
+        const diagonalIndexes =
+          rowIndex % 2 === 0
+            ? [columnIndex - 1, columnIndex]
+            : [columnIndex, columnIndex + 1];
+
+        diagonalIndexes.forEach((nextColumnIndex) => {
+          const nextPoint = nextRow[nextColumnIndex];
+          if (!nextPoint) return;
+          const to = getFooterPoint(nextPoint, rowIndex + 1, nextColumnIndex);
+          context.moveTo(from.x, from.y);
+          context.lineTo(to.x, to.y);
+        });
+      });
+    });
+
+    context.lineWidth = 1.1;
+    context.strokeStyle = "rgba(126, 61, 43, 0.34)";
+    context.stroke();
+  }
+
+  function drawFooterFrame() {
+    updateFooterMesh();
+    drawFooterMesh();
+    frame += 1;
+  }
+
+  function releaseFooterPointer() {
+    pointer.active = false;
+    pointer.velocityX = 0;
+    pointer.velocityY = 0;
+  }
+
+  function stopFooterAnimation() {
+    if (animationId === null) return;
+    cancelAnimationFrame(animationId);
+    animationId = null;
+  }
+
+  function animateFooterMesh() {
+    animationId = null;
+    if (reduceMotion || !footerVisible || document.hidden) return;
+    drawFooterFrame();
+    animationId = requestAnimationFrame(animateFooterMesh);
+  }
+
+  function startFooterAnimation() {
+    if (reduceMotion || !footerVisible || document.hidden || animationId !== null) {
+      return;
+    }
+    animationId = requestAnimationFrame(animateFooterMesh);
+  }
+
+  resizeFooterCanvas();
+  drawFooterFrame();
+
   if ("IntersectionObserver" in window) {
     const footerObserver = new IntersectionObserver(
       ([entry]) => {
-        animatedFooter.classList.toggle("is-grid-active", entry.isIntersecting);
+        footerVisible = entry.isIntersecting;
+        footer?.classList.toggle("is-grid-active", footerVisible);
+        if (footerVisible) {
+          startFooterAnimation();
+        } else {
+          releaseFooterPointer();
+          stopFooterAnimation();
+        }
       },
-      { rootMargin: "120px 0px" }
+      { rootMargin: "100px 0px" }
     );
-    footerObserver.observe(animatedFooter);
+    footerObserver.observe(footerCanvas);
   } else {
-    animatedFooter.classList.add("is-grid-active");
+    footerVisible = true;
+    footer?.classList.add("is-grid-active");
+    startFooterAnimation();
   }
+
+  if (footer && supportsFinePointer && !reduceMotion) {
+    footer.addEventListener(
+      "pointermove",
+      (event) => {
+        const bounds = footerCanvas.getBoundingClientRect();
+        const nextX = event.clientX - bounds.left;
+        const nextY = event.clientY - bounds.top;
+
+        if (!pointer.active) {
+          pointer.active = true;
+          pointer.x = nextX;
+          pointer.y = nextY;
+          return;
+        }
+
+        pointer.velocityX = Math.max(-24, Math.min(24, nextX - pointer.x));
+        pointer.velocityY = Math.max(-24, Math.min(24, nextY - pointer.y));
+        pointer.x = nextX;
+        pointer.y = nextY;
+      },
+      { passive: true }
+    );
+    footer.addEventListener("pointerleave", releaseFooterPointer);
+    footer.addEventListener("pointercancel", releaseFooterPointer);
+    window.addEventListener("blur", releaseFooterPointer);
+  }
+
+  window.addEventListener("resize", () => {
+    if (resizeId !== null) cancelAnimationFrame(resizeId);
+    resizeId = requestAnimationFrame(() => {
+      resizeId = null;
+      resizeFooterCanvas();
+      drawFooterFrame();
+      startFooterAnimation();
+    });
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      releaseFooterPointer();
+      stopFooterAnimation();
+    } else {
+      startFooterAnimation();
+    }
+  });
 }
 
 const directionAccordion = document.querySelector("[data-direction-accordion]");

@@ -20,7 +20,7 @@
     <script>
       document.documentElement.classList.add("js-enabled");
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260827-7" />
+    <link rel="stylesheet" href="./styles.css?v=20260827-8" />
   </head>
   <body class="home-page">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -497,6 +497,12 @@
       </section>
 
       <section class="section contact-section" id="contact" aria-labelledby="contact-title">
+        <div class="contact-shapes" aria-hidden="true">
+          <span class="contact-shape contact-shape--diamond"></span>
+          <span class="contact-shape contact-shape--tiles"></span>
+          <span class="contact-shape contact-shape--bar"></span>
+          <span class="contact-shape contact-shape--dot"></span>
+        </div>
         <div class="contact-panel reveal">
           <div class="contact-panel__lead">
             <p class="section-kicker">Contact</p>
@@ -581,11 +587,16 @@
     </main>
 
     <footer class="site-footer">
-      <p><strong>Binary Outlook</strong></p>
-      <p>&copy; 2026 Binary Outlook</p>
+      <canvas class="footer-mesh-canvas" aria-hidden="true" data-footer-mesh></canvas>
+      <a class="footer-brand" href="#top" aria-label="Back to the top of Binary Outlook">
+        <img src="./assets/brand/lion-mark.png" alt="" width="44" height="44" />
+        <strong>Binary Outlook</strong>
+      </a>
+      <p class="footer-slogan">Proudly Lions</p>
+      <p class="footer-copyright">&copy; 2026 Binary Outlook</p>
     </footer>
 
     <script src="./project-previews.js?v=20260827-2"></script>
-    <script src="./script.js?v=20260827-5"></script>
+    <script src="./script.js?v=20260827-6"></script>
   </body>
 </html>
