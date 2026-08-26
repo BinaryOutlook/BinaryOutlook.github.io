@@ -18,7 +18,7 @@
     <script>
       document.documentElement.classList.add("js-enabled");
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260826" />
+    <link rel="stylesheet" href="./styles.css?v=20260826-2" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -512,21 +512,28 @@
       <section class="section contact-section" id="contact" aria-labelledby="contact-title">
         <div class="contact-panel reveal">
           <div class="contact-panel__lead">
-            <p class="section-kicker">Contact / Open channel</p>
+            <p class="section-kicker">Contact</p>
             <h2 id="contact-title">Let's build something useful.</h2>
             <p class="contact-intro">
-              Have a technical problem, research direction, or unconventional
-              idea worth testing? Tell me what you are working on and where a
-              second perspective could help.
+              Want to compare notes, test an idea, or build something together?
+              Send a short message with the context and the difficult part.
             </p>
             <div class="contact-actions" aria-label="Email actions">
-              <a class="button primary" href="mailto:binaryoutlook01@gmail.com">
+              <a
+                class="button primary"
+                href="#contact-email"
+                data-email-action
+                data-email-user="binaryoutlook01"
+                data-email-domain="gmail.com"
+              >
                 Email me
               </a>
               <button
                 class="button secondary contact-copy"
                 type="button"
-                data-copy-email="binaryoutlook01@gmail.com"
+                data-copy-email
+                data-email-user="binaryoutlook01"
+                data-email-domain="gmail.com"
               >
                 <span data-copy-label>Copy email</span>
               </button>
@@ -538,9 +545,9 @@
             <div class="contact-availability">
               <span class="contact-availability__mark" aria-hidden="true"></span>
               <div>
-                <p class="panel-label">Availability</p>
+                <p class="panel-label">Open channel</p>
                 <p>
-                  Open to thoughtful conversations around technical work,
+                  Available for thoughtful conversations around technical work,
                   research, and collaboration.
                 </p>
               </div>
@@ -558,10 +565,8 @@
             <dl class="contact-channels">
               <div>
                 <dt>Email</dt>
-                <dd>
-                  <a href="mailto:binaryoutlook01@gmail.com">
-                    binaryoutlook01@gmail.com
-                  </a>
+                <dd id="contact-email" class="contact-email-display">
+                  binaryoutlook01 <span>(at)</span> gmail.com
                 </dd>
               </div>
               <div>
@@ -580,8 +585,8 @@
             </dl>
 
             <p class="contact-note">
-              A helpful first message includes what you are building, the
-              difficult part, and the kind of conversation you have in mind.
+              The best first message says what you are building and where you
+              would value another perspective.
             </p>
           </div>
         </div>
@@ -594,6 +599,6 @@
     </footer>
 
     <script src="./project-previews.js?v=20260826"></script>
-    <script src="./script.js?v=20260826"></script>
+    <script src="./script.js?v=20260826-2"></script>
   </body>
 </html>

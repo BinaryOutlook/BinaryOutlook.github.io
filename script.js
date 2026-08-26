@@ -636,8 +636,14 @@ function copyTextFallback(text) {
   if (!copied) throw new Error("Copy command was unavailable");
 }
 
+function getEmailAddress(element) {
+  const user = element.dataset.emailUser;
+  const domain = element.dataset.emailDomain;
+  return user && domain ? `${user}@${domain}` : "";
+}
+
 async function copyEmail(button) {
-  const email = button.dataset.copyEmail;
+  const email = getEmailAddress(button);
   const label = button.querySelector("[data-copy-label]");
   const status = button.closest(".contact-panel__lead")?.querySelector(".contact-copy-status");
 
@@ -666,6 +672,11 @@ async function copyEmail(button) {
 }
 
 addWritingContactCta();
+
+document.querySelectorAll("[data-email-action]").forEach((link) => {
+  const email = getEmailAddress(link);
+  if (email) link.href = `mailto:${email}`;
+});
 
 document.querySelectorAll("[data-copy-email]").forEach((button) => {
   button.classList.add("is-ready");

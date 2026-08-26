@@ -1133,80 +1133,102 @@ h3 {
 }
 
 .section.contact-section {
+  --contact-accent: #c9573f;
+  --contact-bg: #dfe9e3;
+  --contact-gold: #dba92f;
+  --contact-ink: #173640;
+  --contact-line: rgba(23, 54, 64, 0.2);
+  --contact-muted: #4c6268;
   align-items: center;
+  background: var(--contact-bg);
   display: grid;
   max-width: none;
-  min-height: 78svh;
-  padding-left: max(0.75rem, calc((100vw - var(--max)) / 2));
-  padding-right: max(0.75rem, calc((100vw - var(--max)) / 2));
+  min-height: 76svh;
+  overflow: hidden;
+  padding: clamp(4rem, 8vw, 7rem) max(1rem, calc((100vw - var(--max)) / 2));
+  position: relative;
   scroll-margin-top: 72px;
 }
 
-.contact-panel {
-  background: var(--ink);
-  border-top: 0.7rem solid var(--red);
-  color: var(--surface);
-  display: flex;
-  flex-wrap: wrap;
-  gap: clamp(2rem, 5vw, 5rem);
-  isolation: isolate;
-  margin: 0 auto;
-  max-width: var(--max);
-  min-height: 32rem;
-  overflow: hidden;
-  padding: clamp(1.25rem, 5vw, 4rem);
-  position: relative;
-  width: 100%;
+.section.contact-section::before,
+.section.contact-section::after {
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+  position: absolute;
 }
 
-.contact-panel::after {
-  border: 1.1rem solid var(--blue);
-  border-radius: 50%;
-  bottom: -3.5rem;
-  content: "";
-  height: 9rem;
-  left: -3rem;
-  opacity: 0.82;
-  position: absolute;
-  width: 9rem;
-  z-index: -1;
+.section.contact-section::before {
+  background: var(--contact-accent);
+  height: clamp(13rem, 28vw, 25rem);
+  opacity: 0.12;
+  right: clamp(-10rem, -8vw, -4rem);
+  top: clamp(-10rem, -8vw, -4rem);
+  width: clamp(13rem, 28vw, 25rem);
+}
+
+.section.contact-section::after {
+  border: clamp(1.5rem, 4vw, 3rem) solid rgba(219, 169, 47, 0.28);
+  bottom: clamp(-8rem, -6vw, -3rem);
+  height: clamp(11rem, 22vw, 19rem);
+  left: clamp(-8rem, -6vw, -3rem);
+  width: clamp(11rem, 22vw, 19rem);
+}
+
+.contact-panel {
+  align-items: center;
+  background: transparent;
+  color: var(--contact-ink);
+  display: grid;
+  gap: clamp(2rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 1.05fr) minmax(18rem, 0.78fr);
+  margin: 0 auto;
+  max-width: var(--max);
+  position: relative;
+  width: 100%;
+  z-index: 1;
 }
 
 .contact-panel__lead {
   align-content: center;
   display: grid;
-  flex: 1 1 32rem;
   min-width: 0;
 }
 
 .contact-panel .section-kicker {
-  color: var(--yellow);
+  color: var(--contact-accent);
 }
 
 .contact-panel h2 {
-  color: var(--surface);
-  font-size: clamp(3rem, 7vw, 6rem);
+  color: var(--contact-ink);
+  font-size: clamp(3rem, 6vw, 5.5rem);
   margin-bottom: 1.5rem;
-  max-width: 10ch;
+  max-width: 9.5ch;
 }
 
 .contact-panel .contact-intro {
-  color: rgba(251, 248, 239, 0.76);
+  color: var(--contact-muted);
   font-size: clamp(1.05rem, 2vw, 1.25rem);
-  max-width: 620px;
+  max-width: 590px;
 }
 
 .contact-panel .button.primary {
-  background: var(--yellow);
-  border-color: var(--yellow);
-  color: var(--ink);
+  background: var(--contact-ink);
+  border-color: var(--contact-ink);
+  color: var(--surface-strong);
 }
 
 .contact-panel .button.secondary {
   background: transparent;
-  border-color: rgba(251, 248, 239, 0.5);
-  color: var(--surface);
+  border-color: var(--contact-ink);
+  color: var(--contact-ink);
   cursor: pointer;
+}
+
+.contact-panel .button {
+  border-radius: 999px;
+  padding-left: 1.3rem;
+  padding-right: 1.3rem;
 }
 
 .contact-copy {
@@ -1220,12 +1242,12 @@ h3 {
 .contact-panel .button.secondary:hover,
 .contact-panel .button.secondary:focus-visible,
 .contact-panel .button.secondary.is-copied {
-  background: var(--surface);
-  color: var(--ink);
+  background: var(--contact-ink);
+  color: var(--surface-strong);
 }
 
 .contact-copy-status {
-  color: rgba(251, 248, 239, 0.68);
+  color: var(--contact-muted);
   font-size: 0.84rem;
   margin: 0.65rem 0 0;
   min-height: 1.4rem;
@@ -1233,14 +1255,12 @@ h3 {
 
 .contact-panel__rail {
   align-content: start;
-  align-self: stretch;
-  background: var(--surface);
-  color: var(--ink);
+  border-left: 1px solid var(--contact-line);
+  color: var(--contact-ink);
   display: grid;
-  flex: 1 1 20rem;
-  gap: 1.5rem;
+  gap: 2rem;
   min-width: 0;
-  padding: clamp(1.25rem, 3vw, 2rem);
+  padding: 0 0 0 clamp(1.5rem, 4vw, 3.5rem);
 }
 
 .contact-availability {
@@ -1251,28 +1271,28 @@ h3 {
 }
 
 .contact-availability__mark {
-  background: var(--teal);
-  box-shadow: 0 0 0 0.3rem rgba(11, 120, 110, 0.14);
+  background: var(--contact-accent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 0.32rem rgba(201, 87, 63, 0.14);
   height: 0.72rem;
   margin-top: 0.34rem;
   width: 0.72rem;
 }
 
 .contact-availability .panel-label {
-  color: var(--teal);
+  color: var(--contact-accent);
   margin-bottom: 0.35rem;
 }
 
 .contact-availability p:last-child,
 .contact-note {
-  color: var(--muted);
+  color: var(--contact-muted);
   margin-bottom: 0;
 }
 
 .contact-topics {
-  border-bottom: 1px solid var(--soft);
-  border-top: 1px solid var(--soft);
-  padding: 1.25rem 0;
+  border-top: 1px solid var(--contact-line);
+  padding-top: 1.5rem;
 }
 
 .contact-topics h3 {
@@ -1296,7 +1316,8 @@ h3 {
 }
 
 .contact-topics li::before {
-  background: var(--blue);
+  background: var(--contact-accent);
+  border-radius: 50%;
   content: "";
   height: 0.48rem;
   margin-top: 0.55rem;
@@ -1304,36 +1325,34 @@ h3 {
 }
 
 .contact-topics li:nth-child(2)::before {
-  background: var(--yellow);
+  background: var(--contact-gold);
 }
 
 .contact-topics li:nth-child(3)::before {
-  background: var(--red);
+  background: var(--teal);
 }
 
 .contact-channels {
   display: grid;
-  gap: 0.85rem;
+  gap: 1rem 2rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   margin: 0;
 }
 
 .contact-channels div {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  display: grid;
+  gap: 0.25rem;
 }
 
 .contact-channels dt {
-  color: var(--muted);
+  color: var(--contact-accent);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.06em;
-  flex: 0 0 4rem;
   text-transform: uppercase;
 }
 
 .contact-channels dd {
-  flex: 1 1 12rem;
   font-size: 0.94rem;
   margin: 0;
   min-width: 0;
@@ -1341,19 +1360,47 @@ h3 {
 }
 
 .contact-channels a {
-  border-bottom: 1px solid var(--line);
+  border-bottom: 1px solid var(--contact-line);
   font-weight: 760;
 }
 
 .contact-channels a:hover,
 .contact-channels a:focus-visible {
-  border-color: var(--blue);
-  color: var(--blue);
+  border-color: var(--contact-accent);
+  color: var(--contact-accent);
   outline: none;
+}
+
+.contact-email-display span {
+  color: var(--contact-accent);
+  font-weight: 800;
 }
 
 .contact-note {
   font-size: 0.88rem;
+}
+
+@media (max-width: 820px) {
+  .contact-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-panel__rail {
+    border-left: 0;
+    border-top: 1px solid var(--contact-line);
+    padding: 2rem 0 0;
+  }
+}
+
+@media (max-width: 460px) {
+  .section.contact-section {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .contact-channels {
+    grid-template-columns: 1fr;
+  }
 }
 
 .site-footer {
