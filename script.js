@@ -68,6 +68,7 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").match
 
 if (canvas) {
   const context = canvas.getContext("2d");
+  const cleanMeshStart = document.querySelector("#about");
   const contactSection = document.querySelector("#contact");
   const supportsFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   const meshColumns = 18;
@@ -79,6 +80,7 @@ if (canvas) {
   let scrollUpdateId = null;
   let scrollPosition = window.scrollY;
   let meshRegionActive = true;
+  let signalLayerOpacity = 1;
   let mesh = [];
   const pointer = {
     active: false,
@@ -213,16 +215,9 @@ if (canvas) {
     }
   }
 
-  function drawFrame() {
-    context.clearRect(0, 0, width, height);
-    context.fillStyle = "rgba(242, 240, 232, 0.2)";
-    context.fillRect(0, 0, width, height);
-
+  function drawSignalLayer() {
     const horizon = height * 0.64;
     const cellWidth = width / meshColumns;
-
-    updateMesh();
-    drawMesh();
 
     for (let column = 0; column < meshColumns; column += 1) {
       const phase = (frame * 0.018 + column * 0.7) % 6;
@@ -277,6 +272,22 @@ if (canvas) {
       }
     }
     context.stroke();
+  }
+
+  function drawFrame() {
+    context.clearRect(0, 0, width, height);
+    context.fillStyle = "rgba(250, 249, 245, 0.26)";
+    context.fillRect(0, 0, width, height);
+
+    updateMesh();
+    drawMesh();
+
+    if (signalLayerOpacity > 0.001) {
+      context.save();
+      context.globalAlpha = signalLayerOpacity;
+      drawSignalLayer();
+      context.restore();
+    }
 
     frame += 1;
   }
@@ -309,9 +320,18 @@ if (canvas) {
 
   function updateMeshRegion() {
     const bounds = canvas.getBoundingClientRect();
+    const cleanMeshTop =
+      cleanMeshStart?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY;
     const contactTop =
       contactSection?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY;
     const shouldBeActive = contactTop > bounds.top + 2;
+    const signalFadeDistance = Math.min(240, Math.max(140, height * 0.26));
+    const signalFadeStart = bounds.bottom - signalFadeDistance;
+
+    signalLayerOpacity = Math.max(
+      0,
+      Math.min(1, (cleanMeshTop - signalFadeStart) / signalFadeDistance)
+    );
 
     meshRegionActive = shouldBeActive;
     canvas.classList.toggle("is-suspended", !shouldBeActive);
@@ -391,6 +411,7 @@ if (canvas) {
         scrollUpdateId = null;
         scrollPosition = window.scrollY;
         updateMeshRegion();
+        if (reduceMotion) drawFrame();
       });
     },
     { passive: true }
