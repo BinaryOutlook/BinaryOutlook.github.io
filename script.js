@@ -1,6 +1,7 @@
 const menuButton = document.querySelector("[data-menu-button]");
 const navLinks = document.querySelector("[data-nav-links]");
 const navItems = document.querySelectorAll(".nav-links a");
+const sectionNavItems = document.querySelectorAll('.nav-links a[href^="#"]');
 
 function closeMenu() {
   if (!menuButton || !navLinks) return;
@@ -50,8 +51,10 @@ if ("IntersectionObserver" in window) {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
         const activeLink = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
-        navItems.forEach((link) => link.classList.remove("is-active"));
-        if (activeLink) activeLink.classList.add("is-active");
+        if (activeLink) {
+          sectionNavItems.forEach((link) => link.classList.remove("is-active"));
+          activeLink.classList.add("is-active");
+        }
       });
     },
     { rootMargin: "-45% 0px -50% 0px" }
@@ -599,29 +602,6 @@ if (languageWidget) {
   initLanguageWidget(languageWidget);
 }
 
-function addWritingContactCta() {
-  const writingMain = document.querySelector(".writing-page main");
-
-  if (!writingMain || writingMain.querySelector("[data-writing-contact-cta]")) return;
-
-  const contactCta = document.createElement("section");
-  contactCta.className = "section writing-contact-cta";
-  contactCta.setAttribute("aria-labelledby", "writing-contact-title");
-  contactCta.dataset.writingContactCta = "";
-  contactCta.innerHTML = `
-    <div class="writing-contact-cta__inner">
-      <div class="writing-contact-cta__copy">
-        <p class="section-kicker">Start a conversation</p>
-        <h2 id="writing-contact-title">An idea worth discussing?</h2>
-        <p>Share what you are building, questioning, or trying to understand.</p>
-      </div>
-      <a class="button primary" href="./index.html#contact">Contact me</a>
-    </div>
-  `;
-
-  writingMain.append(contactCta);
-}
-
 function copyTextFallback(text) {
   const input = document.createElement("textarea");
   input.value = text;
@@ -670,8 +650,6 @@ async function copyEmail(button) {
     if (status) status.textContent = "";
   }, 2800);
 }
-
-addWritingContactCta();
 
 document.querySelectorAll("[data-email-action]").forEach((link) => {
   const email = getEmailAddress(link);

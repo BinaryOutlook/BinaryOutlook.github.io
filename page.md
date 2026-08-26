@@ -16,18 +16,22 @@ This should feel like a serious computing portfolio rather than a personal diary
 
 ## Site Structure Decision
 
-For the first version, one webpage is enough.
+The technical portfolio should remain a focused single-page homepage because
+its main job is introduction and credibility. A visitor should not need to
+click through many pages just to understand the work.
 
-The current content fits well into a single-page portfolio because the main job is introduction and credibility. A visitor should not need to click through many pages just to understand the work.
+Writing has a small dedicated framework at `writing.html`. For now, it says
+"Hello, world!" and invites visitors to check back soon. New work can be added
+when it exists.
 
-Later, the site can expand into separate pages if needed:
+Later, the site can expand into more separate pages if needed:
 
 - `projects.md` for longer project writeups,
 - `notes.md` for technical learning notes,
 - `research.md` if research work becomes a major part of the profile,
-- `writing.md` if Binary Outlook starts publishing essays or technical reflections.
+- an expanded writing index when real pieces are ready.
 
-For now, the homepage should include all essential content.
+The homepage should still include all essential portfolio content.
 
 ## Page Identity
 
@@ -54,6 +58,7 @@ The top navigation should include:
 - About
 - Direction
 - Projects
+- Writing
 - GitHub
 - Contact
 

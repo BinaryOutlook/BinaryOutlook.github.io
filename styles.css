@@ -1160,48 +1160,6 @@ h3 {
   }
 }
 
-.writing-contact-cta {
-  padding-top: 0;
-}
-
-.writing-contact-cta__inner {
-  align-items: center;
-  background: var(--ink);
-  border-left: 0.65rem solid var(--blue);
-  color: var(--surface);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem 3rem;
-  justify-content: space-between;
-  padding: clamp(1.5rem, 4vw, 3rem);
-}
-
-.writing-contact-cta__copy {
-  flex: 1 1 28rem;
-}
-
-.writing-contact-cta h2 {
-  color: var(--surface);
-  font-size: clamp(2rem, 5vw, 4rem);
-  margin-bottom: 0.75rem;
-}
-
-.writing-contact-cta p:not(.section-kicker) {
-  color: rgba(251, 248, 239, 0.72);
-  margin-bottom: 0;
-  max-width: 620px;
-}
-
-.writing-contact-cta .section-kicker {
-  color: var(--yellow);
-}
-
-.writing-contact-cta .button {
-  background: var(--yellow);
-  border-color: var(--yellow);
-  color: var(--ink);
-}
-
 .section.contact-section {
   --contact-accent: #c9573f;
   --contact-bg: #dfe9e3;
@@ -1499,6 +1457,125 @@ h3 {
   color: var(--ink);
 }
 
+.writing-page {
+  --writing-accent: #a84532;
+  --writing-bg: #eee9dc;
+  --writing-gold: #dba92f;
+  --writing-ink: #173640;
+  --writing-muted: #4c6268;
+  background: var(--writing-bg);
+}
+
+.writing-page .site-header {
+  background: color-mix(in srgb, var(--writing-bg) 88%, transparent);
+}
+
+.writing-hello {
+  align-items: center;
+  background:
+    radial-gradient(circle at 76% 28%, rgba(255, 255, 255, 0.48), transparent 24%),
+    var(--writing-bg);
+  display: grid;
+  min-height: max(36rem, calc(100svh - 166px));
+  overflow: hidden;
+  position: relative;
+}
+
+.writing-hello::before,
+.writing-hello::after,
+.writing-hello__marker {
+  border-radius: 50%;
+  content: "";
+  pointer-events: none;
+  position: absolute;
+}
+
+.writing-hello::before {
+  background: var(--writing-accent);
+  height: clamp(11rem, 25vw, 24rem);
+  right: clamp(-8rem, -5vw, -2rem);
+  top: clamp(-7rem, -5vw, -2rem);
+  width: clamp(11rem, 25vw, 24rem);
+}
+
+.writing-hello::after {
+  border: clamp(1.2rem, 2vw, 2rem) solid var(--writing-gold);
+  bottom: clamp(-6rem, -3vw, -2rem);
+  height: clamp(10rem, 20vw, 19rem);
+  right: clamp(3rem, 13vw, 13rem);
+  width: clamp(10rem, 20vw, 19rem);
+}
+
+.writing-hello__marker {
+  background: var(--blue);
+  height: clamp(2.25rem, 4vw, 4rem);
+  right: clamp(1.5rem, 7vw, 7rem);
+  top: 53%;
+  width: clamp(2.25rem, 4vw, 4rem);
+}
+
+.writing-hello__inner {
+  margin: 0 auto;
+  max-width: var(--max);
+  padding: clamp(4rem, 8vw, 7rem) 1.25rem;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+}
+
+.writing-hello .eyebrow {
+  color: var(--writing-accent);
+  margin-bottom: 1.25rem;
+}
+
+.writing-hello h1 {
+  color: var(--writing-ink);
+  font-size: clamp(5rem, 14vw, 10rem);
+  letter-spacing: -0.055em;
+  margin-bottom: 1.75rem;
+  max-width: 7ch;
+}
+
+.writing-hello__lede {
+  color: var(--writing-muted);
+  font-size: clamp(1.2rem, 2.4vw, 1.65rem);
+  font-weight: 670;
+  line-height: 1.35;
+  max-width: 34rem;
+}
+
+.writing-hello .button {
+  border-color: var(--writing-ink);
+  border-radius: 999px;
+}
+
+.writing-hello .button.primary {
+  background: var(--writing-ink);
+}
+
+.writing-hello .button.secondary {
+  background: transparent;
+  color: var(--writing-ink);
+}
+
+.writing-hello .button:focus-visible {
+  box-shadow:
+    0 0 0 3px var(--writing-bg),
+    0 0 0 5px var(--writing-ink);
+}
+
+.writing-page .site-footer {
+  border-color: rgba(23, 54, 64, 0.18);
+  color: var(--writing-muted);
+  max-width: none;
+  padding-left: max(1.25rem, calc((100vw - var(--max)) / 2));
+  padding-right: max(1.25rem, calc((100vw - var(--max)) / 2));
+}
+
+.writing-page .site-footer strong {
+  color: var(--writing-ink);
+}
+
 .js-enabled .reveal {
   opacity: 0;
   transform: translateY(18px);
@@ -1654,6 +1731,30 @@ h3 {
 
   .direction-thread {
     min-height: auto;
+  }
+
+  .writing-hello {
+    min-height: max(34rem, calc(100svh - 166px));
+  }
+
+  .writing-hello__inner {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .writing-hello::before {
+    right: -7rem;
+    top: -5rem;
+  }
+
+  .writing-hello::after {
+    bottom: -5rem;
+    right: -3rem;
+  }
+
+  .writing-hello__marker {
+    right: 1.25rem;
+    top: 48%;
   }
 }
 
