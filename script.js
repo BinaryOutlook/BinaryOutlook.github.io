@@ -317,7 +317,7 @@ if (directionAccordion) {
   const directionPanels = Array.from(
     directionAccordion.querySelectorAll("[data-direction-panel]")
   );
-  const canHoverDirection = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  let selectedDirection = null;
 
   function setActiveDirection(activePanel = null) {
     directionPanels.forEach((panel) => {
@@ -337,34 +337,25 @@ if (directionAccordion) {
   directionPanels.forEach((panel) => {
     const trigger = panel.querySelector("[data-direction-trigger]");
 
-    trigger?.addEventListener("focus", () => setActiveDirection(panel));
-    trigger?.addEventListener("click", () => setActiveDirection(panel));
+    trigger?.addEventListener("focus", () => {
+      if (trigger.matches(":focus-visible")) setActiveDirection(panel);
+    });
+    trigger?.addEventListener("click", () => {
+      selectedDirection = panel;
+      setActiveDirection(selectedDirection);
+    });
     trigger?.addEventListener("keydown", (event) => {
       if (event.key !== "Escape") return;
+      selectedDirection = null;
       setActiveDirection();
       trigger.blur();
     });
-
-    if (canHoverDirection) {
-      panel.addEventListener("pointerenter", () => setActiveDirection(panel));
-    }
   });
-
-  if (canHoverDirection) {
-    directionAccordion.addEventListener("pointerleave", () => {
-      if (!directionAccordion.contains(document.activeElement)) {
-        setActiveDirection();
-      }
-    });
-  }
 
   directionAccordion.addEventListener("focusout", () => {
     window.setTimeout(() => {
-      if (
-        !directionAccordion.contains(document.activeElement) &&
-        !directionAccordion.matches(":hover")
-      ) {
-        setActiveDirection();
+      if (!directionAccordion.contains(document.activeElement)) {
+        setActiveDirection(selectedDirection);
       }
     }, 0);
   });
