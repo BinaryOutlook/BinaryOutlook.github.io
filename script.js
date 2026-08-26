@@ -308,6 +308,65 @@ if (canvas) {
   }
 }
 
+const directionAccordion = document.querySelector("[data-direction-accordion]");
+
+if (directionAccordion) {
+  const directionPanels = Array.from(
+    directionAccordion.querySelectorAll("[data-direction-panel]")
+  );
+  const canHoverDirection = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  function setActiveDirection(activePanel = null) {
+    directionPanels.forEach((panel) => {
+      const trigger = panel.querySelector("[data-direction-trigger]");
+      const details = panel.querySelector("[data-direction-details]");
+      const isActive = panel === activePanel;
+
+      panel.classList.toggle("is-active", isActive);
+      trigger?.setAttribute("aria-expanded", String(isActive));
+      details?.setAttribute("aria-hidden", String(!isActive));
+      details?.toggleAttribute("inert", !isActive);
+    });
+  }
+
+  setActiveDirection();
+
+  directionPanels.forEach((panel) => {
+    const trigger = panel.querySelector("[data-direction-trigger]");
+
+    trigger?.addEventListener("focus", () => setActiveDirection(panel));
+    trigger?.addEventListener("click", () => setActiveDirection(panel));
+    trigger?.addEventListener("keydown", (event) => {
+      if (event.key !== "Escape") return;
+      setActiveDirection();
+      trigger.blur();
+    });
+
+    if (canHoverDirection) {
+      panel.addEventListener("pointerenter", () => setActiveDirection(panel));
+    }
+  });
+
+  if (canHoverDirection) {
+    directionAccordion.addEventListener("pointerleave", () => {
+      if (!directionAccordion.contains(document.activeElement)) {
+        setActiveDirection();
+      }
+    });
+  }
+
+  directionAccordion.addEventListener("focusout", () => {
+    window.setTimeout(() => {
+      if (
+        !directionAccordion.contains(document.activeElement) &&
+        !directionAccordion.matches(":hover")
+      ) {
+        setActiveDirection();
+      }
+    }, 0);
+  });
+}
+
 const languageWidget = document.querySelector("[data-language-widget]");
 const languageCacheTtl = 1000 * 60 * 60 * 12;
 const languageScanLimit = 36;

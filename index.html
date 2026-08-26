@@ -113,38 +113,106 @@
             </p>
           </div>
 
-          <div class="direction-grid" aria-label="Current technical direction areas">
-            <article class="direction-thread reveal">
+          <div
+            class="direction-grid"
+            aria-label="Current technical direction areas"
+            data-direction-accordion
+          >
+            <article class="direction-thread reveal" data-direction-panel>
               <span class="direction-code">01 / Application</span>
-              <h3>AI</h3>
-              <ul>
-                <li>Human-AI collaboration</li>
-                <li>Workflow automation use cases</li>
-              </ul>
+              <h3>
+                <button
+                  class="direction-trigger"
+                  type="button"
+                  aria-controls="direction-ai-details"
+                  data-direction-trigger
+                >
+                  <span>AI</span>
+                  <span class="direction-indicator" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div
+                class="direction-details"
+                id="direction-ai-details"
+                data-direction-details
+              >
+                <ul>
+                  <li>Human-AI collaboration</li>
+                  <li>Workflow automation use cases</li>
+                </ul>
+              </div>
             </article>
-            <article class="direction-thread reveal">
+            <article class="direction-thread reveal" data-direction-panel>
               <span class="direction-code">02 / Model</span>
-              <h3>CNN</h3>
-              <ul>
-                <li>CNN architecture design</li>
-                <li>Post-training quantization</li>
-              </ul>
+              <h3>
+                <button
+                  class="direction-trigger"
+                  type="button"
+                  aria-controls="direction-cnn-details"
+                  data-direction-trigger
+                >
+                  <span>CNN</span>
+                  <span class="direction-indicator" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div
+                class="direction-details"
+                id="direction-cnn-details"
+                data-direction-details
+              >
+                <ul>
+                  <li>CNN architecture design</li>
+                  <li>Post-training quantization</li>
+                </ul>
+              </div>
             </article>
-            <article class="direction-thread reveal">
+            <article class="direction-thread reveal" data-direction-panel>
               <span class="direction-code">03 / Systems</span>
-              <h3>CUDA</h3>
-              <ul>
-                <li>Parallel execution</li>
-                <li>GPU cost-performance optimization</li>
-              </ul>
+              <h3>
+                <button
+                  class="direction-trigger"
+                  type="button"
+                  aria-controls="direction-cuda-details"
+                  data-direction-trigger
+                >
+                  <span>CUDA</span>
+                  <span class="direction-indicator" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div
+                class="direction-details"
+                id="direction-cuda-details"
+                data-direction-details
+              >
+                <ul>
+                  <li>Parallel execution</li>
+                  <li>GPU cost-performance optimization</li>
+                </ul>
+              </div>
             </article>
-            <article class="direction-thread reveal">
+            <article class="direction-thread reveal" data-direction-panel>
               <span class="direction-code">04 / Interface</span>
-              <h3>Interface</h3>
-              <ul>
-                <li>Front-end implementation</li>
-                <li>Interaction design patterns</li>
-              </ul>
+              <h3>
+                <button
+                  class="direction-trigger"
+                  type="button"
+                  aria-controls="direction-interface-details"
+                  data-direction-trigger
+                >
+                  <span>Interface</span>
+                  <span class="direction-indicator" aria-hidden="true"></span>
+                </button>
+              </h3>
+              <div
+                class="direction-details"
+                id="direction-interface-details"
+                data-direction-details
+              >
+                <ul>
+                  <li>Front-end implementation</li>
+                  <li>Interaction design patterns</li>
+                </ul>
+              </div>
             </article>
           </div>
         </div>
