@@ -122,6 +122,7 @@ if (canvas) {
 
   function updateMesh() {
     const influenceRadius = Math.min(240, Math.max(130, width * 0.18));
+    const repulsionRadius = Math.min(190, Math.max(105, width * 0.14));
 
     mesh.forEach((row) => {
       row.forEach((point) => {
@@ -137,6 +138,14 @@ if (canvas) {
             const influence = (1 - distance / influenceRadius) ** 2;
             point.velocityX += pointer.velocityX * influence * 0.12;
             point.velocityY += pointer.velocityY * influence * 0.12;
+          }
+
+          if (distance < repulsionRadius) {
+            const safeDistance = Math.max(distance, 0.001);
+            const repulsion = (1 - distance / repulsionRadius) ** 2;
+            const repulsionStrength = repulsion * 1.65;
+            point.velocityX -= (deltaX / safeDistance) * repulsionStrength;
+            point.velocityY -= (deltaY / safeDistance) * repulsionStrength;
           }
         }
 
@@ -279,11 +288,14 @@ if (canvas) {
       pointer.y = nextY;
     });
 
-    heroSection.addEventListener("pointerleave", () => {
+    function releasePointer() {
       pointer.active = false;
       pointer.velocityX = 0;
       pointer.velocityY = 0;
-    });
+    }
+
+    heroSection.addEventListener("pointerleave", releasePointer);
+    heroSection.addEventListener("pointercancel", releasePointer);
   }
 
   window.addEventListener("resize", () => {
