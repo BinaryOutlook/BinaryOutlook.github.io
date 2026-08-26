@@ -2,8 +2,10 @@
 
 Every project already has an interactive live repository snapshot. Selecting a
 project updates the preview with its latest GitHub activity, primary language,
-stars, and forks. This gives the preview a useful default before demonstration
-media exists.
+stars, and default-branch commit count. Repository metadata and commit history
+load independently, so one unavailable endpoint does not blank the entire
+preview. This gives the preview a useful default before demonstration media
+exists.
 
 The same preview surface is wired to the filenames below. Media is disabled by
 default, so missing files never produce requests or broken-player states. When

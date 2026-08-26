@@ -10,14 +10,20 @@
   const previewStatus = previewShell.querySelector("[data-project-preview-status]");
   const previewSnapshot = previewShell.querySelector("[data-project-preview-snapshot]");
   const previewRepository = previewShell.querySelector("[data-project-preview-repository]");
-  const previewUpdated = previewShell.querySelector("[data-project-preview-updated]");
+  const previewActivity = previewShell.querySelector("[data-project-preview-activity]");
   const previewLanguage = previewShell.querySelector("[data-project-preview-language]");
   const previewStars = previewShell.querySelector("[data-project-preview-stars]");
-  const previewForks = previewShell.querySelector("[data-project-preview-forks]");
+  const previewCommits = previewShell.querySelector("[data-project-preview-commits]");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   const saveData = Boolean(navigator.connection?.saveData);
   const repositoryCache = new Map();
+  const countFormatter = new Intl.NumberFormat("en", { notation: "compact" });
+  const githubHeaders = {
+    Accept: "application/vnd.github+json",
+    "X-GitHub-Api-Version": "2026-03-10",
+  };
+  const githubTimeoutMs = 8000;
   let activeCard = null;
   let shouldPlayWhenReady = false;
 
@@ -65,58 +71,121 @@
 
   function formatRepositoryDate(value) {
     const date = new Date(value);
-    if (Number.isNaN(date.getTime())) return "Activity date unavailable";
+    if (Number.isNaN(date.getTime())) return "Unavailable";
 
-    return `Updated ${new Intl.DateTimeFormat("en-GB", {
+    return new Intl.DateTimeFormat("en-GB", {
       day: "numeric",
       month: "short",
       year: "numeric",
-    }).format(date)}`;
+    }).format(date);
   }
 
-  function setSnapshotValues({ repository, updated, language, stars, forks }) {
+  function formatCount(value) {
+    const count = Number(value);
+    return Number.isFinite(count) && count >= 0 ? countFormatter.format(count) : "—";
+  }
+
+  function getCommitCount(response, commits) {
+    const linkHeader = response.headers.get("link") || "";
+    const lastPage = linkHeader.match(/[?&]page=(\d+)[^>]*>;\s*rel="last"/i);
+    if (lastPage) return Number.parseInt(lastPage[1], 10);
+    return commits.length;
+  }
+
+  async function fetchGitHubResource(url, { acceptedStatuses = [] } = {}) {
+    const controller = new AbortController();
+    const timeout = window.setTimeout(() => controller.abort(), githubTimeoutMs);
+
+    try {
+      const response = await fetch(url, { headers: githubHeaders, signal: controller.signal });
+      if (acceptedStatuses.includes(response.status)) return { response, data: null };
+      if (!response.ok) {
+        throw new Error(`GitHub repository request failed with ${response.status}`);
+      }
+
+      let data;
+      try {
+        data = await response.json();
+      } catch (error) {
+        throw new Error("GitHub returned an invalid repository payload.");
+      }
+      return { response, data };
+    } finally {
+      window.clearTimeout(timeout);
+    }
+  }
+
+  async function fetchRepositoryDetails(repository) {
+    const { data } = await fetchGitHubResource(
+      `https://api.github.com/repos/${encodeURIComponent(repository.owner)}/${encodeURIComponent(repository.name)}`
+    );
+    if (!data || typeof data !== "object" || Array.isArray(data)) {
+      throw new Error("GitHub returned an unexpected repository payload.");
+    }
+    return data;
+  }
+
+  async function fetchCommitHistory(repository) {
+    const { response, data } = await fetchGitHubResource(
+      `https://api.github.com/repos/${encodeURIComponent(repository.owner)}/${encodeURIComponent(repository.name)}/commits?per_page=1`,
+      { acceptedStatuses: [409] }
+    );
+    if (response.status === 409) return { count: 0, latestActivity: null };
+    if (!Array.isArray(data)) {
+      throw new Error("GitHub returned an unexpected commit payload.");
+    }
+
+    return {
+      count: getCommitCount(response, data),
+      latestActivity:
+        data[0]?.commit?.committer?.date || data[0]?.commit?.author?.date || null,
+    };
+  }
+
+  function setSnapshotValues({ repository, activity, language, stars, commits }) {
     if (previewRepository) {
       previewRepository.textContent = repository;
       previewRepository.title = repository;
     }
-    if (previewUpdated) previewUpdated.textContent = updated;
+    if (previewActivity) previewActivity.textContent = activity;
     if (previewLanguage) previewLanguage.textContent = language;
     if (previewStars) previewStars.textContent = stars;
-    if (previewForks) previewForks.textContent = forks;
+    if (previewCommits) previewCommits.textContent = commits;
   }
 
   async function fetchRepositorySnapshot(repository) {
     const cached = repositoryCache.get(repository.path);
     if (cached) return cached;
 
-    const request = fetch(
-      `https://api.github.com/repos/${encodeURIComponent(repository.owner)}/${encodeURIComponent(repository.name)}`,
-      {
-        headers: {
-          Accept: "application/vnd.github+json",
-          "X-GitHub-Api-Version": "2026-03-10",
-        },
+    const request = (async () => {
+      const [detailsResult, historyResult] = await Promise.allSettled([
+        fetchRepositoryDetails(repository),
+        fetchCommitHistory(repository),
+      ]);
+      if (detailsResult.status === "rejected" && historyResult.status === "rejected") {
+        throw new Error("Live repository data is unavailable.");
       }
-    ).then(async (response) => {
-      if (!response.ok) {
-        throw new Error(`GitHub repository request failed with ${response.status}`);
-      }
-      const data = await response.json();
+
+      const details = detailsResult.status === "fulfilled" ? detailsResult.value : null;
+      const history = historyResult.status === "fulfilled" ? historyResult.value : null;
       return {
         repository: repository.path,
-        updated: formatRepositoryDate(data.pushed_at || data.updated_at),
-        language: data.language || "Mixed",
-        stars: new Intl.NumberFormat("en", { notation: "compact" }).format(
-          data.stargazers_count || 0
+        activity: formatRepositoryDate(
+          history?.latestActivity || details?.pushed_at || details?.updated_at
         ),
-        forks: new Intl.NumberFormat("en", { notation: "compact" }).format(
-          data.forks_count || 0
-        ),
+        language: details ? details.language || "Mixed" : "—",
+        stars: details ? formatCount(details.stargazers_count) : "—",
+        commits: history ? formatCount(history.count) : "—",
+        partial: !details || !history,
       };
-    });
+    })();
 
     repositoryCache.set(repository.path, request);
-    request.catch(() => repositoryCache.delete(repository.path));
+    request
+      .then((snapshot) => {
+        if (snapshot.partial) repositoryCache.delete(repository.path);
+      })
+      .catch(() => repositoryCache.delete(repository.path));
     return request;
   }
 
@@ -127,10 +196,10 @@
       previewSnapshot?.setAttribute("aria-busy", "false");
       setSnapshotValues({
         repository: "Repository unavailable",
-        updated: "Project details only",
+        activity: "Unavailable",
         language: "—",
         stars: "—",
-        forks: "—",
+        commits: "—",
       });
       if (announce) setStatus("Repository snapshot unavailable");
       return;
@@ -138,10 +207,10 @@
 
     setSnapshotValues({
       repository: repository.path,
-      updated: "Loading repository…",
+      activity: "Loading…",
       language: "—",
       stars: "—",
-      forks: "—",
+      commits: "—",
     });
     previewShell.classList.add("is-snapshot-loading");
     previewSnapshot?.setAttribute("aria-busy", "true");
@@ -151,15 +220,21 @@
       const snapshot = await fetchRepositorySnapshot(repository);
       if (card !== activeCard) return;
       setSnapshotValues(snapshot);
-      if (announce) setStatus("Live repository snapshot");
+      if (announce) {
+        setStatus(
+          snapshot.partial
+            ? "Repository snapshot partially available"
+            : "Live repository snapshot"
+        );
+      }
     } catch (error) {
       if (card !== activeCard) return;
       setSnapshotValues({
         repository: repository.path,
-        updated: "Live data unavailable",
+        activity: "Unavailable",
         language: "—",
         stars: "—",
-        forks: "—",
+        commits: "—",
       });
       if (announce) setStatus("Repository snapshot unavailable");
     } finally {
@@ -280,8 +355,6 @@
     const { title, description } = getCardContent(card);
     if (previewTitle) previewTitle.textContent = title;
     if (previewDescription) previewDescription.textContent = description;
-    previewShell.style.setProperty("--preview-accent", card.dataset.previewAccent || "#c9362b");
-
     if (!isSameCard) {
       configurePreviewMedia(card, options);
     } else if (options.play) {
