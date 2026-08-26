@@ -59,7 +59,7 @@ The top navigation should include:
 - Direction
 - Projects
 - Writing
-- GitHub
+- GitHub (direct profile link)
 - Contact
 
 If the page becomes longer, the navigation can also include:
@@ -239,21 +239,16 @@ Link:
 
 GitHub: `https://github.com/BinaryOutlook/SemantrisPlus`
 
-## GitHub Snapshot Section
+## GitHub Access
 
-This section should use GitHub's public REST API data and render it as native webpage UI instead of embedding a third-party image.
+GitHub should remain easy to reach without taking up a separate homepage
+section. Link directly to the public profile from navigation, the hero, project
+cards, and Contact.
 
-Draft copy:
-
-The languages and tools across my GitHub history shift with each project. Together, they show a practical mix of AI experimentation, web development, systems learning, and project-based exploration.
-
-Suggested visual:
-
-Use a custom language panel that fetches public repositories, aggregates repository language byte counts, and displays bars in the site's own Bauhaus-inspired visual system.
-
-Optional supporting text:
-
-The important part is not a single language ranking, but the pattern: learning by building, then using each project to pressure-test a new technical direction.
+The Featured Projects lens carries the useful live data instead: repository
+activity, primary language, stars, and default-branch commit history. This keeps
+the evidence beside the projects it describes and avoids a redundant statistics
+block between Projects and Contact.
 
 ## Learning Notes Section
 

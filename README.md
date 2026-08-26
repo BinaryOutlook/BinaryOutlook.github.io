@@ -30,15 +30,16 @@ Here are a few projects that reflect the kinds of problems and ideas I enjoy wor
 | **The Lank Forenzo Simulator** | GUI-based browser game centered on decisions, exploration, and reality-bending interactions, now used as a sandbox for experimenting with emerging web technologies. | browser game, decision systems, interactive storytelling, web experimentation   | [GitHub](https://github.com/BinaryOutlook/The-Lank-Forenzo-Simulator)                         |
 | **SemantrisPlus**              | A modern reinterpretation of Google's Semantris, reimagined with LLM-powered semantic play and updated interaction design. | LLM applications, semantic reasoning, language game design, AI-powered gameplay | [GitHub](https://github.com/BinaryOutlook/SemantrisPlus)                                      |
 
+The homepage project lens supplements these links with live repository activity,
+primary language, stars, and default-branch commit counts.
+
 ## Writing
 
 The framework for future essays and reflections is live at
 [Writing](https://binaryoutlook.github.io/writing.html). Check back soon.
 
-## GitHub Snapshot
+## GitHub
 
-The languages and tools I use naturally shift with the demands of each project, but taken together they offer a rough map of where my time and curiosity have been flowing.
-
-Feel free to have a look at the patterns across my GitHub history.
-
-The portfolio page now renders this as a native live panel using GitHub's public repository language data instead of a pasted-in image card.
+Browse the public work directly at [@BinaryOutlook](https://github.com/BinaryOutlook).
+The homepage keeps this as a direct navigation link rather than a separate
+statistics section.

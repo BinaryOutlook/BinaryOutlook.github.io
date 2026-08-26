@@ -63,12 +63,12 @@ if ("IntersectionObserver" in window) {
   sections.forEach((section) => sectionObserver.observe(section));
 }
 
-const canvas = document.querySelector("[data-hero-canvas]");
+const canvas = document.querySelector("[data-home-mesh]");
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 if (canvas) {
   const context = canvas.getContext("2d");
-  const heroSection = canvas.closest(".hero-section");
+  const contactSection = document.querySelector("#contact");
   const supportsFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   const meshColumns = 18;
   const meshRows = 9;
@@ -76,6 +76,9 @@ if (canvas) {
   let height = 0;
   let frame = 0;
   let animationId = null;
+  let scrollUpdateId = null;
+  let scrollPosition = window.scrollY;
+  let meshRegionActive = true;
   let mesh = [];
   const pointer = {
     active: false,
@@ -170,7 +173,13 @@ if (canvas) {
     mesh.forEach((row, rowIndex) => {
       context.beginPath();
       row.forEach((point, columnIndex) => {
-        const idleOffset = Math.sin(frame * 0.012 + rowIndex * 0.48 + columnIndex * 0.16) * 0.7;
+        const idleOffset =
+          Math.sin(
+            frame * 0.012 +
+              scrollPosition * 0.0015 +
+              rowIndex * 0.48 +
+              columnIndex * 0.16
+          ) * 0.7;
         const y = point.y + idleOffset;
 
         if (columnIndex === 0) {
@@ -186,7 +195,13 @@ if (canvas) {
       context.beginPath();
       mesh.forEach((row, rowIndex) => {
         const point = row[columnIndex];
-        const idleOffset = Math.sin(frame * 0.012 + rowIndex * 0.48 + columnIndex * 0.16) * 0.7;
+        const idleOffset =
+          Math.sin(
+            frame * 0.012 +
+              scrollPosition * 0.0015 +
+              rowIndex * 0.48 +
+              columnIndex * 0.16
+          ) * 0.7;
 
         if (rowIndex === 0) {
           context.moveTo(point.x, point.y + idleOffset);
@@ -226,7 +241,12 @@ if (canvas) {
     }
 
     context.fillStyle = "rgba(226, 174, 37, 0.42)";
-    context.fillRect(width * 0.72, height * 0.18, Math.min(130, width * 0.12), Math.min(130, width * 0.12));
+    context.fillRect(
+      width * 0.72,
+      height * 0.18,
+      Math.min(130, width * 0.12),
+      Math.min(130, width * 0.12)
+    );
 
     context.fillStyle = "rgba(201, 54, 43, 0.32)";
     context.beginPath();
@@ -248,7 +268,7 @@ if (canvas) {
       const y =
         horizon -
         44 -
-        Math.sin(x * 0.014 + frame * 0.025) * 18 -
+        Math.sin(x * 0.014 + frame * 0.025 + scrollPosition * 0.001) * 18 -
         Math.cos(x * 0.006 + frame * 0.01) * 12;
       if (x === 0) {
         context.moveTo(x, y);
@@ -258,57 +278,140 @@ if (canvas) {
     }
     context.stroke();
 
-    context.fillStyle = "rgba(23, 23, 19, 0.72)";
-    context.font = "700 12px ui-sans-serif, system-ui, sans-serif";
-    context.fillText("binaryoutlook.github.io", Math.max(18, width * 0.055), height - 30);
-
     frame += 1;
-    if (!reduceMotion) {
-      animationId = requestAnimationFrame(drawFrame);
+  }
+
+  function releasePointer() {
+    pointer.active = false;
+    pointer.velocityX = 0;
+    pointer.velocityY = 0;
+  }
+
+  function stopAnimation() {
+    if (animationId === null) return;
+    cancelAnimationFrame(animationId);
+    animationId = null;
+  }
+
+  function animateMesh() {
+    animationId = null;
+    if (reduceMotion || !meshRegionActive || document.hidden) return;
+    drawFrame();
+    animationId = requestAnimationFrame(animateMesh);
+  }
+
+  function startAnimation() {
+    if (reduceMotion || !meshRegionActive || document.hidden || animationId !== null) {
+      return;
     }
+    animationId = requestAnimationFrame(animateMesh);
+  }
+
+  function updateMeshRegion() {
+    const bounds = canvas.getBoundingClientRect();
+    const contactTop =
+      contactSection?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY;
+    const shouldBeActive = contactTop > bounds.top + 2;
+
+    meshRegionActive = shouldBeActive;
+    canvas.classList.toggle("is-suspended", !shouldBeActive);
+
+    if (shouldBeActive) {
+      startAnimation();
+    } else {
+      releasePointer();
+      stopAnimation();
+    }
+  }
+
+  function acceptsPointer(event) {
+    if (!meshRegionActive) return false;
+
+    const bounds = canvas.getBoundingClientRect();
+    if (
+      event.clientX < bounds.left ||
+      event.clientX > bounds.right ||
+      event.clientY < bounds.top ||
+      event.clientY > bounds.bottom
+    ) {
+      return false;
+    }
+
+    const target = event.target instanceof Element ? event.target : null;
+    return !target?.closest(".site-header, .contact-section, .site-footer");
   }
 
   resizeCanvas();
+  updateMeshRegion();
   drawFrame();
+  startAnimation();
 
-  if (heroSection && supportsFinePointer && !reduceMotion) {
-    heroSection.addEventListener("pointerenter", (event) => {
-      const bounds = canvas.getBoundingClientRect();
-      pointer.active = true;
-      pointer.x = event.clientX - bounds.left;
-      pointer.y = event.clientY - bounds.top;
-      pointer.velocityX = 0;
-      pointer.velocityY = 0;
+  if (supportsFinePointer && !reduceMotion) {
+    window.addEventListener(
+      "pointermove",
+      (event) => {
+        if (!acceptsPointer(event)) {
+          releasePointer();
+          return;
+        }
+
+        const bounds = canvas.getBoundingClientRect();
+        const nextX = event.clientX - bounds.left;
+        const nextY = event.clientY - bounds.top;
+
+        if (!pointer.active) {
+          pointer.active = true;
+          pointer.x = nextX;
+          pointer.y = nextY;
+          pointer.velocityX = 0;
+          pointer.velocityY = 0;
+          return;
+        }
+
+        pointer.velocityX = Math.max(-28, Math.min(28, nextX - pointer.x));
+        pointer.velocityY = Math.max(-28, Math.min(28, nextY - pointer.y));
+        pointer.x = nextX;
+        pointer.y = nextY;
+      },
+      { passive: true }
+    );
+
+    window.addEventListener("pointercancel", releasePointer);
+    window.addEventListener("blur", releasePointer);
+    document.addEventListener("pointerout", (event) => {
+      if (!event.relatedTarget) releasePointer();
     });
-
-    heroSection.addEventListener("pointermove", (event) => {
-      const bounds = canvas.getBoundingClientRect();
-      const nextX = event.clientX - bounds.left;
-      const nextY = event.clientY - bounds.top;
-      pointer.velocityX = Math.max(-28, Math.min(28, nextX - pointer.x));
-      pointer.velocityY = Math.max(-28, Math.min(28, nextY - pointer.y));
-      pointer.x = nextX;
-      pointer.y = nextY;
-    });
-
-    function releasePointer() {
-      pointer.active = false;
-      pointer.velocityX = 0;
-      pointer.velocityY = 0;
-    }
-
-    heroSection.addEventListener("pointerleave", releasePointer);
-    heroSection.addEventListener("pointercancel", releasePointer);
   }
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (scrollUpdateId !== null) return;
+      scrollUpdateId = requestAnimationFrame(() => {
+        scrollUpdateId = null;
+        scrollPosition = window.scrollY;
+        updateMeshRegion();
+      });
+    },
+    { passive: true }
+  );
 
   window.addEventListener("resize", () => {
     resizeCanvas();
+    scrollPosition = window.scrollY;
+    updateMeshRegion();
     if (reduceMotion) drawFrame();
   });
 
-  if (reduceMotion && animationId) {
-    cancelAnimationFrame(animationId);
-  }
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+      releasePointer();
+      stopAnimation();
+    } else {
+      updateMeshRegion();
+      startAnimation();
+    }
+  });
 }
 
 const directionAccordion = document.querySelector("[data-direction-accordion]");
@@ -359,238 +462,6 @@ if (directionAccordion) {
       }
     }, 0);
   });
-}
-
-const languageWidget = document.querySelector("[data-language-widget]");
-const languageCacheTtl = 1000 * 60 * 60 * 12;
-const languageScanLimit = 36;
-const languageColors = {
-  JavaScript: "#f1c232",
-  TypeScript: "#3178c6",
-  Python: "#3572a5",
-  HTML: "#e34c26",
-  CSS: "#563d7c",
-  "C++": "#f34b7d",
-  C: "#555555",
-  CUDA: "#76b900",
-  Java: "#b07219",
-  Jupyter: "#da5b0b",
-  "Jupyter Notebook": "#da5b0b",
-  Shell: "#89e051",
-  Vue: "#41b883",
-  Svelte: "#ff3e00",
-  Go: "#00add8",
-  Rust: "#dea584",
-};
-const fallbackLanguageColors = ["#e2ae25", "#1859a8", "#c9362b", "#0b786e", "#57438b"];
-
-function getLanguageCacheKey(username) {
-  return `binaryoutlook-language-stats-v1-${username}`;
-}
-
-function readLanguageCache(username) {
-  try {
-    const rawCache = window.localStorage.getItem(getLanguageCacheKey(username));
-    if (!rawCache) return null;
-
-    const cached = JSON.parse(rawCache);
-    if (!cached || Date.now() - cached.cachedAt > languageCacheTtl) return null;
-
-    return cached.data;
-  } catch (error) {
-    return null;
-  }
-}
-
-function writeLanguageCache(username, data) {
-  try {
-    window.localStorage.setItem(
-      getLanguageCacheKey(username),
-      JSON.stringify({ cachedAt: Date.now(), data })
-    );
-  } catch (error) {
-    // Local storage is an enhancement; the live panel still works without it.
-  }
-}
-
-async function fetchGitHubJson(url) {
-  const response = await fetch(url, {
-    headers: {
-      Accept: "application/vnd.github+json",
-      "X-GitHub-Api-Version": "2026-03-10",
-    },
-  });
-
-  if (!response.ok) {
-    const rateLimitRemaining = response.headers.get("x-ratelimit-remaining");
-    const rateLimitReset = response.headers.get("x-ratelimit-reset");
-    const rateLimitNote =
-      rateLimitRemaining === "0" && rateLimitReset
-        ? ` Rate limit resets at ${new Date(Number(rateLimitReset) * 1000).toLocaleTimeString()}.`
-        : "";
-    throw new Error(`GitHub API request failed with ${response.status}.${rateLimitNote}`);
-  }
-
-  return response.json();
-}
-
-async function mapWithConcurrency(items, limit, mapper) {
-  const results = [];
-  let nextIndex = 0;
-  const workerCount = Math.min(limit, items.length);
-
-  async function worker() {
-    while (nextIndex < items.length) {
-      const currentIndex = nextIndex;
-      nextIndex += 1;
-      results[currentIndex] = await mapper(items[currentIndex], currentIndex);
-    }
-  }
-
-  await Promise.all(Array.from({ length: workerCount }, worker));
-  return results;
-}
-
-async function fetchLanguageData(username) {
-  const repos = await fetchGitHubJson(
-    `https://api.github.com/users/${encodeURIComponent(username)}/repos?type=owner&sort=pushed&direction=desc&per_page=100`
-  );
-
-  if (!Array.isArray(repos)) {
-    throw new Error("GitHub API returned an unexpected repository payload.");
-  }
-
-  const eligibleRepos = repos.filter(
-    (repo) => !repo.fork && !repo.archived && !repo.disabled && repo.size > 0
-  );
-  const sourceRepos = eligibleRepos.slice(0, languageScanLimit);
-  const totals = new Map();
-  const failures = [];
-
-  await mapWithConcurrency(sourceRepos, 4, async (repo) => {
-    try {
-      const languages = await fetchGitHubJson(repo.languages_url);
-      Object.entries(languages).forEach(([language, bytes]) => {
-        totals.set(language, (totals.get(language) || 0) + bytes);
-      });
-    } catch (error) {
-      failures.push(repo.name);
-    }
-  });
-
-  const totalBytes = Array.from(totals.values()).reduce((sum, bytes) => sum + bytes, 0);
-
-  if (!totalBytes) {
-    throw new Error("No language totals were available from GitHub.");
-  }
-
-  const languages = Array.from(totals, ([name, bytes]) => ({
-    name,
-    bytes,
-    percent: (bytes / totalBytes) * 100,
-  }))
-    .sort((a, b) => b.bytes - a.bytes)
-    .slice(0, 7);
-
-  return {
-    languages,
-    repoCount: sourceRepos.length,
-    totalRepoCount: eligibleRepos.length,
-    isLimited: eligibleRepos.length > sourceRepos.length,
-    skippedCount: failures.length,
-    scannedAt: new Date().toISOString(),
-    totalBytes,
-  };
-}
-
-function getLanguageColor(languageName, index) {
-  return languageColors[languageName] || fallbackLanguageColors[index % fallbackLanguageColors.length];
-}
-
-function createLanguageRow(language, index) {
-  const row = document.createElement("div");
-  row.className = "language-row";
-  row.setAttribute("aria-label", `${language.name}: ${language.percent.toFixed(1)} percent`);
-  row.style.setProperty("--language-color", getLanguageColor(language.name, index));
-  row.style.setProperty("--language-width", `${Math.max(language.percent, 2).toFixed(2)}%`);
-
-  const meta = document.createElement("div");
-  meta.className = "language-row__meta";
-
-  const name = document.createElement("span");
-  name.className = "language-row__name";
-
-  const swatch = document.createElement("span");
-  swatch.className = "language-swatch";
-  swatch.setAttribute("aria-hidden", "true");
-
-  const label = document.createElement("span");
-  label.textContent = language.name;
-
-  const percent = document.createElement("span");
-  percent.className = "language-row__percent";
-  percent.textContent = `${language.percent.toFixed(1)}%`;
-
-  const bar = document.createElement("div");
-  bar.className = "language-row__bar";
-  bar.setAttribute("aria-hidden", "true");
-
-  const fill = document.createElement("span");
-  fill.className = "language-row__fill";
-
-  name.append(swatch, label);
-  meta.append(name, percent);
-  bar.append(fill);
-  row.append(meta, bar);
-
-  return row;
-}
-
-function renderLanguageData(widget, data, fromCache = false) {
-  const list = widget.querySelector("[data-language-list]");
-  const summary = widget.querySelector("[data-language-summary]");
-  const topLanguage = data.languages[0];
-  const cacheNote = fromCache ? " using a recent local cache" : "";
-  const skipNote = data.skippedCount ? ` ${data.skippedCount} repositories were skipped during the scan.` : "";
-  const repoScope = data.isLimited
-    ? `the ${data.repoCount} most recently pushed public owner repositories`
-    : `${data.repoCount} public owner repositories`;
-
-  summary.textContent = `${topLanguage.name} leads this snapshot. I scanned ${repoScope} through GitHub's language data${cacheNote}.${skipNote}`;
-  list.replaceChildren(...data.languages.map(createLanguageRow));
-  widget.classList.remove("has-error");
-}
-
-function renderLanguageError(widget) {
-  const list = widget.querySelector("[data-language-list]");
-  const summary = widget.querySelector("[data-language-summary]");
-  const row = createLanguageRow({ name: "GitHub API unavailable", percent: 100 }, 2);
-
-  summary.textContent =
-    "Live language data is unavailable right now, usually because public API traffic is rate-limited. The GitHub profile link still has the full repository history.";
-  list.replaceChildren(row);
-  widget.classList.add("has-error");
-}
-
-async function initLanguageWidget(widget) {
-  const username = widget.dataset.githubUser || "BinaryOutlook";
-  const cachedData = readLanguageCache(username);
-
-  if (cachedData) {
-    renderLanguageData(widget, cachedData, true);
-  }
-
-  try {
-    const liveData = await fetchLanguageData(username);
-    writeLanguageCache(username, liveData);
-    renderLanguageData(widget, liveData);
-  } catch (error) {
-    if (!cachedData) renderLanguageError(widget);
-  }
-}
-
-if (languageWidget) {
-  initLanguageWidget(languageWidget);
 }
 
 function copyTextFallback(text) {

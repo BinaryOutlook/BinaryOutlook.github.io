@@ -20,9 +20,9 @@
     <script>
       document.documentElement.classList.add("js-enabled");
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260827-3" />
+    <link rel="stylesheet" href="./styles.css?v=20260827-4" />
   </head>
-  <body>
+  <body class="home-page">
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header" data-header>
@@ -55,15 +55,23 @@
           <a href="#direction">Direction</a>
           <a href="#projects">Projects</a>
           <a href="./writing.html">Writing</a>
-          <a href="#github">GitHub</a>
+          <a
+            href="https://github.com/BinaryOutlook"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="GitHub profile (opens in a new tab)"
+          >
+            GitHub
+          </a>
           <a href="#contact">Contact</a>
         </div>
       </nav>
     </header>
 
+    <canvas class="home-mesh-canvas" aria-hidden="true" data-home-mesh></canvas>
+
     <main id="main">
       <section class="hero-section" id="top" aria-labelledby="hero-title">
-        <canvas class="hero-canvas" aria-hidden="true" data-hero-canvas></canvas>
         <div class="hero-grid">
           <div class="hero-copy reveal">
             <p class="eyebrow">Technical portfolio</p>
@@ -488,54 +496,6 @@
         </div>
       </section>
 
-      <section class="section github-section" id="github" aria-labelledby="github-title">
-        <div class="section-kicker">GitHub</div>
-        <div class="github-layout">
-          <div class="github-copy reveal">
-            <h2 id="github-title">GitHub Snapshot</h2>
-            <p>
-              A live language mix from public repositories, shaped by AI, web,
-              and systems projects.
-            </p>
-          </div>
-          <div
-            class="language-panel reveal"
-            data-language-widget
-            data-github-user="BinaryOutlook"
-            aria-labelledby="language-panel-title"
-          >
-            <div class="language-panel__header">
-              <div>
-                <p class="panel-label">Live language mix</p>
-                <h3 id="language-panel-title">Most-used languages</h3>
-              </div>
-              <a
-                class="language-panel__link"
-                href="https://github.com/BinaryOutlook"
-                target="_blank"
-                rel="noreferrer"
-              >
-                GitHub
-              </a>
-            </div>
-            <p class="language-panel__summary" data-language-summary>
-              Fetching public repository language data from GitHub.
-            </p>
-            <div class="language-list" data-language-list aria-live="polite">
-              <div class="language-row is-loading">
-                <div class="language-row__meta">
-                  <span>Connecting to GitHub API</span>
-                  <span>Live</span>
-                </div>
-                <div class="language-row__bar" aria-hidden="true">
-                  <span class="language-row__fill"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section class="section contact-section" id="contact" aria-labelledby="contact-title">
         <div class="contact-panel reveal">
           <div class="contact-panel__lead">
@@ -625,7 +585,7 @@
       <p>&copy; 2026 Binary Outlook</p>
     </footer>
 
-    <script src="./project-previews.js?v=20260827-1"></script>
-    <script src="./script.js?v=20260827-1"></script>
+    <script src="./project-previews.js?v=20260827-2"></script>
+    <script src="./script.js?v=20260827-2"></script>
   </body>
 </html>

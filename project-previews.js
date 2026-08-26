@@ -148,7 +148,10 @@
       previewRepository.title = repository;
     }
     if (previewActivity) previewActivity.textContent = activity;
-    if (previewLanguage) previewLanguage.textContent = language;
+    if (previewLanguage) {
+      previewLanguage.textContent = language;
+      previewLanguage.title = language === "—" ? "" : language;
+    }
     if (previewStars) previewStars.textContent = stars;
     if (previewCommits) previewCommits.textContent = commits;
   }
