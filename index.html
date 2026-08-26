@@ -18,7 +18,7 @@
     <script>
       document.documentElement.classList.add("js-enabled");
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260826-2" />
+    <link rel="stylesheet" href="./styles.css?v=20260826-3" />
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
@@ -244,14 +244,32 @@
                 aria-hidden="true"
                 data-project-preview-video
               ></video>
-              <div
-                class="project-preview__placeholder"
-                aria-hidden="true"
-                data-project-preview-placeholder
-              >
-                <span class="project-preview__index">01</span>
-                <span class="project-preview__axis"></span>
-                <span class="project-preview__node"></span>
+              <div class="project-preview__snapshot" data-project-preview-snapshot>
+                <div class="project-preview__snapshot-header">
+                  <span data-project-preview-repository>GitHub repository</span>
+                  <span class="project-preview__live-indicator">
+                    <span aria-hidden="true"></span>
+                    Live
+                  </span>
+                </div>
+                <div class="project-preview__activity">
+                  <span>Latest activity</span>
+                  <strong data-project-preview-updated>Loading repository…</strong>
+                </div>
+                <dl class="project-preview__metrics">
+                  <div>
+                    <dt>Language</dt>
+                    <dd data-project-preview-language>—</dd>
+                  </div>
+                  <div>
+                    <dt>Stars</dt>
+                    <dd data-project-preview-stars>—</dd>
+                  </div>
+                  <div>
+                    <dt>Forks</dt>
+                    <dd data-project-preview-forks>—</dd>
+                  </div>
+                </dl>
               </div>
               <span
                 class="project-preview__availability"
@@ -259,11 +277,11 @@
                 aria-live="polite"
                 data-project-preview-status
               >
-                Interactive preview coming soon
+                Loading repository snapshot
               </span>
             </div>
             <div class="project-preview__caption" aria-live="polite">
-              <p class="panel-label">Project lens</p>
+              <p class="panel-label">Live project lens</p>
               <h3 id="project-preview-title" data-project-preview-title>HaLoop</h3>
               <p data-project-preview-description>
                 DevSecOps guardrails for AI coding agents: approvals, risk
@@ -598,7 +616,7 @@
       <p>&copy; 2026 Binary Outlook</p>
     </footer>
 
-    <script src="./project-previews.js?v=20260826"></script>
+    <script src="./project-previews.js?v=20260826-2"></script>
     <script src="./script.js?v=20260826-2"></script>
   </body>
 </html>

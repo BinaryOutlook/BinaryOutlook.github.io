@@ -8,10 +8,16 @@
   const previewTitle = previewShell.querySelector("[data-project-preview-title]");
   const previewDescription = previewShell.querySelector("[data-project-preview-description]");
   const previewStatus = previewShell.querySelector("[data-project-preview-status]");
-  const previewIndex = previewShell.querySelector(".project-preview__index");
+  const previewSnapshot = previewShell.querySelector("[data-project-preview-snapshot]");
+  const previewRepository = previewShell.querySelector("[data-project-preview-repository]");
+  const previewUpdated = previewShell.querySelector("[data-project-preview-updated]");
+  const previewLanguage = previewShell.querySelector("[data-project-preview-language]");
+  const previewStars = previewShell.querySelector("[data-project-preview-stars]");
+  const previewForks = previewShell.querySelector("[data-project-preview-forks]");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   const saveData = Boolean(navigator.connection?.saveData);
+  const repositoryCache = new Map();
   let activeCard = null;
   let shouldPlayWhenReady = false;
 
@@ -41,9 +47,133 @@
     };
   }
 
+  function getRepository(card) {
+    const link = card.querySelector('.project-link[href*="github.com"]');
+    if (!link) return null;
+
+    try {
+      const url = new URL(link.href, window.location.href);
+      if (url.hostname !== "github.com") return null;
+      const [owner, name] = url.pathname.split("/").filter(Boolean);
+      if (!owner || !name) return null;
+      const cleanName = name.replace(/\.git$/, "");
+      return { owner, name: cleanName, path: `${owner}/${cleanName}` };
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function formatRepositoryDate(value) {
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return "Activity date unavailable";
+
+    return `Updated ${new Intl.DateTimeFormat("en-GB", {
+      day: "numeric",
+      month: "short",
+      year: "numeric",
+    }).format(date)}`;
+  }
+
+  function setSnapshotValues({ repository, updated, language, stars, forks }) {
+    if (previewRepository) {
+      previewRepository.textContent = repository;
+      previewRepository.title = repository;
+    }
+    if (previewUpdated) previewUpdated.textContent = updated;
+    if (previewLanguage) previewLanguage.textContent = language;
+    if (previewStars) previewStars.textContent = stars;
+    if (previewForks) previewForks.textContent = forks;
+  }
+
+  async function fetchRepositorySnapshot(repository) {
+    const cached = repositoryCache.get(repository.path);
+    if (cached) return cached;
+
+    const request = fetch(
+      `https://api.github.com/repos/${encodeURIComponent(repository.owner)}/${encodeURIComponent(repository.name)}`,
+      {
+        headers: {
+          Accept: "application/vnd.github+json",
+          "X-GitHub-Api-Version": "2026-03-10",
+        },
+      }
+    ).then(async (response) => {
+      if (!response.ok) {
+        throw new Error(`GitHub repository request failed with ${response.status}`);
+      }
+      const data = await response.json();
+      return {
+        repository: repository.path,
+        updated: formatRepositoryDate(data.pushed_at || data.updated_at),
+        language: data.language || "Mixed",
+        stars: new Intl.NumberFormat("en", { notation: "compact" }).format(
+          data.stargazers_count || 0
+        ),
+        forks: new Intl.NumberFormat("en", { notation: "compact" }).format(
+          data.forks_count || 0
+        ),
+      };
+    });
+
+    repositoryCache.set(repository.path, request);
+    request.catch(() => repositoryCache.delete(repository.path));
+    return request;
+  }
+
+  async function loadRepositorySnapshot(card, { announce = true } = {}) {
+    const repository = getRepository(card);
+    if (!repository) {
+      previewShell.classList.remove("is-snapshot-loading");
+      previewSnapshot?.setAttribute("aria-busy", "false");
+      setSnapshotValues({
+        repository: "Repository unavailable",
+        updated: "Project details only",
+        language: "—",
+        stars: "—",
+        forks: "—",
+      });
+      if (announce) setStatus("Repository snapshot unavailable");
+      return;
+    }
+
+    setSnapshotValues({
+      repository: repository.path,
+      updated: "Loading repository…",
+      language: "—",
+      stars: "—",
+      forks: "—",
+    });
+    previewShell.classList.add("is-snapshot-loading");
+    previewSnapshot?.setAttribute("aria-busy", "true");
+    if (announce) setStatus("Loading live repository data");
+
+    try {
+      const snapshot = await fetchRepositorySnapshot(repository);
+      if (card !== activeCard) return;
+      setSnapshotValues(snapshot);
+      if (announce) setStatus("Live repository snapshot");
+    } catch (error) {
+      if (card !== activeCard) return;
+      setSnapshotValues({
+        repository: repository.path,
+        updated: "Live data unavailable",
+        language: "—",
+        stars: "—",
+        forks: "—",
+      });
+      if (announce) setStatus("Repository snapshot unavailable");
+    } finally {
+      if (card === activeCard) {
+        previewShell.classList.remove("is-snapshot-loading");
+        previewSnapshot?.setAttribute("aria-busy", "false");
+      }
+    }
+  }
+
   function clearPreviewMedia() {
     shouldPlayWhenReady = false;
     previewShell.classList.remove("has-media", "is-loading", "is-playing", "has-media-error");
+    previewSnapshot?.setAttribute("aria-hidden", "false");
 
     if (!previewVideo) return;
     previewVideo.pause();
@@ -95,8 +225,8 @@
     clearPreviewMedia();
 
     const mediaEnabled = card.dataset.previewEnabled === "true";
+    loadRepositorySnapshot(card, { announce: !mediaEnabled });
     if (!mediaEnabled || !previewVideo) {
-      setStatus("Interactive preview coming soon");
       return;
     }
 
@@ -107,12 +237,13 @@
     if (poster) previewVideo.poster = poster;
     if (source || poster) {
       previewShell.classList.add("has-media");
+      previewSnapshot?.setAttribute("aria-hidden", "true");
       previewVideo.setAttribute("aria-label", `${title} project preview`);
       previewVideo.setAttribute("aria-hidden", "false");
     }
 
     if (!source) {
-      setStatus(poster ? "Project preview poster" : "Interactive preview coming soon");
+      setStatus(poster ? "Project preview poster" : "Repository snapshot available");
       return;
     }
 
@@ -149,9 +280,6 @@
     const { title, description } = getCardContent(card);
     if (previewTitle) previewTitle.textContent = title;
     if (previewDescription) previewDescription.textContent = description;
-    if (previewIndex) {
-      previewIndex.textContent = String(previewCards.indexOf(card) + 1).padStart(2, "0");
-    }
     previewShell.style.setProperty("--preview-accent", card.dataset.previewAccent || "#c9362b");
 
     if (!isSameCard) {
@@ -178,6 +306,7 @@
     shouldPlayWhenReady = false;
     previewShell.classList.remove("has-media", "is-loading", "is-playing");
     previewShell.classList.add("has-media-error");
+    previewSnapshot?.setAttribute("aria-hidden", "false");
     previewVideo.setAttribute("aria-hidden", "true");
     setStatus("Preview unavailable");
   });

@@ -1,8 +1,13 @@
 # Project preview media
 
-The portfolio preview system is already wired to the filenames below. Media is
-disabled by default, so missing files never produce requests or broken-player
-states.
+Every project already has an interactive live repository snapshot. Selecting a
+project updates the preview with its latest GitHub activity, primary language,
+stars, and forks. This gives the preview a useful default before demonstration
+media exists.
+
+The same preview surface is wired to the filenames below. Media is disabled by
+default, so missing files never produce requests or broken-player states. When
+enabled, the video takes over the repository snapshot while it plays.
 
 | Project | WebM | MP4 fallback | Poster |
 | --- | --- | --- | --- |
