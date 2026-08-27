@@ -301,12 +301,17 @@ Draft copy:
 
 I am open to conversations around AI systems, deep learning, CUDA, technical projects, research directions, and collaboration opportunities.
 
-Suggested links:
+Suggested contact actions:
 
 - GitHub
-- Email: `binaryoutlook01@gmail.com`
+- Email me
+- Copy email
 - LinkedIn
 - Project repositories
+
+Do not display the raw email address as a separate contact channel. The two
+email actions already cover the same job without introducing an awkwardly
+wrapping duplicate.
 
 LinkedIn can be added here later if it should be shown publicly.
 

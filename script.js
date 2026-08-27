@@ -777,10 +777,10 @@ async function copyEmail(button) {
 
     label.textContent = "Email copied";
     button.classList.add("is-copied");
-    if (status) status.textContent = `${email} copied to your clipboard.`;
+    if (status) status.textContent = "Email address copied to your clipboard.";
   } catch (error) {
     label.textContent = "Copy unavailable";
-    if (status) status.textContent = `Copy did not work. Select the visible address: ${email}`;
+    if (status) status.textContent = 'Copy did not work. Use “Email me” to open your mail app.';
   }
 
   window.setTimeout(() => {
