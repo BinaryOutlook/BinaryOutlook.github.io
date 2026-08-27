@@ -1329,8 +1329,10 @@ h3 {
 }
 
 .site-footer {
-  border-top: 1px solid var(--line);
-  color: var(--muted);
+  align-items: center;
+  background: #e6bd62;
+  border-top: 0;
+  color: rgba(23, 54, 64, 0.78);
   display: grid;
   font-family:
     ui-sans-serif,
@@ -1339,26 +1341,6 @@ h3 {
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
-  gap: 0.25rem;
-  grid-template-columns: 1fr auto;
-  margin: 0 auto;
-  max-width: var(--max);
-  padding: 2rem 1.25rem;
-}
-
-.site-footer p {
-  margin: 0;
-}
-
-.site-footer strong {
-  color: var(--ink);
-}
-
-.home-page .site-footer {
-  align-items: center;
-  background: #e6bd62;
-  border-top: 0;
-  color: rgba(23, 54, 64, 0.78);
   gap: 1.25rem;
   grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
   isolation: isolate;
@@ -1371,7 +1353,15 @@ h3 {
   z-index: 1;
 }
 
-.home-page .site-footer::before {
+.site-footer p {
+  margin: 0;
+}
+
+.site-footer strong {
+  color: #173640;
+}
+
+.site-footer::before {
   background:
     repeating-linear-gradient(
       30deg,
@@ -1401,14 +1391,10 @@ h3 {
   z-index: 1;
 }
 
-.home-page .site-footer p,
+.site-footer p,
 .footer-brand {
   position: relative;
   z-index: 2;
-}
-
-.home-page .site-footer strong {
-  color: #173640;
 }
 
 .footer-brand {
@@ -1538,18 +1524,6 @@ h3 {
     0 0 0 5px var(--writing-ink);
 }
 
-.writing-page .site-footer {
-  border-color: rgba(23, 54, 64, 0.18);
-  color: var(--writing-muted);
-  max-width: none;
-  padding-left: max(1.25rem, calc((100vw - var(--max)) / 2));
-  padding-right: max(1.25rem, calc((100vw - var(--max)) / 2));
-}
-
-.writing-page .site-footer strong {
-  color: var(--writing-ink);
-}
-
 .js-enabled .reveal {
   opacity: 0;
   transform: translateY(18px);
@@ -1658,9 +1632,6 @@ h3 {
     justify-self: start;
   }
 
-  .site-footer {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 620px) {
@@ -1727,7 +1698,7 @@ h3 {
     min-height: 230px;
   }
 
-  .home-page .site-footer {
+  .site-footer {
     gap: 0.35rem 0.85rem;
     grid-template-columns: minmax(0, 1fr) auto;
     min-height: 0;
