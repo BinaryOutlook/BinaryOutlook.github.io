@@ -41,7 +41,7 @@
     <script>
       document.documentElement.classList.add("js-enabled");
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260827-8" />
+    <link rel="stylesheet" href="./styles.css?v=20260827-9" />
   </head>
   <body class="writing-page">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -91,6 +91,11 @@
 
     <main id="main">
       <section class="writing-hello" id="top" aria-labelledby="writing-title">
+        <canvas
+          class="writing-contour-canvas"
+          aria-hidden="true"
+          data-writing-contours
+        ></canvas>
         <div class="writing-hello__inner reveal">
           <p class="eyebrow">Writing</p>
           <h1 id="writing-title">Hello,<br /> world!</h1>
@@ -102,7 +107,6 @@
             <a class="button secondary" href="./index.html#contact">Contact</a>
           </div>
         </div>
-        <span class="writing-hello__marker" aria-hidden="true"></span>
       </section>
     </main>
 
@@ -112,5 +116,6 @@
     </footer>
 
     <script src="./script.js?v=20260827-6"></script>
+    <script src="./writing-contours.js?v=20260827-1"></script>
   </body>
 </html>

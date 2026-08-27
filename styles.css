@@ -1458,42 +1458,34 @@ h3 {
     radial-gradient(circle at 76% 28%, rgba(255, 255, 255, 0.48), transparent 24%),
     var(--writing-bg);
   display: grid;
+  isolation: isolate;
   min-height: max(36rem, calc(100svh - 166px));
   overflow: hidden;
   position: relative;
 }
 
-.writing-hello::before,
-.writing-hello::after,
-.writing-hello__marker {
+.writing-hello::after {
   border-radius: 50%;
   content: "";
   pointer-events: none;
   position: absolute;
-}
-
-.writing-hello::before {
-  background: var(--writing-accent);
-  height: clamp(11rem, 25vw, 24rem);
-  right: clamp(-8rem, -5vw, -2rem);
-  top: clamp(-7rem, -5vw, -2rem);
-  width: clamp(11rem, 25vw, 24rem);
-}
-
-.writing-hello::after {
   border: clamp(1.2rem, 2vw, 2rem) solid var(--writing-gold);
   bottom: clamp(-6rem, -3vw, -2rem);
   height: clamp(10rem, 20vw, 19rem);
+  opacity: 0.62;
   right: clamp(3rem, 13vw, 13rem);
   width: clamp(10rem, 20vw, 19rem);
+  z-index: 0;
 }
 
-.writing-hello__marker {
-  background: var(--blue);
-  height: clamp(2.25rem, 4vw, 4rem);
-  right: clamp(1.5rem, 7vw, 7rem);
-  top: 53%;
-  width: clamp(2.25rem, 4vw, 4rem);
+.writing-contour-canvas {
+  contain: paint;
+  height: 100%;
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
 }
 
 .writing-hello__inner {
@@ -1502,7 +1494,7 @@ h3 {
   padding: clamp(4rem, 8vw, 7rem) 1.25rem;
   position: relative;
   width: 100%;
-  z-index: 1;
+  z-index: 2;
 }
 
 .writing-hello .eyebrow {
@@ -1768,19 +1760,9 @@ h3 {
     padding-right: 1rem;
   }
 
-  .writing-hello::before {
-    right: -7rem;
-    top: -5rem;
-  }
-
   .writing-hello::after {
     bottom: -5rem;
     right: -3rem;
-  }
-
-  .writing-hello__marker {
-    right: 1.25rem;
-    top: 48%;
   }
 }
 
