@@ -30,8 +30,11 @@ Here are a few projects that reflect the kinds of problems and ideas I enjoy wor
 | **BadmintonManager**           | Browser-based badminton management sim about coaching matches indirectly through tactics, simulation, data, and long-term game systems. | sports management, match simulation, algorithms and data                        | [GitHub](https://github.com/BinaryOutlook/BadmintonManager)                                   |
 | **The Lank Forenzo Simulator** | GUI-based browser game centered on decisions, exploration, and reality-bending interactions, now used as a sandbox for experimenting with emerging web technologies. | browser game, decision systems, interactive storytelling, web experimentation   | [GitHub](https://github.com/BinaryOutlook/The-Lank-Forenzo-Simulator)                         |
 
-The homepage project lens supplements these links with live repository activity,
-primary language, stars, and default-branch commit counts.
+The homepage project panel adds a project-specific Novelty summary, upstream
+credit where relevant, and a setup or installation link. Its GitHub snapshot
+shows repository activity, primary language, stars, default-branch commit counts,
+and the latest commit with a direct link. A fetched timestamp and Refresh button
+make the data age explicit; project details remain available if GitHub cannot load.
 
 ## Writing
 

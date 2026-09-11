@@ -1,11 +1,23 @@
 # Project preview media
 
-Every project already has an interactive live repository snapshot. Selecting a
-project updates the preview with its latest GitHub activity, primary language,
-stars, and default-branch commit count. Repository metadata and commit history
-load independently, so one unavailable endpoint does not blank the entire
-preview. This gives the preview a useful default before demonstration media
-exists.
+Selecting a project updates the panel's short summary, **Novelty**, optional
+**Built on** credit, and a project-specific setup or installation action. Novelty
+describes the project's distinctive approach, not an industry-first claim or an
+individual contribution. These details live in the card's `data-preview-summary`,
+`data-preview-novelty`, `data-preview-foundation`, `data-preview-action-label`, and
+`data-preview-action-url` attributes.
+
+The GitHub snapshot shows repository activity, language, stars, commit count,
+and the latest default-branch commit title, date, and link. Metadata and commit
+history load independently; an unavailable endpoint leaves the other useful.
+Empty repositories show “No commits yet.” Full failures keep the project details
+and action available. The timestamp records when data was fetched, including
+cached snapshots; Refresh explicitly fetches that project's data again.
+
+The panel sticks on desktop only when it fits within the viewport. On smaller
+screens, selecting Preview scrolls to the project details. Selection updates via
+hover, keyboard focus, or the Preview button; automatic scroll selection pauses
+while the pointer or keyboard focus is inside the detail panel.
 
 The same preview surface is wired to the filenames below. Media is disabled by
 default, so missing files never produce requests or broken-player states. When

@@ -14,6 +14,15 @@
   const previewLanguage = previewShell.querySelector("[data-project-preview-language]");
   const previewStars = previewShell.querySelector("[data-project-preview-stars]");
   const previewCommits = previewShell.querySelector("[data-project-preview-commits]");
+  const previewNovelty = previewShell.querySelector("[data-project-preview-novelty]");
+  const previewProvenance = previewShell.querySelector("[data-project-preview-provenance]");
+  const previewFoundation = previewShell.querySelector("[data-project-preview-foundation]");
+  const previewAction = previewShell.querySelector("[data-project-preview-action]");
+  const previewCommit = previewShell.querySelector("[data-project-preview-commit]");
+  const previewCommitState = previewShell.querySelector("[data-project-preview-commit-state]");
+  const previewCommitDate = previewShell.querySelector("[data-project-preview-commit-date]");
+  const previewFetched = previewShell.querySelector("[data-project-preview-fetched]");
+  const previewRefresh = previewShell.querySelector("[data-project-preview-refresh]");
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   const saveData = Boolean(navigator.connection?.saveData);
@@ -26,6 +35,7 @@
   const githubTimeoutMs = 8000;
   let activeCard = null;
   let shouldPlayWhenReady = false;
+  let snapshotRequest = 0;
 
   function setStatus(message) {
     if (previewStatus) previewStatus.textContent = message;
@@ -48,6 +58,7 @@
     return {
       title: card.querySelector(".project-content h3")?.textContent.trim() || "Project preview",
       description:
+        card.dataset.previewSummary ||
         card.querySelector(".project-content p")?.textContent.trim() ||
         "A short demonstration of this project.",
     };
@@ -130,7 +141,7 @@
       `https://api.github.com/repos/${encodeURIComponent(repository.owner)}/${encodeURIComponent(repository.name)}/commits?per_page=1`,
       { acceptedStatuses: [409] }
     );
-    if (response.status === 409) return { count: 0, latestActivity: null };
+    if (response.status === 409) return { count: 0, latestActivity: null, latestCommit: null };
     if (!Array.isArray(data)) {
       throw new Error("GitHub returned an unexpected commit payload.");
     }
@@ -139,6 +150,11 @@
       count: getCommitCount(response, data),
       latestActivity:
         data[0]?.commit?.committer?.date || data[0]?.commit?.author?.date || null,
+      latestCommit: data[0] && /^[a-f0-9]{40}$/i.test(data[0].sha) ? {
+        title: data[0].commit?.message?.split(/\r?\n/)[0] || "View latest commit",
+        url: `https://github.com/${repository.path}/commit/${data[0].sha}`,
+        date: data[0].commit?.committer?.date || data[0].commit?.author?.date || null,
+      } : null,
     };
   }
 
@@ -154,6 +170,36 @@
     }
     if (previewStars) previewStars.textContent = stars;
     if (previewCommits) previewCommits.textContent = commits;
+  }
+
+  function setDevelopment({ latestCommit = null, commitState = "Latest commit unavailable", fetchedAt = null, partial = false } = {}) {
+    if (previewCommit) {
+      previewCommit.hidden = !latestCommit;
+      previewCommit.textContent = latestCommit?.title || "";
+      previewCommit.removeAttribute("href");
+      previewCommit.removeAttribute("title");
+      if (latestCommit) {
+        previewCommit.href = latestCommit.url;
+        previewCommit.title = latestCommit.title;
+      }
+    }
+    if (previewCommitState) {
+      previewCommitState.hidden = Boolean(latestCommit);
+      previewCommitState.textContent = latestCommit ? "" : commitState;
+    }
+    if (previewCommitDate) {
+      const validDate = latestCommit?.date && !Number.isNaN(new Date(latestCommit.date).getTime());
+      previewCommitDate.hidden = !validDate;
+      previewCommitDate.textContent = validDate ? formatRepositoryDate(latestCommit.date) : "";
+      previewCommitDate.removeAttribute("datetime");
+      if (validDate) previewCommitDate.dateTime = latestCommit.date;
+    }
+    if (previewFetched) {
+      previewFetched.textContent = fetchedAt
+        ? `${partial ? "Partial data fetched" : "Fetched"} ${new Intl.DateTimeFormat("en-GB", { hour: "2-digit", minute: "2-digit", second: "2-digit" }).format(fetchedAt)}`
+        : "GitHub data unavailable";
+      previewFetched.title = fetchedAt ? new Date(fetchedAt).toLocaleString() : "";
+    }
   }
 
   async function fetchRepositorySnapshot(repository) {
@@ -179,6 +225,9 @@
         language: details ? details.language || "Mixed" : "—",
         stars: details ? formatCount(details.stargazers_count) : "—",
         commits: history ? formatCount(history.count) : "—",
+        latestCommit: history?.latestCommit,
+        commitState: history?.count === 0 ? "No commits yet" : "Latest commit unavailable",
+        fetchedAt: Date.now(),
         partial: !details || !history,
       };
     })();
@@ -193,6 +242,7 @@
   }
 
   async function loadRepositorySnapshot(card, { announce = true } = {}) {
+    const requestId = ++snapshotRequest;
     const repository = getRepository(card);
     if (!repository) {
       previewShell.classList.remove("is-snapshot-loading");
@@ -205,6 +255,8 @@
         commits: "—",
       });
       if (announce) setStatus("Repository snapshot unavailable");
+      setDevelopment();
+      if (previewRefresh) previewRefresh.disabled = true;
       return;
     }
 
@@ -217,21 +269,26 @@
     });
     previewShell.classList.add("is-snapshot-loading");
     previewSnapshot?.setAttribute("aria-busy", "true");
-    if (announce) setStatus("Loading live repository data");
+    setDevelopment({ commitState: "Loading latest commit…" });
+    if (previewFetched) previewFetched.textContent = "Fetching GitHub data…";
+    if (previewRefresh) previewRefresh.disabled = true;
+    if (announce) setStatus("Loading GitHub data");
 
     try {
       const snapshot = await fetchRepositorySnapshot(repository);
-      if (card !== activeCard) return;
+      if (card !== activeCard || requestId !== snapshotRequest) return;
       setSnapshotValues(snapshot);
+      setDevelopment(snapshot);
       if (announce) {
         setStatus(
           snapshot.partial
             ? "Repository snapshot partially available"
-            : "Live repository snapshot"
+            : "GitHub repository snapshot"
         );
       }
     } catch (error) {
-      if (card !== activeCard) return;
+      if (card !== activeCard || requestId !== snapshotRequest) return;
+      setDevelopment();
       setSnapshotValues({
         repository: repository.path,
         activity: "Unavailable",
@@ -241,7 +298,8 @@
       });
       if (announce) setStatus("Repository snapshot unavailable");
     } finally {
-      if (card === activeCard) {
+      if (card === activeCard && requestId === snapshotRequest) {
+        if (previewRefresh) previewRefresh.disabled = false;
         previewShell.classList.remove("is-snapshot-loading");
         previewSnapshot?.setAttribute("aria-busy", "false");
       }
@@ -358,6 +416,13 @@
     const { title, description } = getCardContent(card);
     if (previewTitle) previewTitle.textContent = title;
     if (previewDescription) previewDescription.textContent = description;
+    if (previewNovelty) previewNovelty.textContent = card.dataset.previewNovelty || "";
+    if (previewProvenance) previewProvenance.hidden = !card.dataset.previewFoundation;
+    if (previewFoundation) previewFoundation.textContent = card.dataset.previewFoundation || "";
+    if (previewAction) {
+      previewAction.textContent = `${card.dataset.previewActionLabel || "Explore project"} ↗`;
+      previewAction.href = card.dataset.previewActionUrl || card.querySelector(".project-link").href;
+    }
     if (!isSameCard) {
       configurePreviewMedia(card, options);
     } else if (options.play) {
@@ -407,6 +472,9 @@
     trigger?.addEventListener("click", () => {
       const isCurrentAndPlaying = card === activeCard && previewVideo && !previewVideo.paused;
       activatePreview(card);
+      if (!window.matchMedia("(min-width: 921px)").matches) {
+        previewShell.scrollIntoView({ behavior: reduceMotion ? "instant" : "smooth", block: "start" });
+      }
 
       if (isCurrentAndPlaying) {
         pausePreview();
@@ -420,7 +488,7 @@
     const cardObserver = new IntersectionObserver(
       (entries) => {
         const centeredCard = entries.find((entry) => entry.isIntersecting);
-        if (centeredCard && !previewCards.some((card) => card.matches(":hover, :focus-within"))) {
+        if (centeredCard && !previewShell.matches(":hover, :focus-within") && !previewCards.some((card) => card.matches(":hover, :focus-within"))) {
           activatePreview(centeredCard.target);
         }
       },
@@ -430,5 +498,20 @@
     previewCards.forEach((card) => cardObserver.observe(card));
   }
 
+  previewRefresh?.addEventListener("click", () => {
+    const repository = activeCard && getRepository(activeCard);
+    if (!repository) return;
+    repositoryCache.delete(repository.path);
+    loadRepositorySnapshot(activeCard, { announce: activeCard.dataset.previewEnabled !== "true" });
+  });
+
+  function updateStickyPreview() {
+    const top = Number.parseFloat(getComputedStyle(previewShell).top) || 96;
+    previewShell.classList.toggle("fits-viewport", previewShell.offsetHeight + top + 24 <= window.innerHeight);
+  }
+  if ("ResizeObserver" in window) new ResizeObserver(updateStickyPreview).observe(previewShell);
+  window.addEventListener("resize", updateStickyPreview);
+
   activatePreview(previewCards[0]);
+  updateStickyPreview();
 })();

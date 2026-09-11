@@ -245,10 +245,14 @@ GitHub should remain easy to reach without taking up a separate homepage
 section. Link directly to the public profile from navigation, the hero, project
 cards, and Contact.
 
-The Featured Projects lens carries the useful live data instead: repository
-activity, primary language, stars, and default-branch commit history. This keeps
-the evidence beside the projects it describes and avoids a redundant statistics
-block between Projects and Contact.
+The Featured Projects panel adds a short purpose statement, a team-focused
+**Novelty** summary, optional **Built on** credit, and a setup or installation
+action for the selected project. Novelty describes the distinctive approach,
+without claiming an industry-first invention or assigning individual credit.
+The GitHub snapshot includes repository activity, language, stars, commit count,
+and a linked latest commit with its date. Show when data was fetched and provide
+a Refresh button. Static project details remain useful when GitHub is unavailable.
+The panel is sticky on desktop only when it fits the viewport.
 
 ## Learning Notes Section
 
