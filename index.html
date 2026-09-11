@@ -261,8 +261,8 @@
         <div class="section-intro reveal">
           <h2 id="projects-title">Featured Projects</h2>
           <p>
-            Projects that carry the proof: agent safety, simulation, semantic
-            play, and web interaction.
+            Projects that carry the proof: agent safety, developer tools,
+            simulation, and web interaction.
           </p>
         </div>
 
@@ -271,6 +271,7 @@
             class="project-preview reveal"
             aria-labelledby="project-preview-title"
             data-project-preview-shell
+            id="project-preview-details"
           >
             <div class="project-preview__frame" id="project-preview-media">
               <video
@@ -287,7 +288,7 @@
                   <span data-project-preview-repository>GitHub repository</span>
                   <span class="project-preview__live-indicator">
                     <span aria-hidden="true"></span>
-                    Live
+                    GitHub data
                   </span>
                 </div>
                 <div class="project-preview__activity">
@@ -318,13 +319,35 @@
                 Loading repository snapshot
               </span>
             </div>
-            <div class="project-preview__caption" aria-live="polite">
-              <p class="panel-label">Live project lens</p>
+            <div class="project-preview__caption">
+              <p class="panel-label">Project details</p>
               <h3 id="project-preview-title" data-project-preview-title>HaLoop</h3>
               <p data-project-preview-description>
-                DevSecOps guardrails for AI coding agents: approvals, risk
-                scoring, and audit trails.
+                Human-governed AI coding workflows.
               </p>
+              <dl class="project-preview__details">
+                <div>
+                  <dt>Novelty</dt>
+                  <dd data-project-preview-novelty>Explainable risk decisions connect local guardrails, human approvals, and an audit trail across the editor and review dashboard.</dd>
+                </div>
+                <div data-project-preview-provenance hidden>
+                  <dt>Built on</dt>
+                  <dd data-project-preview-foundation></dd>
+                </div>
+                <div>
+                  <dt>Latest development</dt>
+                  <dd>
+                    <a class="project-preview__commit" data-project-preview-commit target="_blank" rel="noreferrer" hidden></a>
+                    <span data-project-preview-commit-state>Loading latest commit…</span>
+                    <time class="project-preview__commit-date" data-project-preview-commit-date hidden></time>
+                  </dd>
+                </div>
+              </dl>
+              <a class="project-link project-preview__action" data-project-preview-action href="https://github.com/DasbootU9607/Deep-Learning-Week-Hackathon-2026-HaLoop-Team-CEEES#start-here" target="_blank" rel="noreferrer">Explore setup guide ↗</a>
+              <div class="project-preview__data-footer">
+                <span data-project-preview-fetched>Fetching GitHub data…</span>
+                <button class="project-preview__refresh" type="button" data-project-preview-refresh>Refresh</button>
+              </div>
             </div>
           </aside>
 
@@ -333,6 +356,11 @@
             class="project-card reveal"
             data-project-preview-card
             data-preview-key="haloop"
+            data-preview-summary="Human-governed AI coding workflows."
+            data-preview-novelty="Explainable risk decisions connect local guardrails, human approvals, and an audit trail across the editor and review dashboard."
+            data-preview-foundation=""
+            data-preview-action-label="Explore setup guide"
+            data-preview-action-url="https://github.com/DasbootU9607/Deep-Learning-Week-Hackathon-2026-HaLoop-Team-CEEES#start-here"
             data-preview-enabled="false"
             data-preview-webm="./assets/previews/haloop.webm"
             data-preview-mp4="./assets/previews/haloop.mp4"
@@ -359,7 +387,7 @@
               <button
                 class="project-preview-trigger"
                 type="button"
-                aria-controls="project-preview-media"
+                aria-controls="project-preview-details"
                 aria-pressed="false"
                 data-project-preview-trigger
               >
@@ -379,7 +407,64 @@
           <article
             class="project-card reveal"
             data-project-preview-card
+            data-preview-key="binary-markdown"
+            data-preview-summary="Visual Markdown editing inside VS Code."
+            data-preview-novelty="Code copying preserves line breaks and indentation, while outline visibility can be remembered per file or globally."
+            data-preview-foundation="Any Markdown — independently maintained fork."
+            data-preview-action-label="View installation guide"
+            data-preview-action-url="https://github.com/BinaryOutlook/binary-markdown#install-a-test-build"
+            data-preview-enabled="false"
+            data-preview-webm="./assets/previews/binary-markdown.webm"
+            data-preview-mp4="./assets/previews/binary-markdown.mp4"
+            data-preview-poster="./assets/previews/binary-markdown-poster.webp"
+            data-preview-accent="#0b786e"
+          >
+            <div class="project-meta">
+              <span>Developer tooling</span>
+              <span>Open source</span>
+            </div>
+            <div class="project-content">
+              <h3>Binary Markdown</h3>
+              <p>
+                An independently maintained visual Markdown editor for VS Code,
+                building on Any Markdown with fixes for code copying and
+                persistent outline preferences.
+              </p>
+              <ul class="tag-list" aria-label="Binary Markdown focus areas">
+                <li>Editing workflows</li>
+                <li>VS Code extension</li>
+              </ul>
+            </div>
+            <div class="project-actions">
+              <button
+                class="project-preview-trigger"
+                type="button"
+                aria-controls="project-preview-details"
+                aria-pressed="false"
+                data-project-preview-trigger
+              >
+                Preview
+              </button>
+              <a
+                class="project-link"
+                href="https://github.com/BinaryOutlook/binary-markdown"
+                target="_blank"
+                rel="noreferrer"
+              >
+                GitHub
+              </a>
+            </div>
+          </article>
+
+          <article
+            class="project-card reveal"
+            data-project-preview-card
             data-preview-key="badminton-manager"
+            data-preview-summary="Coach the match. Build a badminton career."
+            data-preview-novelty="Coaching choices drive a deterministic match engine, connecting scouting and live tactics with training, rankings, and a local career simulation."
+            data-preview-foundation=""
+            data-preview-action-label="Run the game locally"
+            data-preview-action-url="https://github.com/BinaryOutlook/BadmintonManager#quick-start"
             data-preview-enabled="false"
             data-preview-webm="./assets/previews/badminton-manager.webm"
             data-preview-mp4="./assets/previews/badminton-manager.mp4"
@@ -405,7 +490,7 @@
               <button
                 class="project-preview-trigger"
                 type="button"
-                aria-controls="project-preview-media"
+                aria-controls="project-preview-details"
                 aria-pressed="false"
                 data-project-preview-trigger
               >
@@ -426,6 +511,11 @@
             class="project-card reveal"
             data-project-preview-card
             data-preview-key="lank-forenzo"
+            data-preview-summary="Airline strategy through conflicting executive incentives."
+            data-preview-novelty="One deterministic campaign serves web, terminal, and agent clients, exposing the same player-visible facts and rules through different interfaces."
+            data-preview-foundation=""
+            data-preview-action-label="Explore ways to play"
+            data-preview-action-url="https://github.com/BinaryOutlook/The-Lank-Forenzo-Simulator#play-in-the-web"
             data-preview-enabled="false"
             data-preview-webm="./assets/previews/lank-forenzo.webm"
             data-preview-mp4="./assets/previews/lank-forenzo.mp4"
@@ -451,7 +541,7 @@
               <button
                 class="project-preview-trigger"
                 type="button"
-                aria-controls="project-preview-media"
+                aria-controls="project-preview-details"
                 aria-pressed="false"
                 data-project-preview-trigger
               >
@@ -460,52 +550,6 @@
               <a
                 class="project-link"
                 href="https://github.com/BinaryOutlook/The-Lank-Forenzo-Simulator"
-                target="_blank"
-                rel="noreferrer"
-              >
-                GitHub
-              </a>
-            </div>
-          </article>
-
-          <article
-            class="project-card reveal"
-            data-project-preview-card
-            data-preview-key="semantris-plus"
-            data-preview-enabled="false"
-            data-preview-webm="./assets/previews/semantris-plus.webm"
-            data-preview-mp4="./assets/previews/semantris-plus.mp4"
-            data-preview-poster="./assets/previews/semantris-plus-poster.webp"
-            data-preview-accent="#0b786e"
-          >
-            <div class="project-meta">
-              <span>LLM application</span>
-              <span>Semantic play</span>
-            </div>
-            <div class="project-content">
-              <h3>SemantrisPlus</h3>
-              <p>
-                A Semantris reinterpretation with LLM-powered semantic play and
-                cleaner interaction design.
-              </p>
-              <ul class="tag-list" aria-label="SemantrisPlus focus areas">
-                <li>Semantic reasoning</li>
-                <li>Language gameplay</li>
-              </ul>
-            </div>
-            <div class="project-actions">
-              <button
-                class="project-preview-trigger"
-                type="button"
-                aria-controls="project-preview-media"
-                aria-pressed="false"
-                data-project-preview-trigger
-              >
-                Preview
-              </button>
-              <a
-                class="project-link"
-                href="https://github.com/BinaryOutlook/SemantrisPlus"
                 target="_blank"
                 rel="noreferrer"
               >

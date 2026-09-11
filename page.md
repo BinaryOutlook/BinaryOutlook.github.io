@@ -185,6 +185,24 @@ Link:
 
 GitHub: `https://github.com/DasbootU9607/Deep-Learning-Week-Hackathon-2026-HaLoop-Team-CEEES`
 
+### Binary Markdown
+
+Draft copy:
+
+**Binary Markdown** is an independently maintained visual Markdown editor for VS Code, building on Any Markdown with fixes for code copying and persistent outline preferences.
+
+Focus:
+
+- Developer tooling
+- Open-source maintenance
+- Editing workflows
+- VS Code extension development
+- Interaction design
+
+Link:
+
+GitHub: `https://github.com/BinaryOutlook/binary-markdown`
+
 ### BadmintonManager
 
 Draft copy:
@@ -221,34 +239,20 @@ Link:
 
 GitHub: `https://github.com/BinaryOutlook/The-Lank-Forenzo-Simulator`
 
-### SemantrisPlus
-
-Draft copy:
-
-**SemantrisPlus** is a modern reinterpretation of Google's Semantris, reimagined with LLM-powered semantic play and updated interaction design.
-
-Focus:
-
-- LLM applications
-- Semantic reasoning
-- Language game design
-- AI-powered gameplay
-- Interaction design
-
-Link:
-
-GitHub: `https://github.com/BinaryOutlook/SemantrisPlus`
-
 ## GitHub Access
 
 GitHub should remain easy to reach without taking up a separate homepage
 section. Link directly to the public profile from navigation, the hero, project
 cards, and Contact.
 
-The Featured Projects lens carries the useful live data instead: repository
-activity, primary language, stars, and default-branch commit history. This keeps
-the evidence beside the projects it describes and avoids a redundant statistics
-block between Projects and Contact.
+The Featured Projects panel adds a short purpose statement, a team-focused
+**Novelty** summary, optional **Built on** credit, and a setup or installation
+action for the selected project. Novelty describes the distinctive approach,
+without claiming an industry-first invention or assigning individual credit.
+The GitHub snapshot includes repository activity, language, stars, commit count,
+and a linked latest commit with its date. Show when data was fetched and provide
+a Refresh button. Static project details remain useful when GitHub is unavailable.
+The panel is sticky on desktop only when it fits the viewport.
 
 ## Learning Notes Section
 
@@ -283,9 +287,9 @@ It can make the page feel active, but only if the events are accurate and worth 
 Possible entries:
 
 - Built HaLoop as an AI agent safety and DevSecOps project.
+- Maintained Binary Markdown, extending Any Markdown with code-copying fixes and persistent outline preferences.
 - Started BadmintonManager as a higher-scale badminton management simulation.
 - Continued developing The Lank Forenzo Simulator as a browser-based experimentation sandbox.
-- Reimagined Semantris through LLM-powered semantic gameplay in SemantrisPlus.
 
 Avoid adding awards, dates, or institutional claims unless they are confirmed.
 
