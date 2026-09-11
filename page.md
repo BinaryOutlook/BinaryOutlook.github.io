@@ -185,6 +185,24 @@ Link:
 
 GitHub: `https://github.com/DasbootU9607/Deep-Learning-Week-Hackathon-2026-HaLoop-Team-CEEES`
 
+### Binary Markdown
+
+Draft copy:
+
+**Binary Markdown** is an independently maintained visual Markdown editor for VS Code, building on Any Markdown with fixes for code copying and persistent outline preferences.
+
+Focus:
+
+- Developer tooling
+- Open-source maintenance
+- Editing workflows
+- VS Code extension development
+- Interaction design
+
+Link:
+
+GitHub: `https://github.com/BinaryOutlook/binary-markdown`
+
 ### BadmintonManager
 
 Draft copy:
@@ -220,24 +238,6 @@ Focus:
 Link:
 
 GitHub: `https://github.com/BinaryOutlook/The-Lank-Forenzo-Simulator`
-
-### SemantrisPlus
-
-Draft copy:
-
-**SemantrisPlus** is a modern reinterpretation of Google's Semantris, reimagined with LLM-powered semantic play and updated interaction design.
-
-Focus:
-
-- LLM applications
-- Semantic reasoning
-- Language game design
-- AI-powered gameplay
-- Interaction design
-
-Link:
-
-GitHub: `https://github.com/BinaryOutlook/SemantrisPlus`
 
 ## GitHub Access
 
@@ -283,9 +283,9 @@ It can make the page feel active, but only if the events are accurate and worth 
 Possible entries:
 
 - Built HaLoop as an AI agent safety and DevSecOps project.
+- Maintained Binary Markdown, extending Any Markdown with code-copying fixes and persistent outline preferences.
 - Started BadmintonManager as a higher-scale badminton management simulation.
 - Continued developing The Lank Forenzo Simulator as a browser-based experimentation sandbox.
-- Reimagined Semantris through LLM-powered semantic gameplay in SemantrisPlus.
 
 Avoid adding awards, dates, or institutional claims unless they are confirmed.
 

@@ -14,9 +14,9 @@ enabled, the video takes over the repository snapshot while it plays.
 | Project | WebM | MP4 fallback | Poster |
 | --- | --- | --- | --- |
 | HaLoop | `haloop.webm` | `haloop.mp4` | `haloop-poster.webp` |
+| Binary Markdown | `binary-markdown.webm` | `binary-markdown.mp4` | `binary-markdown-poster.webp` |
 | BadmintonManager | `badminton-manager.webm` | `badminton-manager.mp4` | `badminton-manager-poster.webp` |
 | The Lank Forenzo Simulator | `lank-forenzo.webm` | `lank-forenzo.mp4` | `lank-forenzo-poster.webp` |
-| SemantrisPlus | `semantris-plus.webm` | `semantris-plus.mp4` | `semantris-plus-poster.webp` |
 
 To publish a preview:
 
