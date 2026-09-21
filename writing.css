@@ -1,0 +1,559 @@
+/* Shared presentation for the writing index and individual articles. */
+.writing-page {
+  --writing-rule: rgba(23, 54, 64, 0.22);
+  --writing-serif: Georgia, "Times New Roman", serif;
+  color: var(--writing-ink);
+}
+
+.writing-page :is(a, button):focus-visible {
+  outline: 2px solid var(--writing-accent);
+  outline-offset: 5px;
+}
+
+.writing-page :is(#top, #main, .article-prose [id]) {
+  scroll-margin-top: 6rem;
+}
+
+.writing-page .eyebrow {
+  color: var(--writing-accent);
+}
+
+.writing-page .writing-index {
+  margin-inline: auto;
+  max-width: var(--max);
+  padding: clamp(3.5rem, 7vw, 6rem) 1.25rem clamp(4rem, 7vw, 6rem);
+}
+
+.writing-page .writing-index__header {
+  margin-bottom: clamp(2.75rem, 5vw, 4rem);
+}
+
+.writing-page .writing-index__header h1 {
+  font-size: clamp(3.5rem, 9vw, 7rem);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.08;
+  margin-bottom: 1.4rem;
+  max-width: none;
+}
+
+.writing-page .writing-index__intro {
+  color: var(--writing-muted);
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  line-height: 1.5;
+  margin-bottom: 0;
+  max-width: 43ch;
+}
+
+.writing-page .writing-list {
+  border-top: 2px solid var(--writing-ink);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.writing-page .writing-entry {
+  border-bottom: 1px solid var(--writing-rule);
+  display: grid;
+  gap: 1.25rem clamp(2rem, 5vw, 4rem);
+  grid-template-columns: minmax(8rem, 0.24fr) minmax(0, 1fr);
+  padding-block: clamp(2rem, 4vw, 3rem);
+}
+
+.writing-page .writing-entry__meta {
+  color: var(--writing-muted);
+  font-size: 0.86rem;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.5;
+  margin: 0.35rem 0 0;
+}
+
+.writing-page :is(.writing-entry__word-count, .article-word-count) {
+  display: block;
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+}
+
+.writing-page .writing-entry h2 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.16;
+  margin-bottom: 1.1rem;
+  max-width: 22ch;
+  text-wrap: balance;
+}
+
+.writing-page .writing-entry h2 a {
+  text-decoration-thickness: 0.06em;
+  text-underline-offset: 0.12em;
+}
+
+.writing-page .writing-entry h2 a:hover {
+  text-decoration-line: underline;
+}
+
+.writing-page .writing-entry__summary {
+  color: var(--writing-muted);
+  font-size: 1.08rem;
+  line-height: 1.65;
+  margin-bottom: 1.35rem;
+  max-width: 58ch;
+}
+
+.writing-page :is(.writing-entry__link, .article-back, .article-footer a) {
+  color: var(--writing-accent);
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: 750;
+  padding-block: 0.5rem;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+
+.writing-page :is(.writing-entry__link, .article-back, .article-footer a):hover {
+  color: var(--writing-ink);
+}
+
+/* The original animated welcome becomes a closing invitation. */
+.writing-page .writing-endnote {
+  min-height: 34rem;
+}
+
+.writing-page .writing-endnote .writing-hello__inner {
+  padding-block: clamp(4rem, 7vw, 6rem);
+}
+
+.writing-page .writing-endnote h2 {
+  color: var(--writing-ink);
+  font-size: clamp(3.6rem, 9vw, 7.5rem);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.06;
+  margin-bottom: 1.75rem;
+  max-width: 10ch;
+}
+
+.writing-page .writing-endnote .writing-hello__lede {
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+  font-weight: 550;
+  line-height: 1.5;
+  max-width: 35ch;
+}
+
+.writing-page .writing-article {
+  margin-inline: auto;
+  max-width: 1080px;
+  padding: clamp(2.5rem, 5vw, 4.5rem) 1.25rem clamp(4rem, 8vw, 7rem);
+}
+
+.writing-page .article-header {
+  border-bottom: 1px solid var(--writing-rule);
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+  padding-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.writing-page .article-back {
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.writing-page .article-header h1 {
+  font-size: clamp(2.2rem, 4.5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.18;
+  margin-bottom: 1.75rem;
+  max-width: none;
+  text-wrap: wrap;
+}
+
+.writing-page .article-meta {
+  color: var(--writing-muted);
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  gap: 0.35rem 1.5rem;
+  margin-bottom: 0;
+}
+
+.writing-page :is(.article-meta__date, .article-meta__author) {
+  margin: 0;
+}
+
+.writing-page .article-cover {
+  margin: 0 0 clamp(2.5rem, 5vw, 4rem);
+}
+
+.writing-page .article-cover img {
+  height: auto;
+  width: 100%;
+}
+
+.writing-page .article-cover figcaption {
+  color: var(--writing-muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin-top: 0.85rem;
+  max-width: 75ch;
+}
+
+.writing-page .article-prose {
+  color: #253d43;
+  font-family: var(--writing-serif);
+  font-size: clamp(1.12rem, 1.7vw, 1.3rem);
+  line-height: 1.8;
+  margin-inline: auto;
+  max-width: 65ch;
+  overflow-wrap: anywhere;
+}
+
+.writing-page .article-prose p {
+  margin-bottom: 1.4em;
+}
+
+.writing-page .article-prose a {
+  color: var(--writing-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.17em;
+}
+
+.writing-page .article-prose a:hover {
+  color: var(--writing-ink);
+  text-decoration-thickness: 2px;
+}
+
+.writing-page .article-prose :is(h2, h3, h4) {
+  color: var(--writing-ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.2;
+  margin-block: 2em 0.85em;
+  text-wrap: balance;
+}
+
+.writing-page .article-prose h2 {
+  font-size: 1.6em;
+}
+
+.writing-page .article-prose h3 {
+  font-size: 1.25em;
+}
+
+.writing-page .article-prose h4 {
+  font-size: 1.05em;
+}
+
+.writing-page .article-prose :is(ul, ol) {
+  margin-block: 0 1.4em;
+  padding-left: 1.5em;
+}
+
+.writing-page .article-prose li + li {
+  margin-top: 0.45em;
+}
+
+.writing-page .article-prose li > :is(ul, ol) {
+  margin-block: 0.45em 0;
+}
+
+.writing-page .article-prose blockquote {
+  border-left: 3px solid var(--writing-accent);
+  color: var(--writing-muted);
+  margin: 1.8em 0;
+  padding-left: 1.25em;
+}
+
+.writing-page .article-prose blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+.writing-page .article-prose figure {
+  margin: 2em 0;
+}
+
+.writing-page .article-prose figure img {
+  height: auto;
+  margin-inline: auto;
+}
+
+.writing-page .article-prose figcaption {
+  color: var(--writing-muted);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.75em;
+  line-height: 1.5;
+  margin-top: 0.85em;
+}
+
+.writing-page .article-prose code {
+  background: rgba(23, 54, 64, 0.06);
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+  font-size: 0.8em;
+  padding: 0.15em 0.3em;
+}
+
+.writing-page .article-prose pre {
+  background: #173640;
+  color: #fbf8ef;
+  line-height: 1.6;
+  margin-block: 1.8em;
+  overflow-x: auto;
+  padding: 1.25em;
+  tab-size: 2;
+}
+
+.writing-page .article-prose pre code {
+  background: none;
+  padding: 0;
+}
+
+.writing-page .article-table {
+  margin-block: 1.8em;
+  overflow-x: auto;
+}
+
+.writing-page .article-prose table {
+  border-collapse: collapse;
+  font-size: 0.85em;
+  text-align: left;
+  width: 100%;
+}
+
+.writing-page .article-prose :is(th, td) {
+  border-bottom: 1px solid var(--writing-rule);
+  padding: 0.7em 0.85em;
+  vertical-align: top;
+}
+
+.writing-page .article-prose th {
+  border-bottom: 2px solid var(--writing-ink);
+  color: var(--writing-ink);
+  font-weight: 700;
+}
+
+.writing-page .article-prose hr {
+  border: 0;
+  border-top: 1px solid var(--writing-rule);
+  margin-block: 2.5em;
+}
+
+.writing-page .article-prose .article-closing {
+  color: var(--writing-ink);
+  font-style: italic;
+  margin-block: 1.8em 0;
+}
+
+.writing-page .article-references {
+  border-top: 1px solid var(--writing-rule);
+  color: var(--writing-muted);
+  font-family: var(--writing-serif);
+  font-size: clamp(1.12rem, 1.7vw, 1.3rem);
+  line-height: 1.6;
+  margin: clamp(3rem, 6vw, 5rem) auto 0;
+  max-width: 65ch;
+  overflow-wrap: anywhere;
+  padding-top: 1.75rem;
+}
+
+.writing-page .article-references h2 {
+  color: var(--writing-ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 1.1em;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.3;
+  margin-bottom: 0.75em;
+}
+
+.writing-page .article-references > p {
+  font-size: 0.85em;
+  margin-bottom: 1.25em;
+}
+
+.writing-page .article-references ol {
+  font-size: 0.85em;
+  margin: 0;
+  padding-left: 1.5em;
+}
+
+.writing-page .article-references li {
+  padding-left: 0.25em;
+}
+
+.writing-page .article-references li + li {
+  margin-top: 0.85em;
+}
+
+.writing-page .article-references a {
+  color: var(--writing-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.17em;
+}
+
+.writing-page .article-references a:hover {
+  color: var(--writing-ink);
+}
+
+.writing-page .article-references :is(.reference-source, small) {
+  color: var(--writing-muted);
+  display: block;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.8em;
+  margin-top: 0.25em;
+}
+
+.writing-page .article-footer {
+  border-top: 1px solid var(--writing-rule);
+  margin-top: clamp(3rem, 6vw, 5rem);
+  padding-top: 1.5rem;
+}
+
+@media (max-width: 920px) {
+  .js-enabled .writing-page .nav-links:not(.is-open) {
+    visibility: hidden;
+  }
+
+  .js-enabled .writing-page .nav-links.is-open {
+    max-height: calc(100svh - 72px);
+    overflow-y: auto;
+    visibility: visible;
+  }
+
+  html:not(.js-enabled) .writing-page .site-header {
+    position: static;
+  }
+
+  html:not(.js-enabled) .writing-page .nav-shell {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-block: 0.75rem;
+  }
+
+  html:not(.js-enabled) .writing-page .menu-button {
+    display: none;
+  }
+
+  html:not(.js-enabled) .writing-page .nav-links {
+    background: none;
+    border: 0;
+    box-shadow: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+    padding: 0;
+    position: static;
+    transform: none;
+    width: 100%;
+  }
+
+  html:not(.js-enabled) .writing-page .nav-links a {
+    padding: 0.65rem 0;
+  }
+}
+
+@media (max-width: 620px) {
+  .writing-page :is(.writing-index, .writing-article) {
+    padding-inline: 1.25rem;
+  }
+
+  .writing-page .writing-entry {
+    gap: 0.85rem;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .writing-page .writing-entry__meta {
+    margin-top: 0;
+  }
+
+  .writing-page .writing-endnote {
+    min-height: 31rem;
+  }
+
+  .writing-page .writing-endnote .writing-hello__inner {
+    padding-inline: 1.25rem;
+  }
+
+  .writing-page .article-prose {
+    line-height: 1.75;
+  }
+
+  .writing-page .article-prose pre {
+    padding: 1em;
+  }
+
+  .js-enabled .writing-page .nav-links.is-open {
+    max-height: calc(100svh - 64px);
+  }
+}
+
+@media print {
+  .writing-page {
+    background: white;
+    color: black;
+  }
+
+  .writing-page :is(.site-header, .site-footer, .skip-link, .writing-endnote, .article-back, .article-footer) {
+    display: none;
+  }
+
+  .writing-page :is(.writing-index, .writing-article) {
+    max-width: none;
+    padding: 0;
+  }
+
+  .writing-page .article-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+  }
+
+  .writing-page .article-header h1 {
+    color: black;
+    font-size: 32pt;
+  }
+
+  .writing-page :is(.article-prose, .article-references) {
+    color: black;
+    font-size: 11pt;
+    line-height: 1.5;
+    max-width: none;
+  }
+
+  .writing-page .article-prose :is(a, h2, h3, h4, .article-closing) {
+    color: black;
+  }
+
+  .writing-page .article-references :is(a, h2) {
+    color: black;
+  }
+
+  .writing-page .article-prose :is(h2, h3, h4) {
+    break-after: avoid;
+  }
+
+  .writing-page .article-prose :is(p, li) {
+    orphans: 3;
+    widows: 3;
+  }
+
+  .writing-page .article-prose :is(figure, blockquote) {
+    break-inside: avoid;
+  }
+
+  .writing-page .article-cover {
+    break-inside: avoid;
+  }
+
+  .writing-page .article-prose pre {
+    background: #f3f3f3;
+    color: black;
+    overflow-wrap: anywhere;
+    white-space: pre-wrap;
+  }
+
+  .writing-page .article-table {
+    overflow: visible;
+  }
+}

@@ -5,15 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Writing from Binary Outlook. Future essays and reflections will appear here."
+      content="Essays and reflections on software, freedom, and the experience of building things."
     />
     <meta name="author" content="Binary Outlook" />
     <meta property="og:title" content="Writing — Binary Outlook" />
     <meta
       property="og:description"
-      content="Hello, world! Future essays and reflections will appear here."
+      content="Essays and reflections on software, freedom, and the experience of building things."
     />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://binaryoutlook.github.io/writing.html" />
+    <link rel="canonical" href="https://binaryoutlook.github.io/writing.html" />
     <title>Writing — Binary Outlook</title>
     <link
       rel="icon"
@@ -42,6 +44,7 @@
       document.documentElement.classList.add("js-enabled");
     </script>
     <link rel="stylesheet" href="./styles.css?v=20260828-1" />
+    <link rel="stylesheet" href="./writing.css?v=20260921-2" />
   </head>
   <body class="writing-page">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -90,17 +93,49 @@
     </header>
 
     <main id="main">
-      <section class="writing-hello" id="top" aria-labelledby="writing-title">
+      <section class="writing-index" id="top" aria-labelledby="writing-title">
+        <header class="writing-index__header">
+          <p class="eyebrow">Binary Outlook</p>
+          <h1 id="writing-title">Writing</h1>
+          <p class="writing-index__intro">
+            On software, freedom, and the experience of building things.
+          </p>
+        </header>
+
+        <ol class="writing-list" aria-label="Published writing">
+          <li class="writing-entry">
+            <p class="writing-entry__meta">
+              <time datetime="2026-09-21">21 September 2026</time>
+              <span class="writing-entry__word-count" data-word-count-for="in-search-of-the-free-and-free">820 words</span>
+            </p>
+            <div class="writing-entry__content">
+              <h2>
+                <a href="./writing/in-search-of-the-free-and-free/">In Search of the Free and Free</a>
+              </h2>
+              <p class="writing-entry__summary">
+                Reflections on software freedom, the bazaar, and carrying the
+                work forward through Binary Markdown.
+              </p>
+              <a class="writing-entry__link" href="./writing/in-search-of-the-free-and-free/">
+                Read the essay <span aria-hidden="true">&rarr;</span>
+              </a>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="writing-hello writing-endnote" aria-labelledby="writing-end-title">
         <canvas
           class="writing-contour-canvas"
           aria-hidden="true"
           data-writing-contours
         ></canvas>
         <div class="writing-hello__inner reveal">
-          <p class="eyebrow">Writing</p>
-          <h1 id="writing-title">Hello,<br /> world!</h1>
+          <p class="eyebrow">Until next time</p>
+          <h2 id="writing-end-title">That’s all<br />for now.</h2>
           <p class="writing-hello__lede">
-            Future essays and reflections will live here. Check back soon.
+            More words will find their way here—hopefully soon. Until then,
+            thank you for reading. Come back another time.
           </p>
           <div class="hero-actions" aria-label="Writing page links">
             <a class="button primary" href="./index.html">Back to portfolio</a>
