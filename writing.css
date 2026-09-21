@@ -30,8 +30,9 @@
 
 .writing-page .writing-index__header h1 {
   font-size: clamp(3.5rem, 9vw, 7rem);
-  letter-spacing: -0.055em;
-  line-height: 0.98;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.08;
   margin-bottom: 1.4rem;
   max-width: none;
 }
@@ -67,10 +68,17 @@
   margin: 0.35rem 0 0;
 }
 
+.writing-page :is(.writing-entry__word-count, .article-word-count) {
+  display: block;
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+}
+
 .writing-page .writing-entry h2 {
   font-size: clamp(2rem, 4vw, 3.5rem);
-  letter-spacing: -0.035em;
-  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.16;
   margin-bottom: 1.1rem;
   max-width: 22ch;
   text-wrap: balance;
@@ -120,9 +128,9 @@
 .writing-page .writing-endnote h2 {
   color: var(--writing-ink);
   font-size: clamp(3.6rem, 9vw, 7.5rem);
-  font-weight: 900;
-  letter-spacing: -0.055em;
-  line-height: 0.94;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.06;
   margin-bottom: 1.75rem;
   max-width: 10ch;
 }
@@ -151,12 +159,13 @@
 }
 
 .writing-page .article-header h1 {
-  font-size: clamp(2.8rem, 6.6vw, 5.75rem);
-  letter-spacing: -0.05em;
-  line-height: 1.02;
+  font-size: clamp(2.2rem, 4.5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.18;
   margin-bottom: 1.75rem;
-  max-width: 18ch;
-  text-wrap: balance;
+  max-width: none;
+  text-wrap: wrap;
 }
 
 .writing-page .article-meta {
@@ -166,6 +175,27 @@
   font-size: 0.9rem;
   gap: 0.35rem 1.5rem;
   margin-bottom: 0;
+}
+
+.writing-page :is(.article-meta__date, .article-meta__author) {
+  margin: 0;
+}
+
+.writing-page .article-cover {
+  margin: 0 0 clamp(2.5rem, 5vw, 4rem);
+}
+
+.writing-page .article-cover img {
+  height: auto;
+  width: 100%;
+}
+
+.writing-page .article-cover figcaption {
+  color: var(--writing-muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  margin-top: 0.85rem;
+  max-width: 75ch;
 }
 
 .writing-page .article-prose {
@@ -197,7 +227,8 @@
 .writing-page .article-prose :is(h2, h3, h4) {
   color: var(--writing-ink);
   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  letter-spacing: -0.025em;
+  font-weight: 700;
+  letter-spacing: 0;
   line-height: 1.2;
   margin-block: 2em 0.85em;
   text-wrap: balance;
@@ -314,6 +345,66 @@
   margin-block: 1.8em 0;
 }
 
+.writing-page .article-references {
+  border-top: 1px solid var(--writing-rule);
+  color: var(--writing-muted);
+  font-family: var(--writing-serif);
+  font-size: clamp(1.12rem, 1.7vw, 1.3rem);
+  line-height: 1.6;
+  margin: clamp(3rem, 6vw, 5rem) auto 0;
+  max-width: 65ch;
+  overflow-wrap: anywhere;
+  padding-top: 1.75rem;
+}
+
+.writing-page .article-references h2 {
+  color: var(--writing-ink);
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 1.1em;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.3;
+  margin-bottom: 0.75em;
+}
+
+.writing-page .article-references > p {
+  font-size: 0.85em;
+  margin-bottom: 1.25em;
+}
+
+.writing-page .article-references ol {
+  font-size: 0.85em;
+  margin: 0;
+  padding-left: 1.5em;
+}
+
+.writing-page .article-references li {
+  padding-left: 0.25em;
+}
+
+.writing-page .article-references li + li {
+  margin-top: 0.85em;
+}
+
+.writing-page .article-references a {
+  color: var(--writing-accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.17em;
+}
+
+.writing-page .article-references a:hover {
+  color: var(--writing-ink);
+}
+
+.writing-page .article-references :is(.reference-source, small) {
+  color: var(--writing-muted);
+  display: block;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.8em;
+  margin-top: 0.25em;
+}
+
 .writing-page .article-footer {
   border-top: 1px solid var(--writing-rule);
   margin-top: clamp(3rem, 6vw, 5rem);
@@ -423,7 +514,7 @@
     font-size: 32pt;
   }
 
-  .writing-page .article-prose {
+  .writing-page :is(.article-prose, .article-references) {
     color: black;
     font-size: 11pt;
     line-height: 1.5;
@@ -431,6 +522,10 @@
   }
 
   .writing-page .article-prose :is(a, h2, h3, h4, .article-closing) {
+    color: black;
+  }
+
+  .writing-page .article-references :is(a, h2) {
     color: black;
   }
 
@@ -444,6 +539,10 @@
   }
 
   .writing-page .article-prose :is(figure, blockquote) {
+    break-inside: avoid;
+  }
+
+  .writing-page .article-cover {
     break-inside: avoid;
   }
 

@@ -14,6 +14,8 @@
       content="Reflections on software freedom, the bazaar, and carrying the work forward through Binary Markdown."
     />
     <meta property="og:type" content="article" />
+    <meta property="og:image" content="https://binaryoutlook.github.io/assets/writing/cathedral-and-bazaar.jpg" />
+    <meta property="og:image:alt" content="An imagined book bazaar beneath a stone cathedral, in warm afternoon light. AI-generated image." />
     <meta property="og:url" content="https://binaryoutlook.github.io/writing/in-search-of-the-free-and-free/" />
     <link rel="canonical" href="https://binaryoutlook.github.io/writing/in-search-of-the-free-and-free/" />
     <meta property="article:published_time" content="2026-09-21" />
@@ -45,7 +47,7 @@
       document.documentElement.classList.add("js-enabled");
     </script>
     <link rel="stylesheet" href="../../styles.css?v=20260828-1" />
-    <link rel="stylesheet" href="../../writing.css?v=20260921-1" />
+    <link rel="stylesheet" href="../../writing.css?v=20260921-2" />
   </head>
   <body class="writing-page article-page">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -99,11 +101,25 @@
           <a class="article-back" href="../../writing.html"><span aria-hidden="true">&larr;</span> All writing</a>
           <p class="eyebrow">Essay</p>
           <h1 id="article-title">In Search of the Free and Free</h1>
-          <p class="article-meta">
-            <time datetime="2026-09-21">21 September 2026</time>
-            <span>By Binary Outlook</span>
-          </p>
+          <div class="article-meta">
+            <div class="article-meta__date">
+              <time datetime="2026-09-21">21 September 2026</time>
+              <span class="article-word-count" data-word-count>820 words</span>
+            </div>
+            <span class="article-meta__author">By Binary Outlook</span>
+          </div>
         </header>
+
+        <figure class="article-cover">
+          <img
+            src="../../assets/writing/cathedral-and-bazaar.jpg"
+            alt="People browsing open-air book stalls beneath canvas awnings, with a pale stone cathedral overlooking the square."
+            width="1672"
+            height="941"
+            decoding="async"
+          />
+          <figcaption>An imagined cathedral and bazaar. AI-generated image.</figcaption>
+        </figure>
 
         <div class="article-prose">
           <p>Say what you will about the world we are living in, there is something extraordinary about being able to sit down with an idea and, a few hours later, have a piece of software taking shape in front of you.</p>
@@ -160,6 +176,37 @@
 
           <p class="article-closing">Free to use, and free to carry forward.</p>
         </div>
+
+        <section class="article-references" aria-labelledby="cited-works-title">
+          <h2 id="cited-works-title">Cited works</h2>
+          <p>If something here caught your interest, feel free to spend a little time with these works and projects.</p>
+          <ol>
+            <li>
+              <a href="https://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/">The Cathedral and the Bazaar</a>
+              <small>Eric S. Raymond. In particular, <a href="https://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/ar01s11.html">The Social Context of Open-Source Software</a>.</small>
+            </li>
+            <li>
+              <a href="https://www.gnu.org/philosophy/free-sw.en.html">What is Free Software?</a>
+              <small>GNU Project / Free Software Foundation. The four essential freedoms.</small>
+            </li>
+            <li>
+              <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">GNU Affero General Public License, version 3</a>
+              <small>Free Software Foundation. The license discussed in this essay.</small>
+            </li>
+            <li>
+              <a href="https://github.com/BinaryOutlook/binary-markdown">Binary Markdown</a>
+              <small>The project, its source, and its acknowledgments of Any Markdown by raggbal and contributors.</small>
+            </li>
+            <li>
+              <a href="https://github.com/BinaryOutlook/binary-markdown/pull/12">Outline reading-position tracking and code-block deletion</a>
+              <small>zhangxiaozhuang398-max. Binary Markdown pull request #12.</small>
+            </li>
+            <li>
+              <a href="https://openai.com/index/chatgpt/">Introducing ChatGPT</a>
+              <small>OpenAI, 30 November 2022.</small>
+            </li>
+          </ol>
+        </section>
 
         <footer class="article-footer">
           <a class="article-back" href="../../writing.html"><span aria-hidden="true">&larr;</span> Back to all writing</a>

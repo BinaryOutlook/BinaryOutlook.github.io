@@ -45,7 +45,7 @@
       document.documentElement.classList.add("js-enabled");
     </script>
     <link rel="stylesheet" href="../../styles.css?v=20260828-1" />
-    <link rel="stylesheet" href="../../writing.css?v=20260921-1" />
+    <link rel="stylesheet" href="../../writing.css?v=20260921-2" />
   </head>
   <body class="writing-page article-page">
     <a class="skip-link" href="#main">Skip to content</a>
@@ -99,10 +99,13 @@
           <a class="article-back" href="../../writing.html"><span aria-hidden="true">&larr;</span> All writing</a>
           <p class="eyebrow">Essay</p>
           <h1 id="article-title">ARTICLE_TITLE</h1>
-          <p class="article-meta">
-            <time datetime="PUBLICATION_DATE_ISO">PUBLICATION_DATE_DISPLAY</time>
-            <span>By Binary Outlook</span>
-          </p>
+          <div class="article-meta">
+            <div class="article-meta__date">
+              <time datetime="PUBLICATION_DATE_ISO">PUBLICATION_DATE_DISPLAY</time>
+              <span class="article-word-count" data-word-count>0 words</span>
+            </div>
+            <span class="article-meta__author">By Binary Outlook</span>
+          </div>
         </header>
 
         <div class="article-prose">
@@ -110,6 +113,8 @@
           <p>ARTICLE_BODY</p>
         </div>
 
+        <!-- Optional: add an .article-cover figure before .article-prose and an
+             .article-references section here, outside the counted article body. -->
         <footer class="article-footer">
           <a class="article-back" href="../../writing.html"><span aria-hidden="true">&larr;</span> Back to all writing</a>
         </footer>

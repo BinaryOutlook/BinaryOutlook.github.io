@@ -13,6 +13,8 @@ Markdown conversion. The page layout is shared; article outlines are unrestricte
 - `_templates/article.html`: a copyable starter for another article. This is a
   source template, not a published article; its relative paths assume it has been
   copied to `writing/<slug>/index.html`.
+- `scripts/update-writing-counts.py`: synchronizes the word counts shown below
+  dates on the index and article pages.
 
 ## Add an article
 
@@ -41,10 +43,34 @@ Markdown conversion. The page layout is shared; article outlines are unrestricte
    Give informative images useful alternative text. Equations or interactive
    illustrations require their own implementation when a future article needs them.
 4. Add an entry at the top of `.writing-list` in `writing.html`, following the
-   existing title, date, summary, and link pattern. Preserve the animated ending
-   below the list. Keep each public article linked from the index.
+   existing title, date, word count, summary, and link pattern. Give the count
+   span a `data-word-count-for="<slug>"` attribute matching the article folder;
+   the article starter already has its own `data-word-count` marker. Preserve the
+   animated ending below the list. Keep each public article linked from the index.
 5. Preview and review before committing. The article's `.article-closing` class
    is optional; use it when a closing sentence warrants a little extra space.
+
+An optional `.article-cover` figure goes between the header and `.article-prose`.
+Keep the image in `assets/writing/`, supply descriptive alternative text and
+its actual dimensions, and use a caption to identify an AI-generated image.
+Set `og:image` and `og:image:alt` for article-specific sharing previews.
+
+Place cited works in an `.article-references` section after `.article-prose`.
+Use a heading, a brief invitation to explore, and a linked list with author or
+project credit. Keep references and image captions outside `.article-prose`.
+
+After editing the article body or adding an index entry, refresh counts:
+
+```sh
+python3 scripts/update-writing-counts.py
+python3 scripts/update-writing-counts.py --check
+```
+
+Counts include the text inside `.article-prose`, including the closing sentence;
+they exclude the title, byline, image caption, and cited works. Apostrophes and
+hyphens within words stay joined, while em dashes separate words. Counts are
+stored in HTML so they remain available without JavaScript. `--check` reports
+stale counts without modifying files.
 
 Site navigation and footer markup are copied with the starter, as they are on
 the existing pages. If these change, update the index, published articles, and
