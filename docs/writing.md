@@ -46,7 +46,8 @@ Markdown conversion. The page layout is shared; article outlines are unrestricte
    existing title, date, word count, summary, and link pattern. Give the count
    span a `data-word-count-for="<slug>"` attribute matching the article folder;
    the article starter already has its own `data-word-count` marker. Preserve the
-   animated ending below the list. Keep each public article linked from the index.
+   animated ending below the list. Keep each listed article linked from the index.
+   For an unlisted article, use the workflow below instead of adding an index entry.
 5. Preview and review before committing. The article's `.article-closing` class
    is optional; use it when a closing sentence warrants a little extra space.
 
@@ -71,6 +72,28 @@ they exclude the title, byline, image caption, and cited works. Apostrophes and
 hyphens within words stay joined, while em dashes separate words. Counts are
 stored in HTML so they remain available without JavaScript. `--check` reports
 stale counts without modifying files.
+
+## Unlisted articles
+
+To publish an article for direct-URL access without adding it to site navigation:
+
+1. Add the boolean `data-unlisted` attribute to the page's `<article>` element.
+2. Add `<meta name="robots" content="noindex, follow">` inside `<head>` to ask
+   search engines not to index the page.
+3. Omit its entry from `writing.html` and any feed or sitemap. Do not add incoming
+   links from other site pages, including existing articles. The unlisted page can
+   retain its normal navigation, return link, and source references.
+4. Run the word-count commands above. The script requires exactly one count
+   marker in the article and no matching count marker in the writing index.
+5. Preview and verify the article using its exact URL, then publish normally.
+
+Unlisted URLs are public, not access protected. Anyone with the URL can read or
+share the page; `noindex` is an indexing request rather than access control.
+
+To list the article later, remove `data-unlisted` and the `noindex` meta tag, add
+its index entry with the matching word-count marker, and refresh the counts.
+
+## Shared layout
 
 Site navigation and footer markup are copied with the starter, as they are on
 the existing pages. If these change, update the index, published articles, and

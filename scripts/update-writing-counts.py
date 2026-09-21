@@ -11,8 +11,11 @@ class ArticleText(HTMLParser):
         super().__init__(convert_charrefs=True)
         self.prose_depth = 0
         self.parts = []
+        self.unlisted = False
 
     def handle_starttag(self, tag, attrs):
+        if tag == "article" and "data-unlisted" in dict(attrs):
+            self.unlisted = True
         if tag == "div":
             classes = dict(attrs).get("class", "").split()
             if self.prose_depth or "article-prose" in classes:
@@ -55,8 +58,12 @@ def main():
             lambda match: match[1] + label + match[2],
             index,
         )
-        if article_matches != 1 or index_matches != 1:
-            raise ValueError(f"Expected one article and one index word-count marker for {slug}")
+        expected_index_matches = 0 if body.unlisted else 1
+        if article_matches != 1 or index_matches != expected_index_matches:
+            raise ValueError(
+                f"Expected one article and {expected_index_matches} index word-count "
+                f"markers for {slug}"
+            )
         if updated_article != article:
             changes[article_path] = updated_article
         print(f"{slug}: {label}")
