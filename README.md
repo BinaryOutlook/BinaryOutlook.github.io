@@ -38,8 +38,12 @@ make the data age explicit; project details remain available if GitHub cannot lo
 
 ## Writing
 
-The framework for future essays and reflections is live at
-[Writing](https://binaryoutlook.github.io/writing.html). Check back soon.
+[Writing](https://binaryoutlook.github.io/writing.html) collects essays and
+reflections, beginning with
+[In Search of the Free and Free](https://binaryoutlook.github.io/writing/in-search-of-the-free-and-free/).
+
+Articles use a shared reading layout and a reusable HTML starter, with no build
+step. See [the writing guide](docs/writing.md) to add or update an article.
 
 ## GitHub
 

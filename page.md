@@ -20,16 +20,18 @@ The technical portfolio should remain a focused single-page homepage because
 its main job is introduction and credibility. A visitor should not need to
 click through many pages just to understand the work.
 
-Writing has a small dedicated framework at `writing.html`. For now, it says
-"Hello, world!" and invites visitors to check back soon. New work can be added
-when it exists.
+Writing has a dedicated index at `writing.html`, with individual articles at
+`writing/<slug>/index.html`. The shared reading styles and HTML starter provide
+consistent presentation while leaving each article's structure open. See
+`docs/writing.md` for the authoring workflow. The original animated contour
+background closes the index with an invitation to return for future writing.
 
 Later, the site can expand into more separate pages if needed:
 
 - `projects.md` for longer project writeups,
 - `notes.md` for technical learning notes,
 - `research.md` if research work becomes a major part of the profile,
-- an expanded writing index when real pieces are ready.
+- topic or series navigation when the writing collection needs it.
 
 The homepage should still include all essential portfolio content.
 
