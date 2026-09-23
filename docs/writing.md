@@ -42,13 +42,17 @@ Markdown conversion. The page layout is shared; article outlines are unrestricte
    `role="region"`, and an accessible label so keyboard users can scroll it.
    Give informative images useful alternative text. Equations or interactive
    illustrations require their own implementation when a future article needs them.
-4. Add an entry at the top of `.writing-list` in `writing.html`, following the
+4. Plan a useful photo or illustration alongside the draft, following the visual
+   workflow below. Include it where possible; if no visual helps, record that
+   decision in the delivery notes. The template includes a commented cover figure
+   and sharing metadata, ready to fill in when an image is selected.
+5. Add an entry at the top of `.writing-list` in `writing.html`, following the
    existing title, date, word count, summary, and link pattern. Give the count
    span a `data-word-count-for="<slug>"` attribute matching the article folder;
    the article starter already has its own `data-word-count` marker. Preserve the
    animated ending below the list. Keep each listed article linked from the index.
    For an unlisted article, use the workflow below instead of adding an index entry.
-5. Preview and review before committing. The article's `.article-closing` class
+6. Preview and review before committing. The article's `.article-closing` class
    is optional; use it when a closing sentence warrants a little extra space.
 
 An optional `.article-cover` figure goes between the header and `.article-prose`.
@@ -72,6 +76,53 @@ they exclude the title, byline, image caption, and cited works. Apostrophes and
 hyphens within words stay joined, while em dashes separate words. Counts are
 stored in HTML so they remain available without JavaScript. `--check` reports
 stale counts without modifying files.
+
+## Photos and illustrations
+
+> Please, if possible, add a photo that explains one of the key concepts, or
+> provide a useful illustration.
+
+Make a visual decision for every article. Start with one image that helps a reader
+understand or picture something in the essay. A cover is a useful default, but an
+image can also sit beside the passage it explains. Keep the article readable on
+its own, and leave the image out when it would only add decoration.
+
+1. **Write a brief.** Identify the idea the image should make clearer, its place
+   in the article, and a suitable medium. Let the essay determine the subject;
+   avoid a generic laptop or technology image that could accompany any article.
+2. **Choose the right tool.** Use image generation for imagined editorial scenes
+   or conceptual illustrations. Use a real photograph, screenshot, or source
+   excerpt when showing an actual place, project, or contribution. Use an editable
+   diagram or plotting tool when exact labels, data, or technical relationships
+   matter. Generated imagery should not stand in for documentary evidence.
+3. **Generate and edit.** For a generated asset, use the built-in image generation
+   tool and keep the prompt focused on the brief. Match the site's restrained
+   ivory, dark ink, and rust palette where appropriate. Prefer images without
+   embedded titles or labels; put explanatory text in HTML. Refine the composition
+   with a targeted edit when needed, and keep the original output until a final
+   version is selected.
+4. **Review alongside the prose.** Inspect the image for misleading details,
+   unwanted text, and awkward crops. Check factual diagrams against their sources.
+   Write alt text describing the useful visual information and a caption that
+   explains its relationship to the essay. Label generated imagery clearly, for
+   example, “An imagined route network. AI-generated illustration.” Credit and
+   link the source of a real photograph or screenshot, and check reuse permission.
+5. **Prepare the asset.** Save the final image under `assets/writing/` with a
+   descriptive filename. Use a reasonably sized JPEG or WebP for photographic
+   imagery, or an appropriate format for a diagram. Record the source, creator,
+   license where applicable, or generation tool and final prompt in
+   `assets/writing/README.md`. Include any meaningful edits or format conversion.
+6. **Place and check it.** Enable the template's cover figure and image metadata
+   only after replacing every `ARTICLE_IMAGE_*` placeholder. Use the actual pixel
+   width and height, a relative `img` path, and an absolute `og:image` URL. Preview
+   on narrow and wide screens, check the image request succeeds, and confirm that
+   its caption and sharing preview describe the selected image.
+
+Cover captions stay outside `.article-prose` and do not affect the article's word
+count. If placing a figure between passages, close `.article-prose` before the
+figure and reopen it after the figure so its caption remains outside the count.
+Run the count updater after changing the article markup. Adding an image to an
+unlisted article does not change its publication status or add it to the index.
 
 ## Unlisted articles
 

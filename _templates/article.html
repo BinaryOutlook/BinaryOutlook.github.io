@@ -14,6 +14,10 @@
       content="ARTICLE_DESCRIPTION"
     />
     <meta property="og:type" content="article" />
+    <!-- If a cover image is included, replace the image placeholders and enable:
+    <meta property="og:image" content="https://binaryoutlook.github.io/assets/writing/ARTICLE_IMAGE_FILE" />
+    <meta property="og:image:alt" content="ARTICLE_IMAGE_ALT" />
+    -->
     <meta property="og:url" content="https://binaryoutlook.github.io/writing/ARTICLE_SLUG/" />
     <link rel="canonical" href="https://binaryoutlook.github.io/writing/ARTICLE_SLUG/" />
     <meta property="article:published_time" content="PUBLICATION_DATE_ISO" />
@@ -108,13 +112,38 @@
           </div>
         </header>
 
+        <!-- Editorial reminder:
+             Please, if possible, add a photo that explains one of the key concepts,
+             or provide a useful illustration.
+             Plan the visual alongside the draft. Use image generation for imagined
+             editorial scenes, authentic images for evidence, and precise diagrams
+             when relationships or technical details need explaining.
+             Review the result, add alt text and a caption/credit, and record its
+             source or generation prompt in assets/writing/README.md.
+             See docs/writing.md for the visual workflow. If no image helps, omit it
+             and mention that decision in the delivery notes.
+
+             Optional cover: replace every image placeholder before enabling.
+             Use the actual pixel dimensions; identify generated imagery in the caption.
+        <figure class="article-cover">
+          <img
+            src="../../assets/writing/ARTICLE_IMAGE_FILE"
+            alt="ARTICLE_IMAGE_ALT"
+            width="ARTICLE_IMAGE_WIDTH"
+            height="ARTICLE_IMAGE_HEIGHT"
+            decoding="async"
+          />
+          <figcaption>ARTICLE_IMAGE_CAPTION_AND_CREDIT</figcaption>
+        </figure>
+        -->
+
         <div class="article-prose">
           <!-- Replace this paragraph with the article. Section structure is optional. -->
           <p>ARTICLE_BODY</p>
         </div>
 
-        <!-- Optional: add an .article-cover figure before .article-prose and an
-             .article-references section here, outside the counted article body. -->
+        <!-- Add an .article-references section here for cited works, outside the
+             counted article body. -->
         <footer class="article-footer">
           <a class="article-back" href="../../writing.html"><span aria-hidden="true">&larr;</span> Back to all writing</a>
         </footer>
