@@ -18,6 +18,7 @@
     <meta property="og:url" content="https://binaryoutlook.github.io/writing/the-critical-mass/" />
     <link rel="canonical" href="https://binaryoutlook.github.io/writing/the-critical-mass/" />
     <meta property="article:published_time" content="2026-09-22" />
+    <meta property="article:modified_time" content="2026-09-23" />
     <title>The Critical Mass — Binary Outlook</title>
     <link
       rel="icon"
@@ -103,74 +104,83 @@
           <div class="article-meta">
             <div class="article-meta__date">
               <time datetime="2026-09-22">22 September 2026</time>
-              <span class="article-word-count" data-word-count>919 words</span>
+              <span class="article-word-count" data-word-count>1,109 words</span>
             </div>
             <span class="article-meta__author">By Binary Outlook</span>
+            <span>Updated <time datetime="2026-09-23">23 September 2026</time></span>
           </div>
         </header>
 
         <div class="article-prose">
-          <p>I was rather enthusiastic about physics and mathematics in high school. This was before ChatGPT, when an unanswered question could remain inconveniently unanswered for quite some time.</p>
+          <p>I was rather enthusiastic about physics and mathematics in high school. I still find it difficult to resist borrowing a physical idea when trying to understand something else, even when the analogy eventually needs to be handled with considerable care.</p>
 
-          <p>One idea worth borrowing from that world is the limit on what a structure can support.</p>
+          <p>The Chandrasekhar limit is one such temptation.</p>
 
-          <p>A white dwarf is held up against gravity by electron degeneracy pressure, a consequence of quantum mechanics. That support has a limit. In the standard picture, the <a href="https://imagine.gsfc.nasa.gov/science/objects/dwarfs2.html">Chandrasekhar limit</a> is roughly 1.4 times the mass of the Sun. A white dwarf cannot keep gaining mass indefinitely and remain stable in the same way.</p>
+          <p>A white dwarf is held up against gravity by electron degeneracy pressure, a consequence of quantum mechanics. Adding mass makes it more compact. Under the standard assumptions, there is a limit—roughly 1.4 times the mass of the Sun—beyond which that mechanism cannot support a stable white dwarf. <a href="https://imagine.gsfc.nasa.gov/science/objects/dwarfs2.html">NASA’s explanation</a> is a useful place to begin.</p>
 
-          <p>Software has no corresponding universal constant. We can rearrange it, divide responsibilities, and change the machinery around it. Still, I find the underlying question useful: how much can we add before the things holding a project together become inadequate?</p>
+          <p>What interests me is the relationship between accumulation and support. A structure can accommodate a great deal, while still depending on conditions that will not hold indefinitely.</p>
 
-          <p>At the beginning, adding things feels almost unambiguously good.</p>
+          <p>Software has no corresponding universal constant. We can reorganise a project, divide responsibilities, and change the tools used to maintain it. But I find myself asking a similar question: how much can we add before the things holding the project together become inadequate?</p>
 
-          <p>Another feature makes the application more useful. Another contributor brings knowledge and time. More users mean more people finding problems, requesting improvements, and occasionally solving something themselves.</p>
+          <p>The phrase <em>critical mass</em> pulls me in two directions here.</p>
 
-          <p>Eventually, there may be enough activity for the project to acquire a life beyond its original author. Questions receive answers while the maintainer is elsewhere. Somebody understands a subsystem better than the person who started it. People begin building other things that depend on it.</p>
+          <p>A project may need enough users and contributors to acquire a life beyond its original author. Someone answers a question while the maintainer is elsewhere. Somebody understands one subsystem unusually well. Other projects begin depending on the work.</p>
 
-          <p>That is one attractive meaning of critical mass: enough participation for something to keep moving.</p>
+          <p>That kind of accumulation can make continued development easier.</p>
 
-          <p>The same growth also creates obligations. Features interact. Contributors make different assumptions. A change that looks harmless in one corner produces a surprising result somewhere else.</p>
+          <p>It also creates relationships that need attention. Features interact. Contributors make different assumptions. A decision that seemed local becomes relevant to a part of the system its author had never considered.</p>
 
-          <p>The project has gained more than the sum of its additions.</p>
+          <p>In <em>The Cathedral and the Bazaar</em>, <a href="http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/ar01s11.html">Eric S. Raymond discusses Brooks’s warning</a> about adding people to a late software project. The additional labour comes with communication costs. In the simple all-to-all model, the number of possible relationships grows quadratically with the number of participants.</p>
 
-          <p>In <em>The Cathedral and the Bazaar</em>, <a href="https://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/ar01s11.html">Eric S. Raymond discusses Brooks’s warning</a> about the cost of adding people to a software project. Available labour grows with the number of developers, while the number of possible communication relationships grows much faster—quadratically in the simple all-to-all model.</p>
+          <p>Possible relationships are not the same as necessary conversations. A project’s organisation affects how much coordination any particular change requires.</p>
 
-          <p>Possible relationships are not the same as necessary conversations. Much of the work of organising a project is deciding which conversations actually need to happen.</p>
+          <p>An ecosystem such as GNU/Linux makes me reluctant to locate the limit in what one person can understand. Its accumulated work has long exceeded that. People maintain particular parts and depend on other people’s understanding elsewhere. Some of what holds it together must therefore exist in the boundaries between those parts, and in the expectations people can reasonably have of one another.</p>
 
-          <p>That is part of what interests me about an ecosystem such as GNU/Linux. Decades of development have produced something far beyond what one person could reasonably hold in their head. Yet people continue to work on particular parts, relying on boundaries, conventions, and the work of others.</p>
+          <p>Now agents can read repositories and produce substantial changes. I am interested in how much further that lets us go. I am also interested in what happens when code grows faster than the understanding needed to maintain it.</p>
 
-          <p>Nobody has to understand everything. Enough people have to understand the right things, and the connections between those things need care.</p>
+          <p>One answer is to write more things down.</p>
 
-          <p>Now we have agents that can read code, propose changes, and carry out substantial stretches of implementation.</p>
+          <p>There are reasons a piece of code looks the way it does. Certain behaviours need to survive. Some approaches have already been tried. If every new contributor or agent has to reconstruct all of that, useful time disappears into repeated investigation.</p>
 
-          <p>It is tempting to look at that as a straightforward increase in capacity. More work can happen at once. A task that previously seemed too tedious to begin suddenly becomes approachable.</p>
+          <p>An explanation can save the next reader some of the work.</p>
 
-          <p>I share that enthusiasm. I also wonder what happens when a project gains code faster than it gains shared understanding.</p>
+          <p>But the explanation is another description of the project, and the project keeps changing. Someone now has to determine whether the description still fits.</p>
 
-          <p>An agent can produce a plausible change while missing the reason a nearby piece of code is deliberately awkward. It can solve the immediate problem by adding another abstraction to a project that already has three ways of doing the same thing. Several agents can each complete their assignments and leave behind a rather difficult integration problem.</p>
+          <p>The unlisted articles on this site provide a small example. Originally, the word-count checker expected every article to have a corresponding entry in the Writing index. That was a sensible expectation while every article was meant to be listed.</p>
 
-          <p>The familiar coordination problem has acquired some new participants.</p>
+          <p>Once some articles could be unlisted, the expectation needed to become conditional. Listed articles still required an index entry; unlisted ones required its absence. The authoring instructions changed alongside the checker. The <a href="https://github.com/BinaryOutlook/BinaryOutlook.github.io/commit/b1cce913570ae487e7555a5b74111f0a929913c9">change to the checker and instructions</a> was small.</p>
 
-          <p>This makes context management interesting to me as a maintenance problem. A repository contains code, but it also contains decisions: which behaviour must survive, where responsibilities belong, what has already been tried, and what evidence is needed before calling a change correct.</p>
+          <p>Looking back at it, I find the less obvious cases more interesting. Here, an automated check made the old assumption explicit. What happens when an equally reasonable assumption survives only in a paragraph of instructions?</p>
 
-          <p>Some of those decisions are written down. Others are scattered through commits, issues, comments, and somebody’s memory.</p>
+          <p>“Every article should appear in the index” would still sound sensible to someone arriving at the repository. Following it could undo the very distinction we had just introduced.</p>
 
-          <p>An agent arriving at a task has to reconstruct enough of that situation to act sensibly.</p>
+          <p>This is where I start to separate missing context from outdated context.</p>
 
-          <p>The way we organise the project affects how expensive that reconstruction becomes. Clear module boundaries can narrow the search. A useful explanation near an unusual decision can prevent repeated investigation. A precise task can establish what success means before implementation begins.</p>
+          <p>With missing context, a reader may have an unanswered question. An old explanation can supply an answer whose confidence has outlasted its applicability. Giving an agent more material to read does not, by itself, distinguish the two.</p>
 
-          <p>An <code>AGENTS.md</code> file can help with some of this. It can point to the relevant checks, explain conventions, and record constraints that would otherwise have to be rediscovered.</p>
+          <p>That does not make missing context preferable. A reader can invent a bad explanation to fill a gap, and an older note may be the only surviving account of why something was done. Removing it could make the project harder to understand.</p>
 
-          <p>It can also grow into an impressive collection of instructions that nobody has kept current.</p>
+          <p>In the article example, the earlier rule still tells us something useful. It explains why the checker would have objected, and what kind of publication workflow the site originally assumed. The rule’s history remains relevant even after its scope changes.</p>
 
-          <p>That is the awkward part. Every explanation we add creates something else that can become wrong. More context can help, but it also gives the reader more material to reconcile. A rule that once prevented a mistake may survive long after the circumstances that justified it.</p>
+          <p>So perhaps age is too crude a way to judge an explanation. I would rather know what circumstances make it applicable, and whether it describes a present requirement, a past decision, or an idea that was never carried through.</p>
 
-          <p>I would like the project’s internal directions to make necessary information easier to find and easier to trust. That seems a more useful ambition than making every agent read everything.</p>
+          <p>An <code>AGENTS.md</code> file can contain all three while making them look remarkably similar.</p>
 
-          <p>It should help the humans returning to the repository, too. Forgetting why something works is hardly an exclusively artificial habit.</p>
+          <p>I can imagine responding by adding more qualifications: this rule applies to these files, except under these conditions, for this reason. That may help. It also gives us another set of conditions to keep current.</p>
 
-          <p>Perhaps that is how we move our own version of the critical mass upwards. We improve the structures that let the project remain understandable as it grows. We make responsibilities easier to divide, assumptions easier to inspect, and mistakes easier to detect.</p>
+          <p>The supporting structure has acquired some weight of its own.</p>
 
-          <p>I would want to judge those improvements by what happens afterwards: less repeated discovery, fewer incompatible changes, and a reasonable amount of time spent checking the result. A shorter prompt or a lower token count alone would tell only part of the story.</p>
+          <p>I do not yet know how far that observation takes the analogy. Software gives us opportunities to change its organisation that a white dwarf does not have. Still, I suspect there is a limit to how much complexity we can compensate for by attaching further explanations to it.</p>
 
-          <p>The appeal of more powerful tools is that they let us attempt more. I have no desire to lose that ambition.</p>
+          <p>Some knowledge may belong in a check that fails when an assumption stops holding. Some may belong near the code it explains. Some may be valuable precisely because it records a disagreement that no automated check could settle.</p>
+
+          <p>Choosing between those places requires an understanding of the project too. We have not escaped the problem merely by distributing it.</p>
+
+          <p>What I would like to try is fairly small: take a few instructions that seem useful, make their conditions clearer, and see whether a fresh reader or agent makes better decisions with them. I would want to notice what still has to be rediscovered, and whether the qualifications themselves become another source of confusion.</p>
+
+          <p>That would tell me more than the length of the instruction file, or how confidently an agent says it has understood it.</p>
+
+          <p>I am still attracted to the possibility of doing more with better tools. I would like to understand what we are adding to the maintenance burden along the way.</p>
 
           <p class="article-closing">I would like to keep building things that can survive the next good idea.</p>
         </div>
@@ -184,8 +194,12 @@
               <small>NASA, Imagine the Universe! Electron degeneracy pressure and the Chandrasekhar limit.</small>
             </li>
             <li>
-              <a href="https://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/ar01s11.html">The Social Context of Open-Source Software</a>
+              <a href="http://www.catb.org/~esr/writings/cathedral-bazaar/cathedral-bazaar/ar01s11.html">The Social Context of Open-Source Software</a>
               <small>Eric S. Raymond, The Cathedral and the Bazaar. Brooks’s Law and coordination in open-source development.</small>
+            </li>
+            <li>
+              <a href="https://github.com/BinaryOutlook/BinaryOutlook.github.io/commit/b1cce913570ae487e7555a5b74111f0a929913c9">Publish three essays as unlisted pages</a>
+              <small>Binary Outlook. The September 2026 change to the word-count checker and authoring instructions discussed here.</small>
             </li>
           </ol>
         </section>
