@@ -964,6 +964,8 @@ main,
   position: sticky;
   top: calc(var(--header-h) + 1.5rem);
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  min-width: 0;
   gap: 1.25rem;
   padding: 1.75rem;
   border: 2px solid var(--ink);
@@ -980,6 +982,7 @@ main,
 }
 
 .panel__repo {
+  min-width: 0;
   overflow: hidden;
   max-width: 60%;
   color: var(--muted);
@@ -1035,6 +1038,7 @@ main,
 
 .snapshot {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 1rem;
   padding: 1.1rem;
   border: 1px solid var(--line);
@@ -1110,6 +1114,8 @@ main,
 }
 
 .snapshot__commit a {
+  display: inline-block;
+  vertical-align: bottom;
   overflow: hidden;
   max-width: 100%;
   font-weight: 650;
