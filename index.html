@@ -8,635 +8,522 @@
       content="Computing student building AI, CUDA, deep learning, and interactive web projects."
     />
     <meta name="author" content="Binary Outlook" />
+    <meta name="theme-color" content="#f4f1e8" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#11161a" media="(prefers-color-scheme: dark)" />
     <meta property="og:title" content="Binary Outlook" />
     <meta
       property="og:description"
       content="Computing student building AI, CUDA, deep learning, and interactive web projects."
     />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://binaryoutlook.github.io/" />
+    <meta property="og:image" content="https://binaryoutlook.github.io/assets/brand/favicon-lion-master.png" />
+    <link rel="canonical" href="https://binaryoutlook.github.io/" />
     <title>Binary Outlook</title>
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="48x48"
-      href="./assets/brand/favicon-lion-48.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="./assets/brand/favicon-lion-32.png"
-    />
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="./assets/brand/favicon-lion-16.png"
-    />
-    <link
-      rel="apple-touch-icon"
-      sizes="180x180"
-      href="./assets/brand/favicon-lion-180.png"
-    />
+    <link rel="icon" type="image/png" sizes="48x48" href="./assets/brand/favicon-lion-48.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/brand/favicon-lion-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/brand/favicon-lion-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/brand/favicon-lion-180.png" />
     <script>
-      document.documentElement.classList.add("js-enabled");
+      (function () {
+        var root = document.documentElement;
+        root.classList.add("js");
+        try {
+          var theme = localStorage.getItem("bo-theme");
+          if (theme === "light" || theme === "dark") root.dataset.theme = theme;
+        } catch (error) {}
+      })();
     </script>
-    <link rel="stylesheet" href="./styles.css?v=20260828-1" />
+    <link rel="stylesheet" href="./home.css?v=20261010-1" />
   </head>
-  <body class="home-page">
+  <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header class="site-header" data-header>
-      <nav class="nav-shell" aria-label="Primary navigation">
-        <a class="brand-mark" href="#top" aria-label="Binary Outlook home">
-          <img
-            class="brand-logo"
-            src="./assets/brand/favicon-lion-180.png"
-            alt=""
-            width="48"
-            height="48"
-          />
-          <span>Binary Outlook</span>
+      <nav class="nav" aria-label="Primary navigation">
+        <a class="brand" href="#top" aria-label="Binary Outlook home">
+          <img src="./assets/brand/favicon-lion-180.png" alt="" width="40" height="40" />
+          <span class="brand__name">Binary Outlook</span>
         </a>
 
-        <button
-          class="menu-button"
-          type="button"
-          aria-label="Toggle navigation"
-          aria-expanded="false"
-          aria-controls="primary-navigation"
-          data-menu-button
-        >
-          <span aria-hidden="true"></span>
-          <span aria-hidden="true"></span>
-        </button>
-
-        <div class="nav-links" id="primary-navigation" data-nav-links>
-          <a href="#about">About</a>
-          <a href="#direction">Direction</a>
-          <a href="#projects">Projects</a>
-          <a href="./writing.html">Writing</a>
+        <div class="nav__links" id="primary-navigation" data-nav-links>
+          <a href="#about"><span class="nav__index">01</span>About</a>
+          <a href="#direction"><span class="nav__index">02</span>Direction</a>
+          <a href="#projects"><span class="nav__index">03</span>Projects</a>
+          <a href="#writing"><span class="nav__index">04</span>Writing</a>
+          <a href="#contact"><span class="nav__index">05</span>Contact</a>
           <a
+            class="nav__external"
             href="https://github.com/BinaryOutlook"
             target="_blank"
             rel="noreferrer"
             aria-label="GitHub profile (opens in a new tab)"
           >
-            GitHub
+            GitHub <span aria-hidden="true">↗</span>
           </a>
-          <a href="#contact">Contact</a>
+        </div>
+
+        <div class="nav__tools">
+          <button
+            class="icon-button theme-toggle"
+            type="button"
+            aria-label="Switch colour theme"
+            data-theme-toggle
+          >
+            <span class="theme-toggle__glyph" aria-hidden="true"></span>
+          </button>
+          <button
+            class="icon-button menu-button"
+            type="button"
+            aria-label="Toggle navigation"
+            aria-expanded="false"
+            aria-controls="primary-navigation"
+            data-menu-button
+          >
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </button>
         </div>
       </nav>
     </header>
 
-    <canvas class="home-mesh-canvas" aria-hidden="true" data-home-mesh></canvas>
-
     <main id="main">
-      <section class="hero-section" id="top" aria-labelledby="hero-title">
-        <div class="hero-grid">
-          <div class="hero-copy reveal">
-            <p class="eyebrow">Technical portfolio</p>
-            <h1 id="hero-title">Binary Outlook</h1>
-            <p class="hero-lede">
-              Computing student building practical systems across AI tooling,
-              deep learning, CUDA, and interactive web experiences.
-            </p>
-            <div class="hero-actions" aria-label="Primary links">
-              <a class="button primary" href="#projects">View projects</a>
-              <a
-                class="button secondary"
-                href="https://github.com/BinaryOutlook"
-                target="_blank"
-                rel="noreferrer"
-              >
-                GitHub profile
-              </a>
-            </div>
+      <!-- Hero -->
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero__copy">
+          <p class="eyebrow"><span class="eyebrow__mark" aria-hidden="true"></span>Technical portfolio</p>
+          <h1 class="hero__title" id="hero-title">
+            <span>Binary</span>
+            <span>Outlook</span>
+          </h1>
+          <p class="hero__lede">
+            Computing student building practical systems across AI tooling,
+            deep learning, CUDA, and interactive web experiences.
+          </p>
+          <div class="hero__actions" aria-label="Primary links">
+            <a class="button button--primary" href="#projects">View projects <span aria-hidden="true">↓</span></a>
+            <a class="button button--ghost" href="https://github.com/BinaryOutlook" target="_blank" rel="noreferrer">
+              GitHub profile <span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="hero__board">
+          <div class="composition" data-composition aria-hidden="true">
+            <span class="tile tile--circle c-red"></span>
+            <span class="tile tile--quarter c-yellow"></span>
+            <span class="tile tile--square c-ink"></span>
+            <span class="tile tile--triangle c-blue"></span>
+            <span class="tile tile--half c-blue"></span>
+            <span class="tile tile--blank"></span>
+            <span class="tile tile--ring c-red"></span>
+            <span class="tile tile--quarter c-ink r-180"></span>
+            <span class="tile tile--bars c-yellow"></span>
+            <span class="tile tile--circle c-ink is-small"></span>
+            <span class="tile tile--half c-red r-90"></span>
+            <span class="tile tile--square c-yellow"></span>
+            <span class="tile tile--triangle c-ink r-270"></span>
+            <span class="tile tile--quarter c-blue r-90"></span>
+            <span class="tile tile--blank"></span>
+            <span class="tile tile--circle c-yellow"></span>
+          </div>
+          <div class="board-bar">
+            <span class="mono">fig. 01 — composition</span>
+            <button class="text-button" type="button" data-recompose>Recompose ↻</button>
           </div>
 
-          <aside class="signal-panel reveal" aria-label="Current technical signal">
-            <p class="panel-label">Current signal</p>
-            <div class="signal-list">
-              <span>AI tooling</span>
-              <span>Deep learning</span>
-              <span>CUDA</span>
-              <span>Interactive systems</span>
-            </div>
+          <aside class="signal" aria-labelledby="signal-title">
+            <p class="label" id="signal-title">Current signal</p>
+            <ul class="signal__list">
+              <li><span class="swatch c-red" aria-hidden="true"></span>AI tooling</li>
+              <li><span class="swatch c-yellow" aria-hidden="true"></span>Deep learning</li>
+              <li><span class="swatch c-blue" aria-hidden="true"></span>CUDA</li>
+              <li><span class="swatch c-ink" aria-hidden="true"></span>Interactive systems</li>
+            </ul>
           </aside>
         </div>
       </section>
 
-      <section class="section about-section" id="about" aria-labelledby="about-title">
-        <div class="section-kicker">About</div>
-        <div class="content-split">
-          <div class="section-heading reveal">
-            <h2 id="about-title">Curious systems, real constraints.</h2>
-          </div>
-          <div class="section-body reveal">
+      <!-- About -->
+      <section class="section about" id="about" aria-labelledby="about-title">
+        <header class="section__head">
+          <p class="section__index mono">01 / About</p>
+          <h2 id="about-title">Curious systems, real constraints.</h2>
+        </header>
+        <div class="about__body">
+          <p class="about__lead reveal">
+            I like ideas that survive contact with code: clear workflows,
+            measurable models, fast kernels, and interfaces people can use.
+          </p>
+          <div class="about__columns reveal">
             <p>
-              I like ideas that survive contact with code: clear workflows,
-              measurable models, fast kernels, and interfaces people can use.
+              Technology moves quickly, and my interests often move with it.
+              What stays constant is the drive to explore deeply, learn with
+              intent, and understand how technical progress becomes something
+              genuinely useful for people.
+            </p>
+            <p>
+              I am most interested in work that carries a strong technical idea
+              the whole distance from concept to product, tool, or research
+              direction. If your interests overlap, I would like to hear from you.
             </p>
           </div>
+          <dl class="about__facts reveal">
+            <div><dt>Focus</dt><dd>Intelligent software</dd></div>
+            <div><dt>Depth</dt><dd>GPU &amp; model performance</dd></div>
+            <div><dt>Surface</dt><dd>Usable interfaces</dd></div>
+          </dl>
         </div>
       </section>
 
-      <section class="section direction-section" id="direction" aria-labelledby="direction-title">
-        <div class="direction-layout">
-          <div class="direction-copy reveal">
-            <div class="section-kicker">Direction</div>
-            <h2 id="direction-title">Technical Direction</h2>
-            <p>
-              Application, model, systems, and interface work I am sharpening now.
-            </p>
-          </div>
+      <!-- Direction -->
+      <section class="section direction" id="direction" aria-labelledby="direction-title">
+        <header class="section__head">
+          <p class="section__index mono">02 / Direction</p>
+          <h2 id="direction-title">Technical Direction</h2>
+          <p class="section__intro">
+            Application, model, systems, and interface work I am sharpening now.
+          </p>
+        </header>
 
-          <div
-            class="direction-grid"
-            aria-label="Current technical direction areas"
-            data-direction-accordion
-          >
-            <article class="direction-thread reveal" data-direction-panel>
-              <span class="direction-code">01 / Application</span>
-              <h3>
-                <button
-                  class="direction-trigger"
-                  type="button"
-                  aria-controls="direction-ai-details"
-                  data-direction-trigger
-                >
-                  <span>AI</span>
-                  <span class="direction-indicator" aria-hidden="true"></span>
-                </button>
-              </h3>
-              <div
-                class="direction-details"
-                id="direction-ai-details"
-                data-direction-details
-              >
-                <ul>
-                  <li>Human-AI collaboration</li>
-                  <li>Workflow automation use cases</li>
-                </ul>
-              </div>
-            </article>
-            <article class="direction-thread reveal" data-direction-panel>
-              <span class="direction-code">02 / Model</span>
-              <h3>
-                <button
-                  class="direction-trigger"
-                  type="button"
-                  aria-controls="direction-cnn-details"
-                  data-direction-trigger
-                >
-                  <span>CNN</span>
-                  <span class="direction-indicator" aria-hidden="true"></span>
-                </button>
-              </h3>
-              <div
-                class="direction-details"
-                id="direction-cnn-details"
-                data-direction-details
-              >
-                <ul>
-                  <li>CNN architecture design</li>
-                  <li>Post-training quantization</li>
-                </ul>
-              </div>
-            </article>
-            <article class="direction-thread reveal" data-direction-panel>
-              <span class="direction-code">03 / Systems</span>
-              <h3>
-                <button
-                  class="direction-trigger"
-                  type="button"
-                  aria-controls="direction-cuda-details"
-                  data-direction-trigger
-                >
-                  <span>CUDA</span>
-                  <span class="direction-indicator" aria-hidden="true"></span>
-                </button>
-              </h3>
-              <div
-                class="direction-details"
-                id="direction-cuda-details"
-                data-direction-details
-              >
-                <ul>
-                  <li>Parallel execution</li>
-                  <li>GPU cost-performance optimization</li>
-                </ul>
-              </div>
-            </article>
-            <article class="direction-thread reveal" data-direction-panel>
-              <span class="direction-code">04 / Interface</span>
-              <h3>
-                <button
-                  class="direction-trigger"
-                  type="button"
-                  aria-controls="direction-interface-details"
-                  data-direction-trigger
-                >
-                  <span>Interface</span>
-                  <span class="direction-indicator" aria-hidden="true"></span>
-                </button>
-              </h3>
-              <div
-                class="direction-details"
-                id="direction-interface-details"
-                data-direction-details
-              >
-                <ul>
-                  <li>Front-end engineering</li>
-                  <li>Interaction design patterns</li>
-                </ul>
-              </div>
-            </article>
-          </div>
-        </div>
+        <ol class="layers" data-direction aria-label="Current technical direction areas">
+          <li class="layer" data-layer style="--accent: var(--red)">
+            <h3>
+              <button class="layer__trigger" type="button" aria-expanded="true" aria-controls="layer-ai" data-layer-trigger>
+                <span class="layer__code mono">01 / Application</span>
+                <span class="layer__name">AI</span>
+                <span class="layer__shape layer__shape--circle" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="layer__details" id="layer-ai">
+              <ul>
+                <li>Human-AI collaboration</li>
+                <li>Workflow automation use cases</li>
+              </ul>
+            </div>
+          </li>
+          <li class="layer" data-layer style="--accent: var(--yellow)">
+            <h3>
+              <button class="layer__trigger" type="button" aria-expanded="true" aria-controls="layer-cnn" data-layer-trigger>
+                <span class="layer__code mono">02 / Model</span>
+                <span class="layer__name">CNN</span>
+                <span class="layer__shape layer__shape--square" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="layer__details" id="layer-cnn">
+              <ul>
+                <li>CNN architecture design</li>
+                <li>Post-training quantization</li>
+              </ul>
+            </div>
+          </li>
+          <li class="layer" data-layer style="--accent: var(--blue)">
+            <h3>
+              <button class="layer__trigger" type="button" aria-expanded="true" aria-controls="layer-cuda" data-layer-trigger>
+                <span class="layer__code mono">03 / Systems</span>
+                <span class="layer__name">CUDA</span>
+                <span class="layer__shape layer__shape--triangle" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="layer__details" id="layer-cuda">
+              <ul>
+                <li>Parallel execution</li>
+                <li>GPU cost-performance optimization</li>
+              </ul>
+            </div>
+          </li>
+          <li class="layer" data-layer style="--accent: var(--teal)">
+            <h3>
+              <button class="layer__trigger" type="button" aria-expanded="true" aria-controls="layer-interface" data-layer-trigger>
+                <span class="layer__code mono">04 / Interface</span>
+                <span class="layer__name">Interface</span>
+                <span class="layer__shape layer__shape--half" aria-hidden="true"></span>
+              </button>
+            </h3>
+            <div class="layer__details" id="layer-interface">
+              <ul>
+                <li>Front-end engineering</li>
+                <li>Interaction design patterns</li>
+              </ul>
+            </div>
+          </li>
+        </ol>
       </section>
 
-      <section class="section projects-section" id="projects" aria-labelledby="projects-title">
-        <div class="section-kicker">Projects</div>
-        <div class="section-intro reveal">
+      <!-- Projects -->
+      <section class="section projects" id="projects" aria-labelledby="projects-title">
+        <header class="section__head">
+          <p class="section__index mono">03 / Projects</p>
           <h2 id="projects-title">Featured Projects</h2>
-          <p>
+          <p class="section__intro">
             Projects that carry the proof: agent safety, developer tools,
             simulation, and web interaction.
           </p>
-        </div>
+        </header>
 
-        <div class="projects-showcase">
-          <aside
-            class="project-preview reveal"
-            aria-labelledby="project-preview-title"
-            data-project-preview-shell
-            id="project-preview-details"
-          >
-            <div class="project-preview__frame" id="project-preview-media">
-              <video
-                class="project-preview__video"
-                muted
-                loop
-                playsinline
-                preload="none"
-                aria-hidden="true"
-                data-project-preview-video
-              ></video>
-              <div class="project-preview__snapshot" data-project-preview-snapshot>
-                <div class="project-preview__snapshot-header">
-                  <span data-project-preview-repository>GitHub repository</span>
-                  <span class="project-preview__live-indicator">
-                    <span aria-hidden="true"></span>
-                    GitHub data
-                  </span>
-                </div>
-                <div class="project-preview__activity">
-                  <span>Last activity</span>
-                  <strong data-project-preview-activity>Loading…</strong>
-                </div>
-                <dl class="project-preview__metrics">
-                  <div>
-                    <dt>Language</dt>
-                    <dd data-project-preview-language>—</dd>
-                  </div>
-                  <div>
-                    <dt>Stars</dt>
-                    <dd data-project-preview-stars>—</dd>
-                  </div>
-                  <div>
-                    <dt>Commits</dt>
-                    <dd data-project-preview-commits>—</dd>
-                  </div>
-                </dl>
+        <div class="projects__layout">
+          <ol class="project-list" aria-label="Featured projects" data-project-list>
+            <li
+              class="project"
+              data-project
+              data-repo="DasbootU9607/Deep-Learning-Week-Hackathon-2026-HaLoop-Team-CEEES"
+              data-summary="Human-governed AI coding workflows."
+              data-novelty="Explainable risk decisions connect local guardrails, human approvals, and an audit trail across the editor and review dashboard."
+              data-foundation=""
+              data-action-label="Explore setup guide"
+              data-action-url="https://github.com/DasbootU9607/Deep-Learning-Week-Hackathon-2026-HaLoop-Team-CEEES#start-here"
+              style="--accent: var(--red)"
+            >
+              <span class="project__number mono" aria-hidden="true">P.01</span>
+              <div class="project__body">
+                <p class="project__meta mono">AI tooling · DevSecOps</p>
+                <h3 class="project__title">
+                  <button class="project__select" type="button" aria-pressed="false" aria-controls="project-panel" data-project-select>
+                    HaLoop
+                  </button>
+                </h3>
+                <p class="project__award"><span aria-hidden="true">◆</span> 2nd place, Deep Learning Week 2026 Hackathon</p>
+                <p class="project__text">
+                  DevSecOps guardrails for AI coding agents: approvals, risk
+                  scoring, and audit trails.
+                </p>
+                <ul class="tags" aria-label="HaLoop focus areas">
+                  <li>Agent workflows</li>
+                  <li>Approval systems</li>
+                </ul>
               </div>
-              <span
-                class="project-preview__availability"
-                role="status"
-                aria-live="polite"
-                data-project-preview-status
-              >
-                Loading repository snapshot
-              </span>
+              <a class="project__link" href="https://github.com/DasbootU9607/Deep-Learning-Week-Hackathon-2026-HaLoop-Team-CEEES" target="_blank" rel="noreferrer" aria-label="HaLoop on GitHub (opens in a new tab)">GitHub ↗</a>
+            </li>
+
+            <li
+              class="project"
+              data-project
+              data-repo="BinaryOutlook/binary-markdown"
+              data-summary="Visual Markdown editing inside VS Code."
+              data-novelty="Code copying preserves line breaks and indentation, while outline visibility can be remembered per file or globally."
+              data-foundation="Any Markdown — independently maintained fork."
+              data-action-label="View installation guide"
+              data-action-url="https://github.com/BinaryOutlook/binary-markdown#install-a-test-build"
+              style="--accent: var(--teal)"
+            >
+              <span class="project__number mono" aria-hidden="true">P.02</span>
+              <div class="project__body">
+                <p class="project__meta mono">Developer tooling · Open source</p>
+                <h3 class="project__title">
+                  <button class="project__select" type="button" aria-pressed="false" aria-controls="project-panel" data-project-select>
+                    Binary Markdown
+                  </button>
+                </h3>
+                <p class="project__text">
+                  An independently maintained visual Markdown editor for VS Code,
+                  building on Any Markdown with fixes for code copying and
+                  persistent outline preferences.
+                </p>
+                <ul class="tags" aria-label="Binary Markdown focus areas">
+                  <li>Editing workflows</li>
+                  <li>VS Code extension</li>
+                </ul>
+              </div>
+              <a class="project__link" href="https://github.com/BinaryOutlook/binary-markdown" target="_blank" rel="noreferrer" aria-label="Binary Markdown on GitHub (opens in a new tab)">GitHub ↗</a>
+            </li>
+
+            <li
+              class="project"
+              data-project
+              data-repo="BinaryOutlook/BadmintonManager"
+              data-summary="Coach the match. Build a badminton career."
+              data-novelty="Coaching choices drive a deterministic match engine, connecting scouting and live tactics with training, rankings, and a local career simulation."
+              data-foundation=""
+              data-action-label="Run the game locally"
+              data-action-url="https://github.com/BinaryOutlook/BadmintonManager#quick-start"
+              style="--accent: var(--blue)"
+            >
+              <span class="project__number mono" aria-hidden="true">P.03</span>
+              <div class="project__body">
+                <p class="project__meta mono">Simulation game · Sports management</p>
+                <h3 class="project__title">
+                  <button class="project__select" type="button" aria-pressed="false" aria-controls="project-panel" data-project-select>
+                    BadmintonManager
+                  </button>
+                </h3>
+                <p class="project__text">
+                  A badminton management sim for coaching decisions, match
+                  simulation, long-term systems, and tactical data.
+                </p>
+                <ul class="tags" aria-label="BadmintonManager focus areas">
+                  <li>Match simulation</li>
+                  <li>Tactical data</li>
+                </ul>
+              </div>
+              <a class="project__link" href="https://github.com/BinaryOutlook/BadmintonManager" target="_blank" rel="noreferrer" aria-label="BadmintonManager on GitHub (opens in a new tab)">GitHub ↗</a>
+            </li>
+
+            <li
+              class="project"
+              data-project
+              data-repo="BinaryOutlook/The-Lank-Forenzo-Simulator"
+              data-summary="Airline strategy through conflicting executive incentives."
+              data-novelty="One deterministic campaign serves web, terminal, and agent clients, exposing the same player-visible facts and rules through different interfaces."
+              data-foundation=""
+              data-action-label="Explore ways to play"
+              data-action-url="https://github.com/BinaryOutlook/The-Lank-Forenzo-Simulator#play-in-the-web"
+              style="--accent: var(--yellow); --on-accent: #14181b"
+            >
+              <span class="project__number mono" aria-hidden="true">P.04</span>
+              <div class="project__body">
+                <p class="project__meta mono">Browser game · Interaction</p>
+                <h3 class="project__title">
+                  <button class="project__select" type="button" aria-pressed="false" aria-controls="project-panel" data-project-select>
+                    The Lank Forenzo Simulator
+                  </button>
+                </h3>
+                <p class="project__text">
+                  A browser game for decision systems, reality-bending
+                  interactions, and web storytelling experiments.
+                </p>
+                <ul class="tags" aria-label="The Lank Forenzo Simulator focus areas">
+                  <li>Decision systems</li>
+                  <li>Web storytelling</li>
+                </ul>
+              </div>
+              <a class="project__link" href="https://github.com/BinaryOutlook/The-Lank-Forenzo-Simulator" target="_blank" rel="noreferrer" aria-label="The Lank Forenzo Simulator on GitHub (opens in a new tab)">GitHub ↗</a>
+            </li>
+          </ol>
+
+          <aside class="panel" id="project-panel" aria-labelledby="panel-title" data-panel style="--accent: var(--red)">
+            <div class="panel__head">
+              <p class="label">Project details</p>
+              <span class="panel__repo mono" data-panel-repo>DasbootU9607/…HaLoop-Team-CEEES</span>
             </div>
-            <div class="project-preview__caption">
-              <p class="panel-label">Project details</p>
-              <h3 id="project-preview-title" data-project-preview-title>HaLoop</h3>
-              <p data-project-preview-description>
-                Human-governed AI coding workflows.
-              </p>
-              <dl class="project-preview__details">
-                <div>
-                  <dt>Novelty</dt>
-                  <dd data-project-preview-novelty>Explainable risk decisions connect local guardrails, human approvals, and an audit trail across the editor and review dashboard.</dd>
-                </div>
-                <div data-project-preview-provenance hidden>
-                  <dt>Built on</dt>
-                  <dd data-project-preview-foundation></dd>
-                </div>
-                <div>
-                  <dt>Latest development</dt>
-                  <dd>
-                    <a class="project-preview__commit" data-project-preview-commit target="_blank" rel="noreferrer" hidden></a>
-                    <span data-project-preview-commit-state>Loading latest commit…</span>
-                    <time class="project-preview__commit-date" data-project-preview-commit-date hidden></time>
-                  </dd>
-                </div>
+            <h3 class="panel__title" id="panel-title" data-panel-title>HaLoop</h3>
+            <p class="panel__summary" data-panel-summary>Human-governed AI coding workflows.</p>
+
+            <dl class="panel__details">
+              <div>
+                <dt>Novelty</dt>
+                <dd data-panel-novelty>Explainable risk decisions connect local guardrails, human approvals, and an audit trail across the editor and review dashboard.</dd>
+              </div>
+              <div data-panel-foundation-row hidden>
+                <dt>Built on</dt>
+                <dd data-panel-foundation></dd>
+              </div>
+            </dl>
+
+            <div class="snapshot" aria-labelledby="snapshot-title">
+              <div class="snapshot__head">
+                <p class="label" id="snapshot-title">GitHub snapshot</p>
+                <span class="live" data-panel-live><span aria-hidden="true"></span>Live data</span>
+              </div>
+              <dl class="snapshot__metrics">
+                <div><dt>Last activity</dt><dd data-panel-activity>—</dd></div>
+                <div><dt>Language</dt><dd data-panel-language>—</dd></div>
+                <div><dt>Stars</dt><dd data-panel-stars>—</dd></div>
+                <div><dt>Commits</dt><dd data-panel-commits>—</dd></div>
               </dl>
-              <a class="project-link project-preview__action" data-project-preview-action href="https://github.com/DasbootU9607/Deep-Learning-Week-Hackathon-2026-HaLoop-Team-CEEES#start-here" target="_blank" rel="noreferrer">Explore setup guide ↗</a>
-              <div class="project-preview__data-footer">
-                <span data-project-preview-fetched>Fetching GitHub data…</span>
-                <button class="project-preview__refresh" type="button" data-project-preview-refresh>Refresh</button>
+              <div class="snapshot__commit">
+                <p class="label">Latest development</p>
+                <p>
+                  <a data-panel-commit target="_blank" rel="noreferrer" hidden></a>
+                  <span data-panel-commit-state>Repository data loads with JavaScript.</span>
+                  <time class="mono" data-panel-commit-date hidden></time>
+                </p>
+              </div>
+              <div class="snapshot__foot">
+                <span class="mono" data-panel-fetched role="status" aria-live="polite">GitHub data not loaded</span>
+                <button class="text-button" type="button" data-panel-refresh hidden>Refresh ↻</button>
               </div>
             </div>
+
+            <a class="button button--accent panel__action" data-panel-action href="https://github.com/DasbootU9607/Deep-Learning-Week-Hackathon-2026-HaLoop-Team-CEEES#start-here" target="_blank" rel="noreferrer">
+              <span data-panel-action-label>Explore setup guide</span> <span aria-hidden="true">↗</span>
+            </a>
           </aside>
-
-          <div class="project-stack">
-          <article
-            class="project-card reveal"
-            data-project-preview-card
-            data-preview-key="haloop"
-            data-preview-summary="Human-governed AI coding workflows."
-            data-preview-novelty="Explainable risk decisions connect local guardrails, human approvals, and an audit trail across the editor and review dashboard."
-            data-preview-foundation=""
-            data-preview-action-label="Explore setup guide"
-            data-preview-action-url="https://github.com/DasbootU9607/Deep-Learning-Week-Hackathon-2026-HaLoop-Team-CEEES#start-here"
-            data-preview-enabled="false"
-            data-preview-webm="./assets/previews/haloop.webm"
-            data-preview-mp4="./assets/previews/haloop.mp4"
-            data-preview-poster="./assets/previews/haloop-poster.webp"
-            data-preview-accent="#c9362b"
-          >
-            <div class="project-meta">
-              <span>AI tooling</span>
-              <span>DevSecOps</span>
-            </div>
-            <div class="project-content">
-              <h3>HaLoop</h3>
-              <p>
-                2nd place, Deep Learning Week 2026 Hackathon. DevSecOps
-                guardrails for AI coding agents: approvals, risk scoring, and
-                audit trails.
-              </p>
-              <ul class="tag-list" aria-label="HaLoop focus areas">
-                <li>Agent workflows</li>
-                <li>Approval systems</li>
-              </ul>
-            </div>
-            <div class="project-actions">
-              <button
-                class="project-preview-trigger"
-                type="button"
-                aria-controls="project-preview-details"
-                aria-pressed="false"
-                data-project-preview-trigger
-              >
-                Preview
-              </button>
-              <a
-                class="project-link"
-                href="https://github.com/DasbootU9607/Deep-Learning-Week-Hackathon-2026-HaLoop-Team-CEEES"
-                target="_blank"
-                rel="noreferrer"
-              >
-                GitHub
-              </a>
-            </div>
-          </article>
-
-          <article
-            class="project-card reveal"
-            data-project-preview-card
-            data-preview-key="binary-markdown"
-            data-preview-summary="Visual Markdown editing inside VS Code."
-            data-preview-novelty="Code copying preserves line breaks and indentation, while outline visibility can be remembered per file or globally."
-            data-preview-foundation="Any Markdown — independently maintained fork."
-            data-preview-action-label="View installation guide"
-            data-preview-action-url="https://github.com/BinaryOutlook/binary-markdown#install-a-test-build"
-            data-preview-enabled="false"
-            data-preview-webm="./assets/previews/binary-markdown.webm"
-            data-preview-mp4="./assets/previews/binary-markdown.mp4"
-            data-preview-poster="./assets/previews/binary-markdown-poster.webp"
-            data-preview-accent="#0b786e"
-          >
-            <div class="project-meta">
-              <span>Developer tooling</span>
-              <span>Open source</span>
-            </div>
-            <div class="project-content">
-              <h3>Binary Markdown</h3>
-              <p>
-                An independently maintained visual Markdown editor for VS Code,
-                building on Any Markdown with fixes for code copying and
-                persistent outline preferences.
-              </p>
-              <ul class="tag-list" aria-label="Binary Markdown focus areas">
-                <li>Editing workflows</li>
-                <li>VS Code extension</li>
-              </ul>
-            </div>
-            <div class="project-actions">
-              <button
-                class="project-preview-trigger"
-                type="button"
-                aria-controls="project-preview-details"
-                aria-pressed="false"
-                data-project-preview-trigger
-              >
-                Preview
-              </button>
-              <a
-                class="project-link"
-                href="https://github.com/BinaryOutlook/binary-markdown"
-                target="_blank"
-                rel="noreferrer"
-              >
-                GitHub
-              </a>
-            </div>
-          </article>
-
-          <article
-            class="project-card reveal"
-            data-project-preview-card
-            data-preview-key="badminton-manager"
-            data-preview-summary="Coach the match. Build a badminton career."
-            data-preview-novelty="Coaching choices drive a deterministic match engine, connecting scouting and live tactics with training, rankings, and a local career simulation."
-            data-preview-foundation=""
-            data-preview-action-label="Run the game locally"
-            data-preview-action-url="https://github.com/BinaryOutlook/BadmintonManager#quick-start"
-            data-preview-enabled="false"
-            data-preview-webm="./assets/previews/badminton-manager.webm"
-            data-preview-mp4="./assets/previews/badminton-manager.mp4"
-            data-preview-poster="./assets/previews/badminton-manager-poster.webp"
-            data-preview-accent="#1859a8"
-          >
-            <div class="project-meta">
-              <span>Simulation game</span>
-              <span>Sports management</span>
-            </div>
-            <div class="project-content">
-              <h3>BadmintonManager</h3>
-              <p>
-                A badminton management sim for coaching decisions, match
-                simulation, long-term systems, and tactical data.
-              </p>
-              <ul class="tag-list" aria-label="BadmintonManager focus areas">
-                <li>Match simulation</li>
-                <li>Tactical data</li>
-              </ul>
-            </div>
-            <div class="project-actions">
-              <button
-                class="project-preview-trigger"
-                type="button"
-                aria-controls="project-preview-details"
-                aria-pressed="false"
-                data-project-preview-trigger
-              >
-                Preview
-              </button>
-              <a
-                class="project-link"
-                href="https://github.com/BinaryOutlook/BadmintonManager"
-                target="_blank"
-                rel="noreferrer"
-              >
-                GitHub
-              </a>
-            </div>
-          </article>
-
-          <article
-            class="project-card reveal"
-            data-project-preview-card
-            data-preview-key="lank-forenzo"
-            data-preview-summary="Airline strategy through conflicting executive incentives."
-            data-preview-novelty="One deterministic campaign serves web, terminal, and agent clients, exposing the same player-visible facts and rules through different interfaces."
-            data-preview-foundation=""
-            data-preview-action-label="Explore ways to play"
-            data-preview-action-url="https://github.com/BinaryOutlook/The-Lank-Forenzo-Simulator#play-in-the-web"
-            data-preview-enabled="false"
-            data-preview-webm="./assets/previews/lank-forenzo.webm"
-            data-preview-mp4="./assets/previews/lank-forenzo.mp4"
-            data-preview-poster="./assets/previews/lank-forenzo-poster.webp"
-            data-preview-accent="#e2ae25"
-          >
-            <div class="project-meta">
-              <span>Browser game</span>
-              <span>Interaction</span>
-            </div>
-            <div class="project-content">
-              <h3>The Lank Forenzo Simulator</h3>
-              <p>
-                A browser game for decision systems, reality-bending
-                interactions, and web storytelling experiments.
-              </p>
-              <ul class="tag-list" aria-label="The Lank Forenzo Simulator focus areas">
-                <li>Decision systems</li>
-                <li>Web storytelling</li>
-              </ul>
-            </div>
-            <div class="project-actions">
-              <button
-                class="project-preview-trigger"
-                type="button"
-                aria-controls="project-preview-details"
-                aria-pressed="false"
-                data-project-preview-trigger
-              >
-                Preview
-              </button>
-              <a
-                class="project-link"
-                href="https://github.com/BinaryOutlook/The-Lank-Forenzo-Simulator"
-                target="_blank"
-                rel="noreferrer"
-              >
-                GitHub
-              </a>
-            </div>
-          </article>
-          </div>
         </div>
       </section>
 
-      <section class="section contact-section" id="contact" aria-labelledby="contact-title">
-        <div class="contact-shapes" aria-hidden="true">
-          <span class="contact-shape contact-shape--diamond"></span>
-          <span class="contact-shape contact-shape--tiles"></span>
-          <span class="contact-shape contact-shape--bar"></span>
-          <span class="contact-shape contact-shape--dot"></span>
-        </div>
-        <div class="contact-panel reveal">
-          <div class="contact-panel__lead">
-            <p class="section-kicker">Contact</p>
+      <!-- Writing -->
+      <section class="section writing" id="writing" aria-labelledby="writing-title">
+        <header class="section__head">
+          <p class="section__index mono">04 / Writing</p>
+          <h2 id="writing-title">Recent Writing</h2>
+          <p class="section__intro">
+            Essays on software, freedom, and the experience of building things.
+          </p>
+        </header>
+
+        <ol class="essays">
+          <li class="essay reveal">
+            <a class="essay__link" href="./writing/screen-science-but-for-whom/">
+              <time class="mono" datetime="2026-10-07">07.10.2026</time>
+              <span class="essay__title">Screen Science, but for Whom?</span>
+              <span class="essay__summary">From Sabre’s flight rankings to AI answers shaped by our context, instructions, and tools: whose interests does a personal result serve?</span>
+              <span class="essay__arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="essay reveal">
+            <a class="essay__link" href="./writing/a-weird-way-into-open-source/">
+              <time class="mono" datetime="2026-09-22">22.09.2026</time>
+              <span class="essay__title">A Weird Way into Open Source</span>
+              <span class="essay__summary">How a school service requirement, small documentation edits, and a preference for air conditioning became an introduction to open source.</span>
+              <span class="essay__arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+          <li class="essay reveal">
+            <a class="essay__link" href="./writing/in-search-of-the-free-and-free/">
+              <time class="mono" datetime="2026-09-21">21.09.2026</time>
+              <span class="essay__title">In Search of the Free and Free</span>
+              <span class="essay__summary">Reflections on software freedom, the bazaar, and carrying the work forward through Binary Markdown.</span>
+              <span class="essay__arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+        </ol>
+        <a class="button button--ghost writing__all" href="./writing.html">All writing <span aria-hidden="true">→</span></a>
+      </section>
+
+      <!-- Contact -->
+      <section class="section contact" id="contact" aria-labelledby="contact-title">
+        <div class="contact__block">
+          <div class="contact__lead">
+            <p class="section__index mono">05 / Contact</p>
             <h2 id="contact-title">Let's build something useful.</h2>
-            <p class="contact-intro">
+            <p class="contact__intro">
               Want to compare notes, test an idea, or build something together?
               Send a short message with the context and the difficult part.
             </p>
-            <div class="contact-actions" aria-label="Email actions">
-              <a
-                class="button primary"
-                href="#contact"
-                data-email-action
-                data-email-user="binaryoutlook01"
-                data-email-domain="gmail.com"
-              >
-                Email me
-              </a>
-              <button
-                class="button secondary contact-copy"
-                type="button"
-                data-copy-email
-                data-email-user="binaryoutlook01"
-                data-email-domain="gmail.com"
-              >
+            <div class="contact__actions" aria-label="Email actions">
+              <a class="button button--inverse" href="#contact" data-email-action data-email-user="binaryoutlook01" data-email-domain="gmail.com">Email me</a>
+              <button class="button button--outline-inverse" type="button" data-copy-email data-email-user="binaryoutlook01" data-email-domain="gmail.com" hidden>
                 <span data-copy-label>Copy email</span>
               </button>
             </div>
-            <p class="contact-copy-status" role="status" aria-live="polite"></p>
+            <p class="contact__status" role="status" aria-live="polite" data-copy-status></p>
           </div>
 
-          <div class="contact-panel__rail">
-            <div class="contact-availability">
-              <span class="contact-availability__mark" aria-hidden="true"></span>
+          <div class="contact__rail">
+            <div class="contact__open">
+              <span class="pulse" aria-hidden="true"></span>
               <div>
-                <p class="panel-label">Open channel</p>
-                <p>
-                  Available for thoughtful conversations around technical work,
-                  research, and collaboration.
-                </p>
+                <p class="label">Open channel</p>
+                <p>Available for thoughtful conversations around technical work, research, and collaboration.</p>
               </div>
             </div>
-
-            <div class="contact-topics" aria-labelledby="contact-topics-title">
-              <h3 id="contact-topics-title">Good reasons to reach out</h3>
-              <ul>
+            <div>
+              <h3 class="label" id="topics-title">Good reasons to reach out</h3>
+              <ul class="contact__topics" aria-labelledby="topics-title">
                 <li>AI tooling and human-in-the-loop workflows</li>
                 <li>CUDA, models, and systems experiments</li>
                 <li>Research and interactive web projects</li>
               </ul>
             </div>
-
-            <dl class="contact-channels">
+            <dl class="contact__channels">
               <div>
-                <dt>GitHub</dt>
+                <dt class="label">GitHub</dt>
                 <dd>
-                  <a
-                    href="https://github.com/BinaryOutlook"
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="Binary Outlook on GitHub (opens in a new tab)"
-                  >
-                    @BinaryOutlook <span aria-hidden="true">↗</span>
-                  </a>
+                  <a href="https://github.com/BinaryOutlook" target="_blank" rel="noreferrer" aria-label="Binary Outlook on GitHub (opens in a new tab)">@BinaryOutlook <span aria-hidden="true">↗</span></a>
                 </dd>
               </div>
             </dl>
-
-            <p class="contact-note">
+            <p class="contact__note">
               The best first message says what you are building and where you
               would value another perspective.
             </p>
@@ -645,17 +532,26 @@
       </section>
     </main>
 
-    <footer class="site-footer">
-      <canvas class="footer-mesh-canvas" aria-hidden="true" data-footer-mesh></canvas>
-      <a class="footer-brand" href="#top" aria-label="Back to the top of Binary Outlook">
-        <img src="./assets/brand/favicon-lion-180.png" alt="" width="44" height="44" />
-        <strong>Binary Outlook</strong>
-      </a>
-      <p class="footer-slogan">Proudly Lions</p>
-      <p class="footer-copyright">&copy; 2026 Binary Outlook</p>
+    <footer class="footer">
+      <canvas class="footer__field" aria-hidden="true" data-footer-field></canvas>
+      <div class="footer__inner">
+        <a class="footer__brand" href="#top" aria-label="Back to the top of Binary Outlook">
+          <img src="./assets/brand/favicon-lion-180.png" alt="" width="56" height="56" />
+          <span>
+            <strong>Binary Outlook</strong>
+            <span class="footer__slogan">Proudly Lions</span>
+          </span>
+        </a>
+        <nav class="footer__nav" aria-label="Footer">
+          <a href="#projects">Projects</a>
+          <a href="./writing.html">Writing</a>
+          <a href="#contact">Contact</a>
+          <a href="https://github.com/BinaryOutlook" target="_blank" rel="noreferrer">GitHub ↗</a>
+        </nav>
+        <p class="footer__copy mono">&copy; 2026 Binary Outlook</p>
+      </div>
     </footer>
 
-    <script src="./project-previews.js?v=20260827-2"></script>
-    <script src="./script.js?v=20260828-1"></script>
+    <script src="./home.js?v=20261010-1"></script>
   </body>
 </html>
