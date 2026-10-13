@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Why I hesitate to give a project my evenings, and what I want the freedom to carry software forward to mean."
+    />
+    <meta name="author" content="Binary Outlook" />
+    <meta property="og:title" content="Free Until Further Notice — Binary Outlook" />
+    <meta
+      property="og:description"
+      content="Why I hesitate to give a project my evenings, and what I want the freedom to carry software forward to mean."
+    />
+    <meta property="og:type" content="article" />
+    <meta property="article:published_time" content="2026-10-14" />
+    <meta property="og:url" content="https://binaryoutlook.github.io/writing/free-until-further-notice/" />
+    <link rel="canonical" href="https://binaryoutlook.github.io/writing/free-until-further-notice/" />
+    <title>Free Until Further Notice — Binary Outlook</title>
+    <link rel="icon" type="image/png" sizes="48x48" href="../../assets/brand/favicon-lion-48.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/brand/favicon-lion-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/brand/favicon-lion-16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/brand/favicon-lion-180.png" />
+    <script>
+      document.documentElement.classList.add("js-enabled");
+    </script>
+    <link rel="stylesheet" href="../../styles.css?v=20260828-1" />
+    <link rel="stylesheet" href="../../writing.css?v=20260921-2" />
+  </head>
+  <body class="writing-page article-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" data-header>
+      <nav class="nav-shell" aria-label="Primary navigation">
+        <a class="brand-mark" href="../../index.html#top" aria-label="Binary Outlook home">
+          <img class="brand-logo" src="../../assets/brand/favicon-lion-180.png" alt="" width="48" height="48" />
+          <span>Binary Outlook</span>
+        </a>
+        <button
+          class="menu-button"
+          type="button"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+          aria-controls="primary-navigation"
+          data-menu-button
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+        <div class="nav-links" id="primary-navigation" data-nav-links>
+          <a href="../../index.html#about">About</a>
+          <a href="../../index.html#direction">Direction</a>
+          <a href="../../index.html#projects">Projects</a>
+          <a class="is-active" href="../../writing.html" aria-current="location">Writing</a>
+          <a href="https://github.com/BinaryOutlook" target="_blank" rel="noreferrer" aria-label="GitHub profile (opens in a new tab)">GitHub</a>
+          <a href="../../index.html#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <article class="writing-article" id="top" aria-labelledby="article-title">
+        <header class="article-header">
+          <a class="article-back" href="../../writing.html"><span aria-hidden="true">&larr;</span> All writing</a>
+          <p class="eyebrow">Essay</p>
+          <h1 id="article-title">Free Until Further Notice</h1>
+          <div class="article-meta">
+            <div class="article-meta__date">
+              <time datetime="2026-10-14">14 October 2026</time>
+              <span class="article-word-count" data-word-count>889 words</span>
+            </div>
+            <span class="article-meta__author">By Binary Outlook</span>
+          </div>
+        </header>
+
+        <div class="article-prose">
+          <p>I recently looked at an open-source project's contribution terms and lost much of my enthusiasm for helping. Its CLA asked volunteers for permanent, royalty-free permission to relicense their work, including in proprietary versions. Versions already released under copyleft would stay open. The agreement made no equivalent promise about future releases.</p>
+
+          <p>I will leave the project unnamed. I cannot read its maintainer's mind. I can read the bargain I would be accepting, and I do not much like it.</p>
+
+          <p>In <a href="../in-search-of-the-free-and-free/">In Search of the Free and Free</a>, I wanted software to be free to use and free to carry forward. I still mean that. The <a href="https://www.gnu.org/philosophy/free-sw.en.html">freedom to understand, change and share it</a> matters to me even when somebody charges for it. Maintainers need to eat too.</p>
+
+          <p>The <em>esprit de corps</em> I like in open source comes from feeling that we are building something we can keep helping shape. Someone gives an evening to a bug or an awkward interface. I want that generosity to leave them with a place in the project's future.</p>
+
+          <p>A CLA can leave the copyright with me while giving the maintainer permission to use my work on other terms. I might agree to share under copyleft, yet also be asked to authorize a proprietary direction I would never choose to support. Keeping my copyright would not resolve that discomfort.</p>
+
+          <p>Contributors who declined the broader permissions were told their implementations could be replaced. An independently written replacement can be legitimate. What caught my attention was how readily the volunteer's work became something to work around.</p>
+
+          <p>Once you have the existing code, a PR gives you a bounded job. Work out its scope, trace the flow through the affected components, and build a validation set for each component's behaviour and edge cases. Then write a replacement and test it against those cases. Names, syntax and control structures can change while much of the understanding survives.</p>
+
+          <p>Even a genuinely separate implementer can benefit from that scoped specification and validation set. Keeping the original source away from them does not undo the investigation that defined their task. If the implementer, or the model's context, has seen the source, I would want to know what “clean room” or “semi-clean room” actually means in that process.</p>
+
+          <p>For a bounded PR, I would not assume this takes anything like the original effort. A rewrite reaching through layer after layer of a codebase is another matter. Either way, the existing work has already told you where to look.</p>
+
+          <p>I do not want to pretend matching behaviour proves infringement. <a href="https://www.copyright.gov/circs/circ61.pdf">US copyright guidance</a> distinguishes protected expression from algorithms and program logic. <a href="https://www.copyright.gov/circs/circ14.pdf">Adaptations</a> can still carry copyright obligations despite looking different. A superficial diff cannot answer all those questions.</p>
+
+          <p>What bothers me goes beyond that legal boundary. The volunteer found the problem, narrowed it down, and worked out which cases mattered. Replacing the implementation can keep the benefit of all that attention. Their contribution does not disappear with their lines of code.</p>
+
+          <p>Learning from source and reimplementing ideas are freedoms I want to keep. I also want to be able to decline broader licensing rights without feeling that my help has become an inconvenience. That is where trust starts wearing thin for me.</p>
+
+          <p>AI could help more people try their first patch. I would like to see that happen. I am less enthusiastic about a future where their insight is useful but the person who brought it is treated as easily dispensable.</p>
+
+          <p>Existing <a href="https://www.gnu.org/licenses/agpl-3.0.en.html">AGPL</a> rights survive subject to the license's conditions. A differently licensed future release does not erase them. Still, I could keep an old version while the official project takes its next steps without me.</p>
+
+          <p>HashiCorp's <a href="https://www.hashicorp.com/en/blog/hashicorp-adopts-business-source-license">2023 licensing change</a> restricted certain competing offerings while leaving source visible. <a href="https://opentofu.org/blog/opentofu-is-going-ga/">OpenTofu</a> showed that a community could continue through a fork. It also needed engineering, a registry and sponsors. Somebody had to do that work.</p>
+
+          <p>I am glad a fork was possible. I would still hesitate to dismiss people's concerns with “just fork it.” Moving workflows, integrations and a community takes time. Having permission to leave does not make departure easy.</p>
+
+          <p>I also read “no paid tier” carefully. Taken alone, it says nothing about advertising or monetization through data collection. Ads need not involve tracking. I want pricing, privacy and openness explained separately before I build my habits around a tool.</p>
+
+          <p>Doctorow's <a href="https://pluralistic.net/2023/01/21/potemkin-ai/">enshittification</a> gives me a name for the fear: something useful becomes difficult to leave, and its owner changes the bargain in their favour. I need not assume a secret plan to worry about the power reserved for doing that.</p>
+
+          <p>I want those questions answered while a project is finding its funding. What stays open in future releases? What happens if it is sold? Can I take my data and keep going? I would rather understand this before giving my evenings, or asking others for theirs.</p>
+
+          <p>I do not expect anyone to maintain software forever without payment. Leaving usable source, build instructions and data formats for somebody else to inherit is a different commitment. It is one I care about when deciding where to help.</p>
+
+          <p>As a maintainer, I owe people that clarity too. The spirit of free and free depends on the room we leave one another, especially when we disagree.</p>
+
+          <p class="article-closing">Free to carry forward should remain something we can do when the owner changes their mind.</p>
+        </div>
+
+        <section class="article-references" aria-labelledby="cited-works-title">
+          <h2 id="cited-works-title">Cited works</h2>
+          <ol>
+            <li><a href="../in-search-of-the-free-and-free/">In Search of the Free and Free</a><small>Binary Outlook. The first essay.</small></li>
+            <li><a href="https://www.gnu.org/philosophy/free-sw.en.html">What is Free Software?</a><small>GNU Project / Free Software Foundation.</small></li>
+            <li><a href="https://www.copyright.gov/circs/circ61.pdf">Computer Programs</a> and <a href="https://www.copyright.gov/circs/circ14.pdf">Derivative Works</a><small>US Copyright Office. Expression, functionality and adaptations.</small></li>
+            <li><a href="https://www.gnu.org/licenses/agpl-3.0.en.html">GNU AGPLv3</a><small>Free Software Foundation. Granted rights and additional permissions.</small></li>
+            <li><a href="https://www.hashicorp.com/en/blog/hashicorp-adopts-business-source-license">HashiCorp adopts Business Source License</a><small>HashiCorp, August 2023.</small></li>
+            <li><a href="https://opentofu.org/blog/opentofu-is-going-ga/">OpenTofu is going GA</a><small>OpenTofu, January 2024.</small></li>
+            <li><a href="https://pluralistic.net/2023/01/21/potemkin-ai/">Tiktok's enshittification</a><small>Cory Doctorow, January 2023.</small></li>
+          </ol>
+        </section>
+        <footer class="article-footer">
+          <a class="article-back" href="../../writing.html"><span aria-hidden="true">&larr;</span> Back to all writing</a>
+        </footer>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <canvas class="footer-mesh-canvas" aria-hidden="true" data-footer-mesh></canvas>
+      <a class="footer-brand" href="#top" aria-label="Back to the top of Binary Outlook">
+        <img src="../../assets/brand/favicon-lion-180.png" alt="" width="44" height="44" />
+        <strong>Binary Outlook</strong>
+      </a>
+      <p class="footer-slogan">Proudly Lions</p>
+      <p class="footer-copyright">&copy; 2026 Binary Outlook</p>
+    </footer>
+    <script src="../../script.js?v=20260828-1"></script>
+  </body>
+</html>
