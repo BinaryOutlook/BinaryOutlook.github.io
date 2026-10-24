@@ -142,10 +142,10 @@ this is a website publication control, not repository access control. Preserve
 the exclusion if the deployment method changes.
 
 Preview a draft locally at `http://localhost:8000/_drafts/<slug>/`. The existing
-relative asset paths work at that depth. The count updater scans only `writing/`,
-so keep a draft's count in sync with its `.article-prose` using the same
-`ArticleText` parser and word pattern from `scripts/update-writing-counts.py`.
-The normal `--check` command still validates the published and unlisted articles.
+relative asset paths work at that depth. The count updater scans both `writing/`
+and `_drafts/`, keeping draft counts in sync with their `.article-prose`. Run the
+normal update and `--check` commands for listed articles, unlisted articles, and
+drafts. Drafts require exactly one article count marker and no index marker.
 
 To publish later, move the article to `writing/<slug>/index.html`, remove
 `data-draft` and the draft label, set the publication date and URL metadata, and

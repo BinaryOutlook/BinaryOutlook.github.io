@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Open source as a campaign across many fronts: strong subsystem foundations, shared engineering, and responsible reuse in the generative AI era."
+    />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="author" content="Binary Outlook" />
+    <meta property="og:title" content="The Many Fronts of Open Source — Binary Outlook" />
+    <meta
+      property="og:description"
+      content="Open source as a campaign across many fronts: strong subsystem foundations, shared engineering, and responsible reuse in the generative AI era."
+    />
+    <meta property="og:type" content="article" />
+    <title>The Many Fronts of Open Source — Binary Outlook</title>
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="48x48"
+      href="../../assets/brand/favicon-lion-48.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../../assets/brand/favicon-lion-32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../../assets/brand/favicon-lion-16.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="../../assets/brand/favicon-lion-180.png"
+    />
+    <script>
+      document.documentElement.classList.add("js-enabled");
+    </script>
+    <link rel="stylesheet" href="../../styles.css?v=20260828-1" />
+    <link rel="stylesheet" href="../../writing.css?v=20260921-2" />
+  </head>
+  <body class="writing-page article-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" data-header>
+      <nav class="nav-shell" aria-label="Primary navigation">
+        <a class="brand-mark" href="../../index.html#top" aria-label="Binary Outlook home">
+          <img
+            class="brand-logo"
+            src="../../assets/brand/favicon-lion-180.png"
+            alt=""
+            width="48"
+            height="48"
+          />
+          <span>Binary Outlook</span>
+        </a>
+
+        <button
+          class="menu-button"
+          type="button"
+          aria-label="Toggle navigation"
+          aria-expanded="false"
+          aria-controls="primary-navigation"
+          data-menu-button
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </button>
+
+        <div class="nav-links" id="primary-navigation" data-nav-links>
+          <a href="../../index.html#about">About</a>
+          <a href="../../index.html#direction">Direction</a>
+          <a href="../../index.html#projects">Projects</a>
+          <a class="is-active" href="../../writing.html" aria-current="location">Writing</a>
+          <a
+            href="https://github.com/BinaryOutlook"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="GitHub profile (opens in a new tab)"
+          >
+            GitHub
+          </a>
+          <a href="../../index.html#contact">Contact</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <article data-draft class="writing-article" id="top" aria-labelledby="article-title">
+        <header class="article-header">
+          <a class="article-back" href="../../writing.html"><span aria-hidden="true">&larr;</span> All writing</a>
+          <p class="eyebrow">Draft essay</p>
+          <h1 id="article-title">The Many Fronts of Open Source</h1>
+          <div class="article-meta">
+            <div class="article-meta__date">
+              Draft · <time datetime="2026-10-25">25 October 2026</time>
+              <span class="article-word-count" data-word-count>893 words</span>
+            </div>
+            <span class="article-meta__author">By Binary Outlook</span>
+          </div>
+        </header>
+
+        <div class="article-prose">
+          <p>Most software begins with dissatisfaction. Something is broken, inefficient, unnecessarily complicated, or missing. Eventually, somebody decides to do something about it.</p>
+
+          <p>I have been thinking about how open-source development resembles a military campaign: an initial breakthrough establishes a foothold, others discover openings along different flanks, and maintainers work to secure the ground already gained.</p>
+
+          <p>The opposition consists of bugs, limitations, incompatibilities, and unanswered engineering questions. The interesting part is how people organize themselves across these fronts, often without anyone planning the entire campaign.</p>
+
+          <p><a href="https://www.kernel.org/doc/html/latest/process/2.Process.html">Linux</a> offers a familiar example. Linus Torvalds began developing the kernel in 1991, but its expansion depended on contributions far beyond one person’s reach. Networking, memory management, device drivers, and architecture support became fronts requiring their own expertise and maintainers.</p>
+
+          <p>The initial assault established a position. Sustaining it required many people who understood their particular terrain.</p>
+
+          <p>Users provide much of the reconnaissance. They encounter hardware configurations, workloads, and failures that the original developers never anticipated. One reports a bug; another reproduces it; someone else traces its cause and proposes a patch.</p>
+
+          <p>These roles are fluid. A frustrated user can become an investigator, then a contributor, and eventually a maintainer. The authority to accept a patch may remain centralized, but the initiative to investigate does not need to come from headquarters.</p>
+
+          <p>Sometimes, contributors decide that another position offers better prospects.</p>
+
+          <p><a href="https://neovim.io/news/2014/06/">Neovim’s fork from Vim</a> illustrates how an inherited foundation can support a different engineering strategy. Contributors pursued changes to architecture, extensibility, and development practices while building upon substantial existing work.</p>
+
+          <p>Other forces eventually regroup. Node.js and io.js developed separately before <a href="https://nodejs.org/en/blog/announcements/foundation-v4-announce">reunifying in 2015</a>. A divided effort can return to a common structure shaped by the disagreements that first separated it.</p>
+
+          <p>Forking, however, creates responsibilities. Copying a repository does not reproduce its community, institutional knowledge, or capacity to maintain releases.</p>
+
+          <p>Taking ground is only part of the campaign.</p>
+
+          <p>Tests, documentation, code review, release management, and compatibility work are its logistics and fortifications. They help improvements survive subsequent changes. An impressive feature becomes a liability if nobody understands it well enough to keep it operational.</p>
+
+          <p>This is where the generative AI era adds another dimension.</p>
+
+          <p>AI assistants can help contributors navigate unfamiliar code, trace dependencies, investigate failures, and construct possible fixes. The distance between spotting an opening and attempting an advance can become smaller.</p>
+
+          <p>Someone who previously could only report a frustration may now have enough assistance to investigate it.</p>
+
+          <p>But faster deployment also puts pressure on the supply lines. More proposed changes mean more work to review, test, integrate, and maintain. A plausible patch can still misunderstand the terrain.</p>
+
+          <p>For me, this makes strong foundations essential, whatever the project.</p>
+
+          <p>We need to understand the subsystem we are working on: its responsibilities, assumptions, interfaces, failure modes, and relationship with the wider system. AI can help us acquire that understanding. We still need enough knowledge to judge whether its suggestions are sound.</p>
+
+          <p>From there, we should connect the dots.</p>
+
+          <p>Which capabilities already exist? Which components can work together? Could a contribution to an established project solve the problem? Where would a small integration accomplish more than an entirely new implementation?</p>
+
+          <p>Generating code quickly can make starting from zero feel inexpensive. Yet the initial implementation is only one part of the cost.</p>
+
+          <p>A mature subsystem carries accumulated experience: corrected edge cases, tested platform behavior, compatibility decisions, and lessons from years of use. A newly generated replacement must earn that reliability through its own testing and maintenance.</p>
+
+          <p>Where suitable foundations exist, reusing them can shorten development time, reduce costs, and limit compatibility problems. Choosing them still requires judgment about their interfaces, maintenance, and fitness for purpose.</p>
+
+          <p>In military terms, we should understand the positions already established and the routes connecting them before opening another front.</p>
+
+          <p>This is why I consider open source an especially valuable foundation for development in the generative AI era. It allows us to inspect existing work, learn how it operates, adapt it, and contribute improvements that others can inherit.</p>
+
+          <p>The culture behind this possibility has deep precedents.</p>
+
+          <p>Eric S. Raymond’s <a href="http://www.catb.org/~esr/writings/cathedral-bazaar/"><em>The Cathedral and the Bazaar</em></a>, drawing on Linux and his work on fetchmail, described the value of reuse, distributed contributions, and treating users as collaborators.</p>
+
+          <p>Richard Stallman’s GNU project and <a href="https://www.gnu.org/philosophy/free-sw.html">free software philosophy</a> established a distinct ethical commitment: people should have the freedom to run, study, modify, and share software, retaining control over their computing and the ability to cooperate.</p>
+
+          <p>Their motivations differ. Both traditions nevertheless help explain how software can become shared ground on which others are free to build.</p>
+
+          <p>I believe we should carry that culture into the generative AI era.</p>
+
+          <p>We can use these tools to understand existing systems, strengthen neglected subsystems, improve documentation, and prepare contributions that maintainers can reasonably review. We should respect licenses, preserve attribution, and contribute useful improvements upstream where possible.</p>
+
+          <p>Those practices sustain the foundations that make reuse worthwhile.</p>
+
+          <p>The many fronts of open source will continue to shift. Projects will fork, regroup, lose momentum, and find new contributors. AI may allow more people to take up positions across that changing landscape.</p>
+
+          <p>What matters is what their efforts leave behind.</p>
+
+          <p>A successful advance should strengthen the subsystem, improve its connections with the wider system, and leave knowledge that the next contributor can use.</p>
+
+          <p class="article-closing">The next person arriving at the front should be able to build upon ground we have already helped secure.</p>
+        </div>
+        <section class="article-references" aria-labelledby="cited-works-title">
+          <h2 id="cited-works-title">Cited works</h2>
+          <p>If something here caught your interest, feel free to spend a little time with these works and projects.</p>
+          <ol>
+            <li>
+              <a href="https://www.kernel.org/doc/html/latest/process/2.Process.html">How the development process works</a>
+              <small>The Linux Kernel documentation. Subsystem maintainers, review, and integration.</small>
+            </li>
+            <li>
+              <a href="https://neovim.io/news/2014/06/">Neovim development newsletter, June 2014</a>
+              <small>Neovim contributors. Early development following the fork from Vim.</small>
+            </li>
+            <li>
+              <a href="https://nodejs.org/en/blog/announcements/foundation-v4-announce">Node.js v4.0.0</a>
+              <small>Node.js, September 2015. The release bringing Node.js and io.js together.</small>
+            </li>
+            <li>
+              <a href="http://www.catb.org/~esr/writings/cathedral-bazaar/">The Cathedral and the Bazaar</a>
+              <small>Eric S. Raymond. Reuse, distributed development, and users as collaborators.</small>
+            </li>
+            <li>
+              <a href="https://www.gnu.org/philosophy/free-sw.html">What is Free Software?</a>
+              <small>GNU Project / Free Software Foundation. The freedoms to run, study, modify, and share software.</small>
+            </li>
+          </ol>
+        </section>
+        <footer class="article-footer">
+          <a class="article-back" href="../../writing.html"><span aria-hidden="true">&larr;</span> Back to all writing</a>
+        </footer>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <canvas class="footer-mesh-canvas" aria-hidden="true" data-footer-mesh></canvas>
+      <a class="footer-brand" href="#top" aria-label="Back to the top of Binary Outlook">
+        <img src="../../assets/brand/favicon-lion-180.png" alt="" width="44" height="44" />
+        <strong>Binary Outlook</strong>
+      </a>
+      <p class="footer-slogan">Proudly Lions</p>
+      <p class="footer-copyright">&copy; 2026 Binary Outlook</p>
+    </footer>
+
+    <script src="../../script.js?v=20260828-1"></script>
+  </body>
+</html>

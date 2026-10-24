@@ -12,10 +12,13 @@ class ArticleText(HTMLParser):
         self.prose_depth = 0
         self.parts = []
         self.unlisted = False
+        self.draft = False
 
     def handle_starttag(self, tag, attrs):
         if tag == "article" and "data-unlisted" in dict(attrs):
             self.unlisted = True
+        if tag == "article" and "data-draft" in dict(attrs):
+            self.draft = True
         if tag == "div":
             classes = dict(attrs).get("class", "").split()
             if self.prose_depth or "article-prose" in classes:
@@ -38,7 +41,11 @@ def main():
     index_path = root / "writing.html"
     index = index_path.read_text()
     changes = {}
-    for article_path in sorted((root / "writing").glob("*/index.html")):
+    article_paths = [
+        *(root / "writing").glob("*/index.html"),
+        *(root / "_drafts").glob("*/index.html"),
+    ]
+    for article_path in sorted(article_paths):
         article = article_path.read_text()
         body = ArticleText()
         body.feed(article)
@@ -58,7 +65,7 @@ def main():
             lambda match: match[1] + label + match[2],
             index,
         )
-        expected_index_matches = 0 if body.unlisted else 1
+        expected_index_matches = 0 if body.unlisted or body.draft else 1
         if article_matches != 1 or index_matches != expected_index_matches:
             raise ValueError(
                 f"Expected one article and {expected_index_matches} index word-count "
