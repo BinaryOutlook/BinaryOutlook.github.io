@@ -1,0 +1,3 @@
+# Keep work-in-progress article sources out of the GitHub Pages site.
+exclude:
+  - _drafts

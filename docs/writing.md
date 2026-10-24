@@ -13,6 +13,9 @@ Markdown conversion. The page layout is shared; article outlines are unrestricte
 - `_templates/article.html`: a copyable starter for another article. This is a
   source template, not a published article; its relative paths assume it has been
   copied to `writing/<slug>/index.html`.
+- `_drafts/<slug>/index.html`: unpublished article sources using the same HTML
+  layout. `_config.yml` explicitly excludes this folder from the GitHub Pages
+  build; these drafts have no deployed article URL.
 - `scripts/update-writing-counts.py`: synchronizes the word counts shown below
   dates on the index and article pages.
 
@@ -123,6 +126,31 @@ count. If placing a figure between passages, close `.article-prose` before the
 figure and reopen it after the figure so its caption remains outside the count.
 Run the count updater after changing the article markup. Adding an image to an
 unlisted article does not change its publication status or add it to the index.
+
+## Unpublished drafts
+
+When an article should be committed without appearing on the website, save it at
+`_drafts/<slug>/index.html`. Keep the shared article layout, mark the `<article>`
+with `data-draft`, and label the visible date as a draft date. Omit publication
+metadata and canonical/`og:url` links until publication. A `noindex, nofollow`
+robots meta tag is an additional precaution, not the publication boundary.
+
+The repository uses GitHub Pages' Jekyll branch build from `main` at `/`.
+`_config.yml` excludes `_drafts` from that build. Do not add a draft to the writing
+index, navigation, feeds, or sitemap. Drafts remain visible in the repository;
+this is a website publication control, not repository access control. Preserve
+the exclusion if the deployment method changes.
+
+Preview a draft locally at `http://localhost:8000/_drafts/<slug>/`. The existing
+relative asset paths work at that depth. The count updater scans only `writing/`,
+so keep a draft's count in sync with its `.article-prose` using the same
+`ArticleText` parser and word pattern from `scripts/update-writing-counts.py`.
+The normal `--check` command still validates the published and unlisted articles.
+
+To publish later, move the article to `writing/<slug>/index.html`, remove
+`data-draft` and the draft label, set the publication date and URL metadata, and
+follow either the listed or unlisted workflow. Refresh counts after moving it.
+For a listed article, also remove the draft's robots meta tag.
 
 ## Unlisted articles
 
